@@ -1,23 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.c                                            :+:      :+:    :+:   */
+/*   mapValidator2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jorteixe  <jorteixe@student.42porto.>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/19 18:51:50 by jorteixe          #+#    #+#             */
-/*   Updated: 2024/07/22 08:47:53 by jorteixe         ###   ########.fr       */
+/*   Created: 2024/07/22 15:09:57 by jorteixe          #+#    #+#             */
+/*   Updated: 2024/07/22 15:09:57 by jorteixe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../../includes/cub3d.h"
 
-int	main(int argc, char **argv)
+void init_map(t_map *map)
 {
-	t_data	data;
-
-	if (argc != 2)
-		error_handler(&data, WRONG_ARG_NUM);
-	parse_and_validate_map(argv[1], &data);
-	return (0);
+	map->north_texture = NULL;
+	map->south_texture = NULL;
+	map->east_texture = NULL;
+	map->west_texture = NULL;
 }

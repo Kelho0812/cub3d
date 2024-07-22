@@ -10,40 +10,58 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+//#TODO Add errors when reading the texture path
+
 #include "../../includes/cub3d.h"
 
-bool	is_NO(char *map)
+bool	is_NO(char *line)
 {
-	if (map[0] == 'N' && map[1] == 'O')
+	if (line[0] == 'N' && line[1] == 'O' && line[2] == ' ')
+		return (true);
+	else
+		return (false);
+}
+
+bool	is_SO(char *line)
+{
+	if (line[0] == 'S' && line[1] == 'O' && line[2] == ' ')
 		return (true);
 	else
 		return (false);
 	;
 }
 
-bool	is_SO(char *map)
+bool	is_WE(char *line)
 {
-	if (map[0] == 'S' && map[1] == 'O')
+	if (line[0] == 'W' && line[1] == 'E' && line[2] == ' ')
 		return (true);
 	else
 		return (false);
 	;
 }
 
-bool	is_WE(char *map)
+bool	is_EA(char *line)
 {
-	if (map[0] == 'W' && map[1] == 'E')
+	if (line[0] == 'E' && line[1] == 'A' && line[2] == ' ')
 		return (true);
 	else
 		return (false);
 	;
 }
 
-bool	is_SE(char *map)
+void	copy_texture_path(char *line, t_map *map, t_coordinates c)
 {
-	if (map[0] == 'S' && map[1] == 'E')
-		return (true);
-	else
-		return (false);
-	;
+	int	i;
+
+	i = 0;
+	while (line[i + 2] == ' ')
+		i++;
+	if (c == NO)
+		map->north_texture = ft_strdup(line + 2 + i);
+	if (c == SO)
+		map->south_texture = ft_strdup(line + 2 + i);
+	if (c == WE)
+		map->west_texture = ft_strdup(line + 2 + i);
+	if (c == EA)
+		map->east_texture = ft_strdup(line + 2 + i);
 }

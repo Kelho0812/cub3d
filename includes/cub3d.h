@@ -43,23 +43,40 @@ typedef struct s_data
 }			t_data;
 
 // PARSER
+typedef enum e_coordinates
+{
+	NO,
+	SO,
+	WE,
+	EA
+}			t_coordinates;
+
 void		parse_and_validate_map(char *map, t_data *data);
+void		init_map(t_map *map);
+void		check_duplicate_textures(t_data *data, char *line);
 void		validate_map(t_data *data);
-void		check_elements(t_map);
+void		check_textures(t_data *data);
+void		copy_texture_path(char *line, t_map *map, t_coordinates c);
 bool		is_NO(char *map);
 bool		is_SO(char *map);
 bool		is_WE(char *map);
-bool		is_SE(char *map);
+bool		is_EA(char *map);
 
 // ERROR_HANDLERS
 typedef enum e_error
 {
 	WRONG_ARG_NUM,
-	WRONG_EXT,
-	OPEN_ERROR,
+	WRONG_EXTENSION,
+	OPEN_MAP_ERROR,
+	TEXTURE_ERROR,
 
 }			t_error;
 
 void		error_handler(t_data *data, t_error error);
+void		error_handler2(t_data *data, t_error error);
+
+// FREEDOM
+void		free_map(t_data *data);
 
 #endif
+

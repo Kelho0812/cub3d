@@ -1,23 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.c                                            :+:      :+:    :+:   */
+/*   freedom.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jorteixe  <jorteixe@student.42porto.>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/19 18:51:50 by jorteixe          #+#    #+#             */
-/*   Updated: 2024/07/22 08:47:53 by jorteixe         ###   ########.fr       */
+/*   Created: 2024/07/22 15:42:10 by jorteixe          #+#    #+#             */
+/*   Updated: 2024/07/22 15:42:10 by jorteixe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-int	main(int argc, char **argv)
+void	free_map(t_data *data)
 {
-	t_data	data;
-
-	if (argc != 2)
-		error_handler(&data, WRONG_ARG_NUM);
-	parse_and_validate_map(argv[1], &data);
-	return (0);
+	t_map	*map;
+	map = &data->map;
+	if (map->north_texture != NULL)
+		free(map->north_texture);
+	else if (map->south_texture != NULL)
+		free(map->south_texture);
+	else if (map->west_texture != NULL)
+		free(map->west_texture);
+	else if (map->east_texture != NULL)
+		free(map->east_texture);
 }

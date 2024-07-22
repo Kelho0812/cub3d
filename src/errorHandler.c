@@ -21,16 +21,26 @@ void	error_handler(t_data *data, t_error error)
 		printf("Example: ./cub3d ./maps/example.cub");
 		exit(1);
 	}
-	else if (error == WRONG_EXT)
+	else if (error == WRONG_EXTENSION)
 	{
 		(void)data;
 		printf("Error: Invalid map extension.\n");
 		exit(1);
 	}
-	else if (error == OPEN_ERROR)
+	else if (error == OPEN_MAP_ERROR)
 	{
 		(void)data;
 		printf("Error: Could not open map.\n");
+		exit(1);
+	}
+}
+
+void	error_handler2(t_data *data, t_error error)
+{
+	if (error == TEXTURE_ERROR)
+	{
+		free_map(data);
+		printf("TEXTURE ERROR OH FILHA DA PUTA.\n");
 		exit(1);
 	}
 }
