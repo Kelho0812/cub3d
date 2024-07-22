@@ -22,7 +22,8 @@ ODIR := obj
 
 # Source files
 SOURCES := cub3d.c\
-			mapValidator.c\
+			parser/mapValidator.c\
+			parser/mapValidatorUtils.c\
 			errorHandler.c\
 
 # Object files

@@ -16,6 +16,7 @@
 # include "./getNextLine/getNextLine.h"
 # include "./libft/libft.h"
 # include <fcntl.h>
+# include <stdbool.h>
 # include <stdio.h>
 
 typedef struct s_rgb
@@ -43,6 +44,12 @@ typedef struct s_data
 
 // PARSER
 void		parse_and_validate_map(char *map, t_data *data);
+void		validate_map(t_data *data);
+void		check_elements(t_map);
+bool		is_NO(char *map);
+bool		is_SO(char *map);
+bool		is_WE(char *map);
+bool		is_SE(char *map);
 
 // ERROR_HANDLERS
 typedef enum e_error

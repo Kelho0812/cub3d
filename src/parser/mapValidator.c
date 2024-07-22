@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 char	**map_parser(int fd, int i, int count, char *map_path);
 
-#include "../includes/cub3d.h"
+#include "../../includes/cub3d.h"
 
 void	parse_and_validate_map(char *map, t_data *data)
 {
@@ -24,6 +24,7 @@ void	parse_and_validate_map(char *map, t_data *data)
 	if (fd < 0)
 		error_handler(data, OPEN_ERROR);
 	data->map.full_map_array = map_parser(fd, 0, 0, map);
+	validate_map(data);
 }
 
 char	**map_parser(int fd, int i, int count, char *map_path)
@@ -52,4 +53,22 @@ char	**map_parser(int fd, int i, int count, char *map_path)
 		line = get_next_line(fd);
 	}
 	return (lines);
+}
+
+void	validate_map(t_data *data)
+{
+	check_elements(data->map);
+}
+void	check_elements(t_map map)
+{
+	int	i;
+
+	i = 0;
+	while (map.full_map_array[i])
+	{
+		if (is_NO(map.full_map_array[i]) && )
+		{
+		}
+		i++;
+	}
 }
