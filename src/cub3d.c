@@ -15,13 +15,13 @@
 int	main(int argc, char **argv)
 {
 	t_data	data;
+
 	if (argc != 2)
 	{
 		printf("You should write: %s <map_relative_path>\n", argv[0]);
 		printf("Example: ./cub3d map.cub");
 		return (1);
 	}
-
 	parse_n_validate_map(argv[1], &data);
 	return (0);
 }

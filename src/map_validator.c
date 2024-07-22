@@ -14,7 +14,12 @@
 
 void	parse_n_validate_map(char *map, t_data *data)
 {
-	(void) data;
-	if (ft_strncmp(map + ft_strlen(map) - 4, ".ber", 4) != 0)
-		printf("Error");
+	int	fd;
+
+	(void)data;
+	if (ft_strncmp(map + ft_strlen(map) - 4, ".cub", 4) != 0)
+		printf("Error: Invalid map extension.\n");
+	fd = open(map, O_RDONLY);
+	if (fd < 0)
+		printf("Error: Could not open map.\n");
 }
