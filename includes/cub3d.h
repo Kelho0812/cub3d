@@ -18,11 +18,23 @@
 # include <fcntl.h>
 # include <stdio.h>
 
+typedef struct s_rgb
+{
+	int		R;
+	int		G;
+	int		B;
+}			t_rgb;
 typedef struct s_map
 {
 	int		width;
 	int		height;
-	char	**map_array;
+	char	**full_map_array;
+	char	*north_texture;
+	char	*south_texture;
+	char	*west_texture;
+	char	*east_texture;
+	t_rgb	ceiling_color;
+	t_rgb	floor_color;
 }			t_map;
 typedef struct s_data
 {
@@ -39,8 +51,8 @@ typedef enum e_error
 	WRONG_EXT,
 	OPEN_ERROR,
 
-}					t_error;
+}			t_error;
 
-void error_handler(t_data *data, t_error error);
+void		error_handler(t_data *data, t_error error);
 
 #endif

@@ -19,5 +19,6 @@ int	main(int argc, char **argv)
 	if (argc != 2)
 		error_handler(&data, WRONG_ARG_NUM);
 	parse_and_validate_map(argv[1], &data);
+	printf("%s\n", data.map.full_map_array[0]);
 	return (0);
 }

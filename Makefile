@@ -23,6 +23,7 @@ ODIR := obj
 # Source files
 SOURCES := cub3d.c\
 			mapValidator.c\
+			errorHandler.c\
 
 # Object files
 OBJECTS := $(patsubst %.c,$(ODIR)/%.o,$(SOURCES))
