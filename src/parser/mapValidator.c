@@ -59,6 +59,7 @@ char	**map_parser(int fd, int i, int count, char *map_path)
 
 void	validate_map(t_data *data)
 {
+	check_duplicates(data);
 	check_textures(data);
 }
 void	check_textures(t_data *data)
@@ -72,30 +73,37 @@ void	check_textures(t_data *data)
 	i = 0;
 	while (map_array[i])
 	{
-		check_duplicate_textures(data, map_array[i]);
-		if (is_NO(map_array[i]) && map->north_texture == NULL)
+		if (is_NO(map_array[i]))
 			copy_texture_path(map_array[i], map, NO);
-		else if (is_SO(map_array[i]) && map->south_texture == NULL)
+		else if (is_SO(map_array[i]))
 			copy_texture_path(map_array[i], map, SO);
-		else if (is_WE(map_array[i]) && map->west_texture == NULL)
+		else if (is_WE(map_array[i]))
 			copy_texture_path(map_array[i], map, WE);
-		else if (is_EA(map_array[i]) && map->east_texture == NULL)
+		else if (is_EA(map_array[i]))
 			copy_texture_path(map_array[i], map, EA);
 		i++;
 	}
 }
-
-void	check_duplicate_textures(t_data *data, char *line)
+void	check_duplicates(t_data *data)
 {
-	t_map	*map;
+	int	i;
 
-	map = &data->map;
-	if (is_NO(line) && map->north_texture != NULL)
+	i = 0;
+	while (data->map.full_map_array[i] != NULL)
+	{
+		if (is_NO(data->map.full_map_array[i]))
+			data->map.no_count++;
+		else if (is_SO(data->map.full_map_array[i]))
+			data->map.so_count++;
+		else if (is_WE(data->map.full_map_array[i]))
+			data->map.we_count++;
+		else if (is_EA(data->map.full_map_array[i]))
+			data->map.ea_count++;
+		i++;
+	}
+	if (data->map.no_count != 1 || data->map.so_count != 1
+		|| data->map.we_count != 1 || data->map.ea_count != 1)
+	{
 		error_handler2(data, TEXTURE_ERROR);
-	else if (is_SO(line) && map->south_texture != NULL)
-		error_handler2(data, TEXTURE_ERROR);
-	else if (is_WE(line) && map->west_texture != NULL)
-		error_handler2(data, TEXTURE_ERROR);
-	else if (is_EA(line) && map->east_texture != NULL)
-		error_handler2(data, TEXTURE_ERROR);
+	}
 }

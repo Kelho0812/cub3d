@@ -18,4 +18,8 @@ void init_map(t_map *map)
 	map->south_texture = NULL;
 	map->east_texture = NULL;
 	map->west_texture = NULL;
+	map->no_count = 0;
+	map->so_count = 0;
+	map->we_count = 0;
+	map->ea_count = 0;
 }

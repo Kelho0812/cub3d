@@ -30,6 +30,10 @@ typedef struct s_map
 	int		width;
 	int		height;
 	char	**full_map_array;
+	int		no_count;
+	int		so_count;
+	int		we_count;
+	int		ea_count;
 	char	*north_texture;
 	char	*south_texture;
 	char	*west_texture;
@@ -53,7 +57,7 @@ typedef enum e_coordinates
 
 void		parse_and_validate_map(char *map, t_data *data);
 void		init_map(t_map *map);
-void		check_duplicate_textures(t_data *data, char *line);
+void		check_duplicates(t_data *data);
 void		validate_map(t_data *data);
 void		check_textures(t_data *data);
 void		copy_texture_path(char *line, t_map *map, t_coordinates c);
@@ -79,4 +83,3 @@ void		error_handler2(t_data *data, t_error error);
 void		free_map(t_data *data);
 
 #endif
-
