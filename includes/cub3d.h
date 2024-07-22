@@ -14,6 +14,7 @@
 # define CUB3D_H
 
 # include "./libft/libft.h"
+# include "./getNextLine/getNextLine.h"
 # include <fcntl.h>
 # include <stdio.h>
 

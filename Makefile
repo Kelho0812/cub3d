@@ -21,8 +21,8 @@ SDIR := src
 ODIR := obj
 
 # Source files
-SOURCES := cub3d.c \
-			map_validator.c \
+SOURCES := cub3d.c\
+			mapValidator.c\
 
 # Object files
 OBJECTS := $(patsubst %.c,$(ODIR)/%.o,$(SOURCES))
