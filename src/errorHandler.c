@@ -1,25 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_validator.c                                    :+:      :+:    :+:   */
+/*   errorHandler.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jorteixe  <jorteixe@student.42porto.>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/22 08:55:51 by jorteixe          #+#    #+#             */
-/*   Updated: 2024/07/22 08:55:51 by jorteixe         ###   ########.fr       */
+/*   Created: 2024/07/22 10:31:58 by jorteixe          #+#    #+#             */
+/*   Updated: 2024/07/22 10:32:08 by jorteixe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-void	parse_and_validate_map(char *map, t_data *data)
+void	error_handler(t_data *data, t_error error)
 {
-	int	fd;
-
-	(void)data;
-	if (ft_strncmp(map + ft_strlen(map) - 4, ".cub", 4) != 0)
-		error_handler(data, WRONG_EXT);
-	fd = open(map, O_RDONLY);
-	if (fd < 0)
-		error_handler(data, OPEN_ERROR);
+	if (error == WRONG_ARG_NUM)
+	{
+		printf("You should write: ./cub3d <map_relative_path>\n");
+		printf("Example: ./cub3d ./maps/example.cub");
+		exit(1);
+	}
+	else if (error == WRONG_EXT)
+	{
+		printf("Error: Invalid map extension.\n");
+		exit(1);
+	}
+	else if (error == OPEN_ERROR)
+	{
+		printf("Error: Could not open map.\n");
+		exit(1);
+	}
 }
