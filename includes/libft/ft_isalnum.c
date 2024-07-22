@@ -1,27 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.c                                            :+:      :+:    :+:   */
+/*   ft_isalnum.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jorteixe  <jorteixe@student.42porto.>      +#+  +:+       +#+        */
+/*   By: jorteixe <jorteixe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/19 18:51:50 by jorteixe          #+#    #+#             */
-/*   Updated: 2024/07/22 08:47:53 by jorteixe         ###   ########.fr       */
+/*   Created: 2023/10/02 12:56:40 by jorteixe          #+#    #+#             */
+/*   Updated: 2023/10/04 15:06:31 by jorteixe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
-
-int	main(int argc, char **argv)
+int	ft_isalnum(int n)
 {
-	t_data	data;
-	if (argc != 2)
+	if ((n >= 48 && n <= 57) || (n >= 65 && n <= 90) || (n >= 97 && n <= 122))
 	{
-		printf("You should write: %s <map_relative_path>\n", argv[0]);
-		printf("Example: ./cub3d map.cub");
 		return (1);
 	}
-
-	parse_n_validate_map(argv[1], &data);
-	return (0);
+	else
+	{
+		return (0);
+	}
 }

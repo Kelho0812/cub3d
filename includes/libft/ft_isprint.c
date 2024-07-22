@@ -1,27 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.c                                            :+:      :+:    :+:   */
+/*   ft_isprint.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jorteixe  <jorteixe@student.42porto.>      +#+  +:+       +#+        */
+/*   By: jorteixe <jorteixe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/19 18:51:50 by jorteixe          #+#    #+#             */
-/*   Updated: 2024/07/22 08:47:53 by jorteixe         ###   ########.fr       */
+/*   Created: 2023/10/02 13:07:39 by jorteixe          #+#    #+#             */
+/*   Updated: 2023/10/05 11:33:11 by jorteixe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
-
-int	main(int argc, char **argv)
+// Checks if 'n' is a printable character
+int	ft_isprint(int n)
 {
-	t_data	data;
-	if (argc != 2)
+	if (n >= 32 && n <= 126)
 	{
-		printf("You should write: %s <map_relative_path>\n", argv[0]);
-		printf("Example: ./cub3d map.cub");
 		return (1);
 	}
-
-	parse_n_validate_map(argv[1], &data);
-	return (0);
+	else
+	{
+		return (0);
+	}
 }

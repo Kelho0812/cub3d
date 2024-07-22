@@ -15,12 +15,14 @@ VG = valgrind --leak-check=full --show-leak-kinds=all --suppressions=sup --track
 
 # File-related variables
 NAME = cub3d
+LIBFT = ./includes/libft/libft.a
 RM = rm -rf
 SDIR := src
 ODIR := obj
 
 # Source files
 SOURCES := cub3d.c \
+			map_validator.c \
 
 # Object files
 OBJECTS := $(patsubst %.c,$(ODIR)/%.o,$(SOURCES))
@@ -31,8 +33,8 @@ COMPILED_FILES := $(shell if [ -d "$(ODIR)" ]; then find $(ODIR) -name "*.o" | w
 # Targets
 all : ${NAME}
 
-${NAME} : ${OBJECTS}
-	@${CC} ${CFLAGS} ${OBJECTS} -o ${NAME}
+${NAME} : ${OBJECTS} $(LIBFT)
+	@${CC} ${CFLAGS} ${OBJECTS} -o ${NAME} $(LIBFT)
 	@printf "$(GRN)➾ Compilation progress: $$(echo "$(shell find $(ODIR) -name "*.o" | wc -l) $(TOTAL_FILES)" | awk '{printf "%.2f", $$1/$$2 * 100}')%%$(RES)\r"
 	@echo "\n$(GRN)➾ ${NAME} created$(RES)"
 	@printf "\n"
@@ -44,7 +46,11 @@ $(ODIR)/%.o: $(SDIR)/%.c | $(ODIR)
 
 # Rest of your Makefile
 $(ODIR):
-	@mkdir -p $@	
+	@mkdir -p $@
+
+$(LIBFT) :
+	@cd ./includes/libft/ && make bonus -s
+	@echo "libft.a created"
 
 clean :
 	@${RM} ${OBJECTS}

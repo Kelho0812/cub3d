@@ -1,33 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   map_validator.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jorteixe  <jorteixe@student.42porto.>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/19 18:54:21 by jorteixe          #+#    #+#             */
-/*   Updated: 2024/07/19 18:54:43 by jorteixe         ###   ########.fr       */
+/*   Created: 2024/07/22 08:55:51 by jorteixe          #+#    #+#             */
+/*   Updated: 2024/07/22 08:55:51 by jorteixe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
+#include "../includes/cub3d.h"
 
-# include <stdio.h>
-# include "./libft/libft.h"
-
-typedef struct s_map
+void	parse_n_validate_map(char *map, t_data *data)
 {
-	int				width;
-	int				height;
-	char			**map_array;
-}					t_map;
-typedef struct s_data
-{
-
-	t_map			map;
-}					t_data;
-
-void parse_n_validate_map(char* map, t_data *data);
-
-#endif
+	(void) data;
+	if (ft_strncmp(map + ft_strlen(map) - 4, ".ber", 4) != 0)
+		printf("Error");
+}

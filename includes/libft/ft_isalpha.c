@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.c                                            :+:      :+:    :+:   */
+/*   ft_isalpha.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jorteixe  <jorteixe@student.42porto.>      +#+  +:+       +#+        */
+/*   By: jorteixe <jorteixe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/19 18:51:50 by jorteixe          #+#    #+#             */
-/*   Updated: 2024/07/22 08:47:53 by jorteixe         ###   ########.fr       */
+/*   Created: 2023/10/02 12:16:09 by jorteixe          #+#    #+#             */
+/*   Updated: 2023/10/04 14:47:45 by jorteixe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
-
-int	main(int argc, char **argv)
+int	ft_isalpha(int n)
 {
-	t_data	data;
-	if (argc != 2)
+	if (n >= 65 && n <= 90)
 	{
-		printf("You should write: %s <map_relative_path>\n", argv[0]);
-		printf("Example: ./cub3d map.cub");
 		return (1);
 	}
-
-	parse_n_validate_map(argv[1], &data);
-	return (0);
+	else if (n >= 97 && n <= 122)
+	{
+		return (1);
+	}
+	else
+	{
+		return (0);
+	}
 }
