@@ -14,7 +14,7 @@ CFLAGS = -Werror -Wall -Wextra -g
 VG = valgrind --leak-check=full --show-leak-kinds=all --suppressions=sup --track-origins=yes --log-file=leaks.log
 
 # File-related variables
-NAME = cub3d
+NAME = cub3D
 LIBFT = ./includes/libft/libft.a
 RM = rm -rf
 SDIR := src
@@ -24,7 +24,9 @@ ODIR := obj
 SOURCES := cub3d.c\
 			parser/mapValidator.c\
 			parser/mapValidatorUtils.c\
+			parser/mapValidator2.c\
 			errorHandler.c\
+			freedom.c\
 
 # Object files
 OBJECTS := $(patsubst %.c,$(ODIR)/%.o,$(SOURCES))
