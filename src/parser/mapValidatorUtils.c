@@ -11,10 +11,11 @@
 /* ************************************************************************** */
 
 //#TODO Add errors when reading the texture path
+//#TODO checkar com flood fill se consegue chegar a algum espaçol
 
 #include "../../includes/cub3d.h"
 
-bool	is_NO(char *line)
+bool	is_north(char *line)
 {
 	if (line[0] == 'N' && line[1] == 'O' && line[2] == ' ')
 		return (true);
@@ -22,31 +23,28 @@ bool	is_NO(char *line)
 		return (false);
 }
 
-bool	is_SO(char *line)
+bool	is_south(char *line)
 {
 	if (line[0] == 'S' && line[1] == 'O' && line[2] == ' ')
 		return (true);
 	else
 		return (false);
-	;
 }
 
-bool	is_WE(char *line)
+bool	is_west(char *line)
 {
 	if (line[0] == 'W' && line[1] == 'E' && line[2] == ' ')
 		return (true);
 	else
 		return (false);
-	;
 }
 
-bool	is_EA(char *line)
+bool	is_east(char *line)
 {
 	if (line[0] == 'E' && line[1] == 'A' && line[2] == ' ')
 		return (true);
 	else
 		return (false);
-	;
 }
 
 void	copy_texture_path(char *line, t_map *map, t_coordinates c)

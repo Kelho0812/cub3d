@@ -12,7 +12,7 @@
 
 #include "../../includes/cub3d.h"
 
-void init_map(t_map *map)
+void	init_map(t_map *map)
 {
 	map->north_texture = NULL;
 	map->south_texture = NULL;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jorteixe  <jorteixe@student.42porto.>      +#+  +:+       +#+        */
+/*   By: jorteixe <jorteixe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 18:54:21 by jorteixe          #+#    #+#             */
-/*   Updated: 2024/07/19 18:54:43 by jorteixe         ###   ########.fr       */
+/*   Updated: 2024/07/23 10:23:58 by jorteixe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,14 +57,16 @@ typedef enum e_coordinates
 
 void		parse_and_validate_map(char *map, t_data *data);
 void		init_map(t_map *map);
-void		check_duplicates(t_data *data);
-void		validate_map(t_data *data);
+char		**map_parser(int fd, int i, int count, char *map_path);
+void		textures_correct_format(t_data *data);
+void		textures_duplicates_n_missing(t_data *data);
+void		validate_mapfile(t_data *data);
 void		check_textures(t_data *data);
 void		copy_texture_path(char *line, t_map *map, t_coordinates c);
-bool		is_NO(char *map);
-bool		is_SO(char *map);
-bool		is_WE(char *map);
-bool		is_EA(char *map);
+bool		is_north(char *map);
+bool		is_south(char *map);
+bool		is_west(char *map);
+bool		is_east(char *map);
 
 // ERROR_HANDLERS
 typedef enum e_error
@@ -76,10 +78,14 @@ typedef enum e_error
 
 }			t_error;
 
-void		error_handler(t_data *data, t_error error);
+void		error_handler(t_error error);
 void		error_handler2(t_data *data, t_error error);
 
 // FREEDOM
 void		free_map(t_data *data);
+void		free_array2d(void **pnts);
+
+// other
+void		init_data(t_data *data);
 
 #endif

@@ -15,6 +15,7 @@
 void	free_map(t_data *data)
 {
 	t_map	*map;
+
 	map = &data->map;
 	if (map->north_texture != NULL)
 		free(map->north_texture);
@@ -24,4 +25,16 @@ void	free_map(t_data *data)
 		free(map->west_texture);
 	else if (map->east_texture != NULL)
 		free(map->east_texture);
+}
+
+void	free_array2d(void **pnts)
+{
+	int i;
+
+	if (!pnts)
+		return ;
+	i = -1;
+	while (pnts[++i])
+		free(pnts[i]);
+	free(pnts);
 }
