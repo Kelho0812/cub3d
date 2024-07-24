@@ -21,6 +21,10 @@ int	main(int argc, char **argv)
 	init_data(&data);
 	parse_and_validate_map(argv[1], &data);
 	printf("%s", data.map.north_texture);
+	printf("%s", data.map.south_texture);
+	printf("%s", data.map.west_texture);
+	printf("%s", data.map.east_texture);
+	free_array2d((void **)data.map.full_map_array);
 	return (0);
 }
 

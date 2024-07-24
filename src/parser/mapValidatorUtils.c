@@ -17,49 +17,81 @@
 
 bool	is_north(char *line)
 {
-	if (line[0] == 'N' && line[1] == 'O' && line[2] == ' ')
-		return (true);
-	else
+	int	i;
+
+	i = ft_strlen(line);
+	if (ft_strncmp(line, "NO", i) != 0)
 		return (false);
+	else
+		return (true);
 }
 
 bool	is_south(char *line)
 {
-	if (line[0] == 'S' && line[1] == 'O' && line[2] == ' ')
-		return (true);
-	else
+	int	i;
+
+	i = ft_strlen(line);
+	if (ft_strncmp(line, "SO", i) != 0)
 		return (false);
+	else
+		return (true);
 }
 
 bool	is_west(char *line)
 {
-	if (line[0] == 'W' && line[1] == 'E' && line[2] == ' ')
-		return (true);
-	else
+	int	i;
+
+	i = ft_strlen(line);
+	if (ft_strncmp(line, "WE", i) != 0)
 		return (false);
+	else
+		return (true);
 }
 
 bool	is_east(char *line)
 {
-	if (line[0] == 'E' && line[1] == 'A' && line[2] == ' ')
-		return (true);
-	else
+	int	i;
+
+	i = ft_strlen(line);
+	if (ft_strncmp(line, "EA", i) != 0)
 		return (false);
+	else
+		return (true);
 }
 
-void	copy_texture_path(char *line, t_map *map, t_coordinates c)
+bool	is_floor(char *line)
 {
 	int	i;
 
-	i = 0;
-	while (line[i + 2] == ' ')
-		i++;
-	if (c == NO)
-		map->north_texture = ft_strdup(line + 2 + i);
-	if (c == SO)
-		map->south_texture = ft_strdup(line + 2 + i);
-	if (c == WE)
-		map->west_texture = ft_strdup(line + 2 + i);
-	if (c == EA)
-		map->east_texture = ft_strdup(line + 2 + i);
+	i = ft_strlen(line);
+	if (ft_strncmp(line, "F", i) != 0)
+		return (false);
+	else
+		return (true);
+}
+
+bool	is_ceiling(char *line)
+{
+	int	i;
+
+	i = ft_strlen(line);
+	if (ft_strncmp(line, "C", i) != 0)
+		return (false);
+	else
+		return (true);
+}
+
+void	copy_texture_path(t_map *map, char **line)
+{
+	if (line != NULL && line[0] != NULL && !ft_isdigit(line[0][0]))
+	{
+		if (!ft_strncmp(line[0], "NO", 2))
+			map->north_texture = ft_strdup(line[1]);
+		if (!ft_strncmp(line[0], "SO", 2))
+			map->south_texture = ft_strdup(line[1]);
+		if (!ft_strncmp(line[0], "WE", 2))
+			map->west_texture = ft_strdup(line[1]);
+		if (!ft_strncmp(line[0], "EA", 2))
+			map->east_texture = ft_strdup(line[1]);
+	}
 }

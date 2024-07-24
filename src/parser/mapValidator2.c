@@ -22,4 +22,6 @@ void	init_map(t_map *map)
 	map->so_count = 0;
 	map->we_count = 0;
 	map->ea_count = 0;
+	map->c_count = 0;
+	map->f_count = 0;
 }

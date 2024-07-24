@@ -71,7 +71,7 @@ debug: all sup_file
 
 leaks: ./$(NAME)
 	@if [ -f leaks.log ]; then mv leaks.log leaks-old.log; fi
-	$(VG) ./$(NAME)
+	$(VG) ./$(NAME) maps/example.cub
 
 gdb: re
 	gdb --tui $(NAME)

@@ -65,57 +65,70 @@ void	validate_mapfile(t_data *data)
 	{
 		trimmed_line = ft_strtrim(data->map.full_map_array[i], " \t");
 		line_words_array = ft_split(trimmed_line, ' ');
-		// do shit
-		check_count_n_order(line_words_array);
+		count_n_order(data, line_words_array);
+		free(trimmed_line);
 		free_array2d((void **)(line_words_array));
 		i++;
 	}
-	textures_duplicates_n_missing(data);
-	// textures_correct_format(data);
-	check_textures(data);
 }
 
-check_count_n_order(t_data *data, char **line_words_array)
+void	count_n_order(t_data *data, char **line_words_array)
 {
-	if (line_words_array[0])
-	{
-		if (is_north(line_words_array[0]))
-			data->map.no_count++;
-		else if (is_south(data->map.full_map_array[i]))
-			data->map.so_count++;
-		else if (is_west(data->map.full_map_array[i]))
-			data->map.we_count++;
-		else if (is_east(data->map.full_map_array[i]))
-			data->map.ea_count++;
-		i++;
-	}
+	increment_element_count(data, line_words_array[0]);
+	check_word_order(data, line_words_array);
+	check_line_order(data, line_words_array);
+}
+void	check_word_order(t_data *data, char **line_array)
+{
+	if (line_array != NULL && line_array[0] != NULL
+		&& !ft_isdigit(line_array[0][0]) && (get_array_size(line_array) != 2))
+		error_handler2(data, TEXTURE_ERROR);
+	copy_texture_path(&data->map, line_array);
 }
 
-void	check_textures(t_data *data)
+void	check_line_order(t_data *data, char **line_words_array)
 {
-	int		i;
-	char	**map_array;
-	t_map	*map;
+	if (line_words_array != NULL && line_words_array[0] != NULL
+		&& ft_isdigit(line_words_array[0][0]) && (data->map.no_count != 1
+			|| data->map.so_count != 1 || data->map.we_count != 1
+			|| data->map.ea_count != 1 || data->map.c_count != 1
+			|| data->map.f_count != 1))
+		error_handler2(data, TEXTURE_ERROR);
+}
 
-	map_array = data->map.full_map_array;
-	map = &data->map;
+int	get_array_size(char **line_array)
+{
+	int	i;
+
 	i = 0;
-	while (map_array[i])
+	while (line_array[i])
 	{
-		if (is_north(map_array[i]))
-			copy_texture_path(map_array[i], map, NO);
-		else if (is_south(map_array[i]))
-			copy_texture_path(map_array[i], map, SO);
-		else if (is_west(map_array[i]))
-			copy_texture_path(map_array[i], map, WE);
-		else if (is_east(map_array[i]))
-			copy_texture_path(map_array[i], map, EA);
 		i++;
 	}
+	return (i);
 }
 
-void	check_elements(char **array2d)
+void	increment_element_count(t_data *data, char *first_word)
 {
+	if (first_word)
+	{
+		if (is_north(first_word))
+			data->map.no_count++;
+		else if (is_south(first_word))
+			data->map.so_count++;
+		else if (is_west(first_word))
+			data->map.we_count++;
+		else if (is_east(first_word))
+			data->map.ea_count++;
+		else if (is_east(first_word))
+			data->map.ea_count++;
+		else if (is_east(first_word))
+			data->map.ea_count++;
+		else if (is_ceiling(first_word))
+			data->map.c_count++;
+		else if (is_floor(first_word))
+			data->map.f_count++;
+	}
 }
 
 void	textures_duplicates_n_missing(t_data *data)
@@ -142,12 +155,4 @@ void	textures_duplicates_n_missing(t_data *data)
 	{
 		error_handler2(data, TEXTURE_ERROR);
 	}
-}
-
-void	textures_correct_format(t_data *data)
-{
-}
-
-int	get_array2D_size(char **line_words_array)
-{
 }

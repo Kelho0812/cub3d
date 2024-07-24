@@ -34,6 +34,8 @@ typedef struct s_map
 	int		so_count;
 	int		we_count;
 	int		ea_count;
+	int		f_count;
+	int		c_count;
 	char	*north_texture;
 	char	*south_texture;
 	char	*west_texture;
@@ -58,15 +60,22 @@ typedef enum e_coordinates
 void		parse_and_validate_map(char *map, t_data *data);
 void		init_map(t_map *map);
 char		**map_parser(int fd, int i, int count, char *map_path);
+void		count_n_order(t_data *data, char **line_words_array);
 void		textures_correct_format(t_data *data);
 void		textures_duplicates_n_missing(t_data *data);
+int			get_array_size(char **line_array);
+void		check_word_order(t_data *data, char **line_words_array);
+void		check_line_order(t_data *data, char **line_words_array);
+void		increment_element_count(t_data *data, char *first_word);
 void		validate_mapfile(t_data *data);
 void		check_textures(t_data *data);
-void		copy_texture_path(char *line, t_map *map, t_coordinates c);
+void		copy_texture_path(t_map *map, char **line);
 bool		is_north(char *map);
 bool		is_south(char *map);
 bool		is_west(char *map);
 bool		is_east(char *map);
+bool		is_floor(char *line);
+bool		is_ceiling(char *line);
 
 // ERROR_HANDLERS
 typedef enum e_error
