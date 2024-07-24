@@ -53,3 +53,7 @@ dkms.conf
 cub3d
 cub3d
 cub3D
+leaks-old.log
+leaks.log
+sup
+.vscode/settings.json
