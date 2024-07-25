@@ -83,7 +83,7 @@ void	check_word_order(t_data *data, char **line_array)
 	if (line_array != NULL && line_array[0] != NULL
 		&& !ft_isdigit(line_array[0][0]) && (get_array_size(line_array) != 2))
 		error_handler2(data, TEXTURE_ERROR);
-	copy_texture_path(&data->map, line_array);
+	copy_texture_path(data, line_array);
 }
 
 void	check_line_order(t_data *data, char **line_words_array)

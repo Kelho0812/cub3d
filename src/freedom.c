@@ -38,3 +38,7 @@ void	free_array2d(void **pnts)
 		free(pnts[i]);
 	free(pnts);
 }
+// void william_wallace(t_data *data)
+// {
+
+// }

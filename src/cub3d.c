@@ -20,10 +20,7 @@ int	main(int argc, char **argv)
 		error_handler(WRONG_ARG_NUM);
 	init_data(&data);
 	parse_and_validate_map(argv[1], &data);
-	printf("%s", data.map.north_texture);
-	printf("%s", data.map.south_texture);
-	printf("%s", data.map.west_texture);
-	printf("%s", data.map.east_texture);
+	// william_wallace()
 	free_array2d((void **)data.map.full_map_array);
 	return (0);
 }

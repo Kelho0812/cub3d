@@ -49,14 +49,6 @@ typedef struct s_data
 }			t_data;
 
 // PARSER
-typedef enum e_coordinates
-{
-	NO,
-	SO,
-	WE,
-	EA
-}			t_coordinates;
-
 void		parse_and_validate_map(char *map, t_data *data);
 void		init_map(t_map *map);
 char		**map_parser(int fd, int i, int count, char *map_path);
@@ -69,7 +61,8 @@ void		check_line_order(t_data *data, char **line_words_array);
 void		increment_element_count(t_data *data, char *first_word);
 void		validate_mapfile(t_data *data);
 void		check_textures(t_data *data);
-void		copy_texture_path(t_map *map, char **line);
+void		copy_texture_path(t_data *data, char **line);
+void		set_RGB(t_data *data, t_rgb *rgb, char *line);
 bool		is_north(char *map);
 bool		is_south(char *map);
 bool		is_west(char *map);
