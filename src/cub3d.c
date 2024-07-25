@@ -20,8 +20,7 @@ int	main(int argc, char **argv)
 		error_handler(WRONG_ARG_NUM);
 	init_data(&data);
 	parse_and_validate_map(argv[1], &data);
-	// william_wallace()
-	free_array2d((void **)data.map.full_map_array);
+	william_wallace(&data);
 	return (0);
 }
 

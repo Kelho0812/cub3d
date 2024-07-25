@@ -111,4 +111,5 @@ void	set_RGB(t_data *data, t_rgb *rgb, char *line)
 	rgb->R = ft_atoi(colors_array[0]);
 	rgb->G = ft_atoi(colors_array[1]);
 	rgb->B = ft_atoi(colors_array[2]);
+	free_array2d((void **) colors_array);
 }

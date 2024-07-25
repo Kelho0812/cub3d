@@ -84,6 +84,7 @@ void		error_handler(t_error error);
 void		error_handler2(t_data *data, t_error error);
 
 // FREEDOM
+void		william_wallace(t_data *data);
 void		free_map(t_data *data);
 void		free_array2d(void **pnts);
 
