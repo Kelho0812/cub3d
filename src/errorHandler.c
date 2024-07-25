@@ -36,7 +36,7 @@ void	error_handler2(t_data *data, t_error error)
 {
 	if (error == TEXTURE_ERROR)
 	{
-		free_map(data);
+		william_wallace(data);
 		printf("TEXTURE ERROR OH FILHA DA PUTA.\n");
 		exit(1);
 	}
