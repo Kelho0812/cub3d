@@ -208,7 +208,7 @@ void	increment_element_count(t_data *data, char *first_word)
 			data->map.f_count++;
 	}
 }
-
+//#TODO Need to add the error handlers and take care of leaks
 void	check_path(char **map, t_data *data)
 {
 	bool	can_reach_space_or_tab;
@@ -229,12 +229,22 @@ void	check_path(char **map, t_data *data)
 			cols = len;
 		i++;
 	}
+	if (!is_surrounded_by_walls(map, rows, cols))
+	{
+		printf("The map is not surrounded by walls.\n");
+		exit(1);
+	}
 	can_reach_space_or_tab = dfs(map, data->player.y, data->player.x, rows,
 			cols);
 	if (can_reach_space_or_tab)
+	{
 		printf("A space or tab is reachable from the starting position.\n");
+		exit(1);
+	}
 	else
+	{
 		printf("No space or tab is reachable from the starting position.\n");
+	}
 	free_array2d((void **)map);
 }
 
@@ -250,16 +260,14 @@ char	**copy_map_from_index(t_data *data, int start_index)
 	{
 		num_lines++;
 	}
-	new_map_array = (char **)malloc((num_lines + 3) * sizeof(char *));
+	new_map_array = (char **)malloc((num_lines + 1) * sizeof(char *));
 	// if (new_map_array == NULL)
-	new_map_array[0] = ft_strdup("                                                                                                  ");
 	for (i = 0; i < num_lines; i++)
 	{
 		new_map_array[i] = ft_strdup(map_array[start_index + i]);
 		// if (new_map_array[i] == NULL)
 	}
-	new_map_array[i] = ft_strdup("                                                                                                  ");
-	new_map_array[i+1] = NULL;
+	new_map_array[num_lines] = NULL;
 	return (new_map_array);
 }
 
@@ -307,4 +315,21 @@ void	print_colored_map(char **map)
 		printf("\n");
 		i++;
 	}
+}
+//#TODO Not working, still the better idea is to surround the map by spaces and check if they are reachable
+bool	is_surrounded_by_walls(char **map, int rows, int cols)
+{
+	for (int j = 0; j < cols; j++)
+	{
+		if (map[0][j] != '1' || map[rows - 1][j] != '1')
+			return (false);
+	}
+
+	for (int i = 0; i < rows; i++)
+	{
+		if (map[i][0] != '1' || map[i][cols - 1] != '1')
+			return (false);
+	}
+
+	return (true);
 }

@@ -85,6 +85,7 @@ bool			is_ceiling(char *line);
 bool			dfs(char **map, int x, int y, int rows, int cols);
 void			check_path(char **map, t_data *data);
 char			**copy_map_from_index(t_data *data, int start_index);
+bool			is_surrounded_by_walls(char **map, int rows, int cols);
 
 // ERROR_HANDLERS
 typedef enum e_error
