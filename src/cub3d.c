@@ -20,6 +20,9 @@ int	main(int argc, char **argv)
 		error_handler(WRONG_ARG_NUM);
 	init_data(&data);
 	parse_and_validate_map(argv[1], &data);
+	printf("%d,",data.map.ceiling_color.R); 
+	printf("%d,",data.map.ceiling_color.G); 
+	printf("%d\n",data.map.ceiling_color.B); 
 	william_wallace(&data);
 	return (0);
 }

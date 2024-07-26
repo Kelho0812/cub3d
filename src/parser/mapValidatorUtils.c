@@ -108,16 +108,30 @@ void	set_RGB(t_data *data, t_rgb *rgb, char *line)
 	char	**colors_array;
 
 	colors_array = ft_split(line, ',');
-	if (get_array_size(colors_array) != 3
-		|| !ft_isdigit(ft_atoi(colors_array[0]))
-		|| !ft_isdigit(ft_atoi(colors_array[1]))
-		|| !ft_isdigit(ft_atoi(colors_array[2])))
+	if (get_array_size(colors_array) != 3 || !is_digit_multiple(colors_array[0])
+		|| !is_digit_multiple(colors_array[1])
+		|| !is_digit_multiple(colors_array[2]))
 	{
-		printf("ZE DA MANGA");
+		free_array2d((void **)colors_array);
 		error_handler2(data, TEXTURE_ERROR);
 	}
 	rgb->R = ft_atoi(colors_array[0]);
 	rgb->G = ft_atoi(colors_array[1]);
 	rgb->B = ft_atoi(colors_array[2]);
 	free_array2d((void **)colors_array);
+}
+
+bool	is_digit_multiple(char *digit)
+{
+	int	i;
+	int len;
+	i = 0;
+	len = ft_strlen(digit);
+	while (i < len)
+	{
+		if (!ft_isdigit(digit[i]))
+			return (false);
+		i++;
+	}
+	return (true);
 }

@@ -55,6 +55,7 @@ char		**map_parser(int fd, int i, int count, char *map_path);
 void		count_n_order(t_data *data, char **line_words_array);
 void		textures_correct_format(t_data *data);
 void		textures_duplicates_n_missing(t_data *data);
+bool		is_digit_multiple(char *digit);
 int			get_array_size(char **line_array);
 void		check_word_order(t_data *data, char **line_words_array);
 void		check_line_order(t_data *data, char **line_words_array);
