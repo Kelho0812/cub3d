@@ -62,8 +62,11 @@ int			get_array_size(char **line_array);
 void		check_word_order(t_data *data, char **line_words_array);
 void		check_line_order(t_data *data, char **line_words_array);
 void		increment_element_count(t_data *data, char *first_word);
+void		check_wrong_chars(t_data *data, char **map_lines, int i);
+int			check_map_start(t_data *data);
 bool		is_RGB_range(int RGB_Num);
-void		validate_and_copy_mapfile(t_data *data);
+void		validate_and_copy_elements(t_data *data);
+void		validate_and_copy_map(t_data *data);
 void		copy_elements(t_data *data, char **line);
 void		set_RGB(t_data *data, t_rgb *rgb, char *line);
 bool		is_north(char *map);
@@ -80,7 +83,8 @@ typedef enum e_error
 	WRONG_EXTENSION,
 	OPEN_MAP_ERROR,
 	TEXTURE_ERROR,
-	RGB_ERROR
+	RGB_ERROR,
+	WRONG_CHARS_MAP_ERROR
 
 }			t_error;
 

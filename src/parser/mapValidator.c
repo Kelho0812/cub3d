@@ -22,7 +22,8 @@ void	parse_and_validate_map(char *map, t_data *data)
 	if (fd < 0)
 		error_handler(OPEN_MAP_ERROR);
 	data->map.full_map_array = map_parser(fd, 0, 0, map);
-	validate_and_copy_mapfile(data);
+	validate_and_copy_elements(data);
+	validate_and_copy_map(data);
 }
 
 char	**map_parser(int fd, int i, int count, char *map_path)
@@ -54,7 +55,7 @@ char	**map_parser(int fd, int i, int count, char *map_path)
 	return (lines);
 }
 
-void	validate_and_copy_mapfile(t_data *data)
+void	validate_and_copy_elements(t_data *data)
 {
 	int		i;
 	char	*trimmed_line;
@@ -71,6 +72,63 @@ void	validate_and_copy_mapfile(t_data *data)
 		free_array2d((void **)(line_words_array));
 		i++;
 	}
+}
+
+void	validate_and_copy_map(t_data *data)
+{
+	int		i;
+	char	**map_array;
+
+	map_array = data->map.full_map_array;
+	i = check_map_start(data);
+	check_wrong_chars(data, map_array, i);
+}
+
+void	check_wrong_chars(t_data *data, char **map_lines, int i)
+{
+	int	j;
+
+	while (map_lines[i] != NULL)
+	{
+		j = 0;
+		while (map_lines[i][j] != '\0')
+		{
+			if (map_lines[i][j] != '0' && map_lines[i][j] != '1'
+				&& map_lines[i][j] != 'N' && map_lines[i][j] != 'S'
+				&& map_lines[i][j] != 'W' && map_lines[i][j] != 'E'
+				&& map_lines[i][j] != ' ' && map_lines[i][j] != '\t')
+			{
+				error_handler2(data, WRONG_CHARS_MAP_ERROR);
+			}
+			j++;
+		}
+		i++;
+	}
+}
+
+int	check_map_start(t_data *data)
+{
+	int		i;
+	char	*trimmed_line;
+	char	**line_words_array;
+
+	i = 0;
+	while (data->map.full_map_array[i] != NULL)
+	{
+		trimmed_line = ft_strtrim(data->map.full_map_array[i], " \t");
+		line_words_array = ft_split(trimmed_line, ' ');
+		if (line_words_array[0] != NULL && line_words_array[0][0] != '\0')
+		{
+			if (ft_isdigit(line_words_array[0][0]))
+			{
+				free_array2d((void **)line_words_array);
+				return (i);
+			}
+		}
+		i++;
+	}
+	free_array2d((void **)line_words_array);
+	return (0);
 }
 
 void	validate_elements(t_data *data, char **line_words_array)
