@@ -30,4 +30,5 @@ int	main(int argc, char **argv)
 void	init_data(t_data *data)
 {
 	init_map(&data->map);
+	init_player(&data->player);
 }

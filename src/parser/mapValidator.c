@@ -21,7 +21,7 @@ void	parse_and_validate_map(char *map, t_data *data)
 	fd = open(map, O_RDONLY);
 	if (fd < 0)
 		error_handler(OPEN_MAP_ERROR);
-	data->map.full_map_array = map_parser(fd, 0, 0, map);
+	data->map.full_file_array = map_parser(fd, 0, 0, map);
 	validate_and_copy_elements(data);
 	validate_and_copy_map(data);
 }
@@ -62,9 +62,9 @@ void	validate_and_copy_elements(t_data *data)
 	char	**line_words_array;
 
 	i = 0;
-	while (data->map.full_map_array[i] != NULL)
+	while (data->map.full_file_array[i] != NULL)
 	{
-		trimmed_line = ft_strtrim(data->map.full_map_array[i], " \t");
+		trimmed_line = ft_strtrim(data->map.full_file_array[i], " \t");
 		line_words_array = ft_split(trimmed_line, ' ');
 		validate_elements(data, line_words_array);
 		copy_elements(data, line_words_array);
@@ -78,21 +78,46 @@ void	validate_and_copy_map(t_data *data)
 {
 	int		i;
 	char	**map_array;
+	char	**new_map_array;
 
-	map_array = data->map.full_map_array;
+	map_array = data->map.full_file_array;
 	i = check_map_start(data);
 	check_wrong_chars(data, map_array, i);
+	new_map_array = copy_map_from_index(data, i);
+	i = 0;
+	while (new_map_array != NULL && new_map_array[i] != NULL)
+	{
+		printf("%s\n", new_map_array[i]);
+		i++;
+	}
+	check_path(new_map_array, data);
 }
 
 void	check_wrong_chars(t_data *data, char **map_lines, int i)
 {
 	int	j;
+	int	wowzers;
+	int	player_count;
 
+	wowzers = i;
+	player_count = 0;
 	while (map_lines[i] != NULL)
 	{
 		j = 0;
 		while (map_lines[i][j] != '\0')
 		{
+			if ((map_lines[i][j] == 'N' || map_lines[i][j] == 'S'
+					|| map_lines[i][j] == 'W' || map_lines[i][j] == 'E')
+				&& player_count == 0)
+			{
+				data->player.x = j;
+				data->player.y = i - wowzers;
+				player_count++;
+			}
+			else if ((map_lines[i][j] == 'N' || map_lines[i][j] == 'S'
+					|| map_lines[i][j] == 'W' || map_lines[i][j] == 'E')
+				&& player_count != 0)
+				error_handler2(data, WRONG_CHARS_MAP_ERROR);
 			if (map_lines[i][j] != '0' && map_lines[i][j] != '1'
 				&& map_lines[i][j] != 'N' && map_lines[i][j] != 'S'
 				&& map_lines[i][j] != 'W' && map_lines[i][j] != 'E'
@@ -113,9 +138,9 @@ int	check_map_start(t_data *data)
 	char	**line_words_array;
 
 	i = 0;
-	while (data->map.full_map_array[i] != NULL)
+	while (data->map.full_file_array[i] != NULL)
 	{
-		trimmed_line = ft_strtrim(data->map.full_map_array[i], " \t");
+		trimmed_line = ft_strtrim(data->map.full_file_array[i], " \t");
 		line_words_array = ft_split(trimmed_line, ' ');
 		if (line_words_array[0] != NULL && line_words_array[0][0] != '\0')
 		{
@@ -187,4 +212,75 @@ void	increment_element_count(t_data *data, char *first_word)
 		else if (is_floor(first_word))
 			data->map.f_count++;
 	}
+}
+
+void	check_path(char **map, t_data *data)
+{
+	bool	can_reach_space_or_tab;
+	int		rows;
+	int		cols;
+	int		len;
+	int		i;
+
+	i = 0;
+	rows = 0;
+	while (map[rows] != NULL)
+		rows++;
+	cols = 0;
+	while (i < rows)
+	{
+		len = ft_strlen(map[i]);
+		if (len > cols)
+			cols = len;
+		i++;
+	}
+	can_reach_space_or_tab = dfs(map, data->player.y, data->player.x, rows,
+			cols);
+	if (can_reach_space_or_tab)
+		printf("A space or tab is reachable from the starting position.\n");
+	else
+		printf("No space or tab is reachable from the starting position.\n");
+	free_array2d((void **)map);
+}
+
+char	**copy_map_from_index(t_data *data, int start_index)
+{
+	char	**map_array;
+	char	**new_map_array;
+
+	int i, num_lines;
+	map_array = data->map.full_file_array;
+	num_lines = 0;
+	while (map_array[start_index + num_lines] != NULL)
+	{
+		num_lines++;
+	}
+	new_map_array = (char **)malloc((num_lines + 1) * sizeof(char *));
+	// if (new_map_array == NULL)
+	for (i = 0; i < num_lines; i++)
+	{
+		new_map_array[i] = ft_strdup(map_array[start_index + i]);
+		// if (new_map_array[i] == NULL)
+	}
+	new_map_array[num_lines] = NULL;
+	return (new_map_array);
+}
+
+bool	dfs(char **map, int x, int y, int rows, int cols)
+{
+	if (x < 0 || x >= rows || y < 0 || y >= cols)
+		return (false);
+	if (map == NULL || map[x] == NULL)
+		return (false);
+	if (map[x][y] == '1' || map[x][y] == 'V')
+		return (false);
+	if (map[x][y] == ' ' || map[x][y] == '\t')
+		return (true);
+	map[x][y] = 'V';
+	if (dfs(map, x - 1, y, rows, cols) || dfs(map, x + 1, y, rows, cols)
+		|| dfs(map, x, y - 1, rows, cols) || dfs(map, x, y + 1, rows, cols))
+	{
+		return (true);
+	}
+	return (false);
 }

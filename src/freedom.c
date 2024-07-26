@@ -41,7 +41,7 @@ void	free_array2d(void **pnts)
 }
 void	william_wallace(t_data *data)
 {
-	free_array2d((void **)data->map.full_map_array);
+	free_array2d((void **)data->map.full_file_array);
 	free_map(data);
 }
 

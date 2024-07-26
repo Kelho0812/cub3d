@@ -25,3 +25,10 @@ void	init_map(t_map *map)
 	map->c_count = 0;
 	map->f_count = 0;
 }
+
+void init_player(t_player *player)
+{
+	player->x = -1;
+	player->y = -1;
+}
+

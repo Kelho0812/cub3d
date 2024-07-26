@@ -22,6 +22,12 @@
 # define RED "\033[1;31m"
 # define RESET "\033[0m"
 
+typedef struct s_player
+{
+	int x;
+	int y;
+}			t_player;
+
 typedef struct s_rgb
 {
 	int		R;
@@ -32,7 +38,7 @@ typedef struct s_map
 {
 	int		width;
 	int		height;
-	char	**full_map_array;
+	char	**full_file_array;
 	int		no_count;
 	int		so_count;
 	int		we_count;
@@ -49,6 +55,7 @@ typedef struct s_map
 typedef struct s_data
 {
 	t_map	map;
+	t_player player;
 }			t_data;
 
 // PARSER
@@ -75,6 +82,9 @@ bool		is_west(char *map);
 bool		is_east(char *map);
 bool		is_floor(char *line);
 bool		is_ceiling(char *line);
+bool		dfs(char **map, int x, int y, int rows, int cols);
+void		check_path(char **map, t_data *data);
+char		**copy_map_from_index(t_data *data, int start_index);
 
 // ERROR_HANDLERS
 typedef enum e_error
@@ -97,6 +107,7 @@ void		free_map(t_data *data);
 void		free_array2d(void **pnts);
 
 // other
-void		init_data(t_data *data);
+void		init_data(t_data *data);	
+void init_player(t_player *player);
 
 #endif
