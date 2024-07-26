@@ -84,12 +84,7 @@ void	validate_and_copy_map(t_data *data)
 	i = check_map_start(data);
 	check_wrong_chars(data, map_array, i);
 	new_map_array = copy_map_from_index(data, i);
-	i = 0;
-	while (new_map_array != NULL && new_map_array[i] != NULL)
-	{
-		printf("%s\n", new_map_array[i]);
-		i++;
-	}
+	print_colored_map(new_map_array);
 	check_path(new_map_array, data);
 }
 
@@ -255,14 +250,16 @@ char	**copy_map_from_index(t_data *data, int start_index)
 	{
 		num_lines++;
 	}
-	new_map_array = (char **)malloc((num_lines + 1) * sizeof(char *));
+	new_map_array = (char **)malloc((num_lines + 3) * sizeof(char *));
 	// if (new_map_array == NULL)
+	new_map_array[0] = ft_strdup("                                                                                                  ");
 	for (i = 0; i < num_lines; i++)
 	{
 		new_map_array[i] = ft_strdup(map_array[start_index + i]);
 		// if (new_map_array[i] == NULL)
 	}
-	new_map_array[num_lines] = NULL;
+	new_map_array[i] = ft_strdup("                                                                                                  ");
+	new_map_array[i+1] = NULL;
 	return (new_map_array);
 }
 
@@ -283,4 +280,31 @@ bool	dfs(char **map, int x, int y, int rows, int cols)
 		return (true);
 	}
 	return (false);
+}
+
+void	print_colored_map(char **map)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (map != NULL && map[i] != NULL)
+	{
+		j = 0;
+		while (map[i][j] != '\0')
+		{
+			if (map[i][j] == '1')
+				printf("\033[0;31m%c\033[0m", map[i][j]);
+			else if (map[i][j] == '0')
+				printf("\033[0;32m%c\033[0m", map[i][j]);
+			else if (map[i][j] == 'N' || map[i][j] == 'S' || map[i][j] == 'E'
+				|| map[i][j] == 'W')
+				printf("\033[0;30m\033[47m%c\033[0m", map[i][j]);
+			else
+				printf("%c", map[i][j]);
+			j++;
+		}
+		printf("\n");
+		i++;
+	}
 }

@@ -109,5 +109,5 @@ void			free_array2d(void **pnts);
 // other
 void			init_data(t_data *data);
 void			init_player(t_player *player);
-
+void			print_colored_map(char **map);
 #endif
