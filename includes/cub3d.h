@@ -19,6 +19,9 @@
 # include <stdbool.h>
 # include <stdio.h>
 
+# define RED "\033[1;31m"
+# define RESET "\033[0m"
+
 typedef struct s_rgb
 {
 	int		R;
@@ -52,17 +55,16 @@ typedef struct s_data
 void		parse_and_validate_map(char *map, t_data *data);
 void		init_map(t_map *map);
 char		**map_parser(int fd, int i, int count, char *map_path);
-void		count_n_order(t_data *data, char **line_words_array);
+void		validate_elements(t_data *data, char **line_words_array);
 void		textures_correct_format(t_data *data);
-void		textures_duplicates_n_missing(t_data *data);
 bool		is_digit_multiple(char *digit);
 int			get_array_size(char **line_array);
 void		check_word_order(t_data *data, char **line_words_array);
 void		check_line_order(t_data *data, char **line_words_array);
 void		increment_element_count(t_data *data, char *first_word);
-void		validate_mapfile(t_data *data);
-void		check_textures(t_data *data);
-void		copy_texture_path(t_data *data, char **line);
+bool		is_RGB_range(int RGB_Num);
+void		validate_and_copy_mapfile(t_data *data);
+void		copy_elements(t_data *data, char **line);
 void		set_RGB(t_data *data, t_rgb *rgb, char *line);
 bool		is_north(char *map);
 bool		is_south(char *map);
@@ -78,6 +80,7 @@ typedef enum e_error
 	WRONG_EXTENSION,
 	OPEN_MAP_ERROR,
 	TEXTURE_ERROR,
+	RGB_ERROR
 
 }			t_error;
 

@@ -22,7 +22,7 @@ void	parse_and_validate_map(char *map, t_data *data)
 	if (fd < 0)
 		error_handler(OPEN_MAP_ERROR);
 	data->map.full_map_array = map_parser(fd, 0, 0, map);
-	validate_mapfile(data);
+	validate_and_copy_mapfile(data);
 }
 
 char	**map_parser(int fd, int i, int count, char *map_path)
@@ -54,7 +54,7 @@ char	**map_parser(int fd, int i, int count, char *map_path)
 	return (lines);
 }
 
-void	validate_mapfile(t_data *data)
+void	validate_and_copy_mapfile(t_data *data)
 {
 	int		i;
 	char	*trimmed_line;
@@ -65,14 +65,15 @@ void	validate_mapfile(t_data *data)
 	{
 		trimmed_line = ft_strtrim(data->map.full_map_array[i], " \t");
 		line_words_array = ft_split(trimmed_line, ' ');
-		count_n_order(data, line_words_array);
+		validate_elements(data, line_words_array);
+		copy_elements(data, line_words_array);
 		free(trimmed_line);
 		free_array2d((void **)(line_words_array));
 		i++;
 	}
 }
 
-void	count_n_order(t_data *data, char **line_words_array)
+void	validate_elements(t_data *data, char **line_words_array)
 {
 	increment_element_count(data, line_words_array[0]);
 	check_word_order(data, line_words_array);
@@ -83,7 +84,6 @@ void	check_word_order(t_data *data, char **line_array)
 	if (line_array != NULL && line_array[0] != NULL
 		&& !ft_isdigit(line_array[0][0]) && (get_array_size(line_array) != 2))
 		error_handler2(data, TEXTURE_ERROR);
-	copy_texture_path(data, line_array);
 }
 
 void	check_line_order(t_data *data, char **line_words_array)
@@ -128,31 +128,5 @@ void	increment_element_count(t_data *data, char *first_word)
 			data->map.c_count++;
 		else if (is_floor(first_word))
 			data->map.f_count++;
-	}
-}
-
-void	textures_duplicates_n_missing(t_data *data)
-{
-	int	i;
-
-	i = 0;
-	while (data->map.full_map_array[i] != NULL)
-	{
-		data->map.full_map_array[i] = ft_strtrim(data->map.full_map_array[i],
-				" \t");
-		if (is_north(data->map.full_map_array[i]))
-			data->map.no_count++;
-		else if (is_south(data->map.full_map_array[i]))
-			data->map.so_count++;
-		else if (is_west(data->map.full_map_array[i]))
-			data->map.we_count++;
-		else if (is_east(data->map.full_map_array[i]))
-			data->map.ea_count++;
-		i++;
-	}
-	if (data->map.no_count != 1 || data->map.so_count != 1
-		|| data->map.we_count != 1 || data->map.ea_count != 1)
-	{
-		error_handler2(data, TEXTURE_ERROR);
 	}
 }

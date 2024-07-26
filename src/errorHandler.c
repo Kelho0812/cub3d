@@ -37,7 +37,13 @@ void	error_handler2(t_data *data, t_error error)
 	if (error == TEXTURE_ERROR)
 	{
 		william_wallace(data);
-		printf("TEXTURE ERROR OH FILHA DA PUTA.\n");
+		printf(RED "TEXTURE ERROR OH FILHA DA PUTA." RESET "\n");
+		exit(1);
+	}
+	if (error == RGB_ERROR)
+	{
+		william_wallace(data);
+		printf(RED "RGB ERROR OH CABRAO."RESET "\n");
 		exit(1);
 	}
 }

@@ -81,7 +81,7 @@ bool	is_ceiling(char *line)
 		return (true);
 }
 
-void	copy_texture_path(t_data *data, char **line)
+void	copy_elements(t_data *data, char **line)
 {
 	t_map	*map;
 
@@ -106,6 +106,9 @@ void	copy_texture_path(t_data *data, char **line)
 void	set_RGB(t_data *data, t_rgb *rgb, char *line)
 {
 	char	**colors_array;
+	int		R;
+	int		G;
+	int		B;
 
 	colors_array = ft_split(line, ',');
 	if (get_array_size(colors_array) != 3 || !is_digit_multiple(colors_array[0])
@@ -113,18 +116,27 @@ void	set_RGB(t_data *data, t_rgb *rgb, char *line)
 		|| !is_digit_multiple(colors_array[2]))
 	{
 		free_array2d((void **)colors_array);
-		error_handler2(data, TEXTURE_ERROR);
+		error_handler2(data, RGB_ERROR);
 	}
-	rgb->R = ft_atoi(colors_array[0]);
-	rgb->G = ft_atoi(colors_array[1]);
-	rgb->B = ft_atoi(colors_array[2]);
+	R = ft_atoi(colors_array[0]);
+	G = ft_atoi(colors_array[1]);
+	B = ft_atoi(colors_array[2]);
+	if (!is_RGB_range(R) || !is_RGB_range(G) || !is_RGB_range(B))
+	{
+		free_array2d((void **)colors_array);
+		error_handler2(data, RGB_ERROR);
+	}
+	rgb->R = R;
+	rgb->G = G;
+	rgb->B = B;
 	free_array2d((void **)colors_array);
 }
 
 bool	is_digit_multiple(char *digit)
 {
 	int	i;
-	int len;
+	int	len;
+
 	i = 0;
 	len = ft_strlen(digit);
 	while (i < len)
@@ -134,4 +146,13 @@ bool	is_digit_multiple(char *digit)
 		i++;
 	}
 	return (true);
+}
+
+bool	is_RGB_range(int RGB_Num)
+{
+	if (RGB_Num >= 0 && RGB_Num <= 255)
+	{
+		return (true);
+	}
+	return (false);
 }
