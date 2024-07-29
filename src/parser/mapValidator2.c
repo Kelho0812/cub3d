@@ -26,9 +26,62 @@ void	init_map(t_map *map)
 	map->f_count = 0;
 }
 
-void init_player(t_player *player)
+void	init_player(t_player *player)
 {
 	player->x = -1;
 	player->y = -1;
 }
 
+bool	is_digit_multiple(char *digit)
+{
+	int	i;
+	int	len;
+
+	i = 0;
+	len = ft_strlen(digit);
+	while (i < len)
+	{
+		if (!ft_isdigit(digit[i]))
+			return (false);
+		i++;
+	}
+	return (true);
+}
+
+bool	is_rgb_range(int RGB_Num)
+{
+	if (RGB_Num >= 0 && RGB_Num <= 255)
+	{
+		return (true);
+	}
+	return (false);
+}
+
+void	set_rgb(t_data *data, t_rgb *rgb, char *line)
+{
+	char	**colors_array;
+	int		r;
+	int		g;
+	int		b;
+
+	colors_array = ft_split(line, ',');
+	if (get_array_size(colors_array) != 3 || !is_digit_multiple(colors_array[0])
+		|| !is_digit_multiple(colors_array[1])
+		|| !is_digit_multiple(colors_array[2]))
+	{
+		free_array2d((void **)colors_array);
+		error_handler2(data, RGB_ERROR);
+	}
+	r = ft_atoi(colors_array[0]);
+	g = ft_atoi(colors_array[1]);
+	b = ft_atoi(colors_array[2]);
+	if (!is_rgb_range(r) || !is_rgb_range(g) || !is_rgb_range(b))
+	{
+		free_array2d((void **)colors_array);
+		error_handler2(data, RGB_ERROR);
+	}
+	rgb->R = r;
+	rgb->G = g;
+	rgb->B = b;
+	free_array2d((void **)colors_array);
+}

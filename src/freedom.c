@@ -25,7 +25,6 @@ void	free_map(t_data *data)
 		free(map->west_texture);
 	if (map->east_texture != NULL)
 		free(map->east_texture);
-	// free_RGB(map->ceiling_color);
 }
 
 void	free_array2d(void **pnts)
@@ -39,15 +38,9 @@ void	free_array2d(void **pnts)
 		free(pnts[i]);
 	free(pnts);
 }
+
 void	william_wallace(t_data *data)
 {
 	free_array2d((void **)data->map.full_file_array);
 	free_map(data);
 }
-
-// void	free_RGB(t_rgb *rgb)
-// {
-// 	if (rgb->R != 0)
-// 		free(rgb->R);
-	
-// }

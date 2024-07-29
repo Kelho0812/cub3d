@@ -43,13 +43,13 @@ void	error_handler2(t_data *data, t_error error)
 	if (error == RGB_ERROR)
 	{
 		william_wallace(data);
-		printf(RED "RGB ERROR OH CABRAO."RESET "\n");
+		printf(RED "RGB ERROR OH CABRAO." RESET "\n");
 		exit(1);
 	}
-	if(error == WRONG_CHARS_MAP_ERROR)
+	if (error == WRONG_CHARS_MAP_ERROR)
 	{
 		william_wallace(data);
-		printf(RED "WRONG CHARS NO MAPA ERROR OH BOI."RESET "\n");
+		printf(RED "WRONG CHARS NO MAPA ERROR OH BOI." RESET "\n");
 		exit(1);
 	}
 }
