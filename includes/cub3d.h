@@ -118,6 +118,8 @@ void					print_result_and_exit(bool can_reach_space_or_tab);
 char					**allocate_and_initialize_map(int rows, int cols);
 void					copy_original_map(char **new_map, char **map, int rows);
 
+bool					is_player(char *line);
+
 // ERROR_HANDLERS
 typedef enum e_error
 {

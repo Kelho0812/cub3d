@@ -56,3 +56,11 @@ void	handle_player_char(t_data *data, int *player_count, int i, int j,
 		error_handler2(data, WRONG_CHARS_MAP_ERROR);
 	}
 }
+
+bool	is_player(char *line)
+{
+	if (is_north(line) || is_south(line) || is_west(line) || is_east(line))
+		return true;
+	else
+		return false;
+}
