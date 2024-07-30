@@ -47,7 +47,6 @@ int handle_keypress(int keysym, t_data *data)
         data->player.pdx = cos(data->player.pa) * 3;
         data->player.pdy = sin(data->player.pa) * 3;
     }
-    printf("%f\n", data->player.pa);
     render_minimap(data);
     render_player(data);
 	return (0);

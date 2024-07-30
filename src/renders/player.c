@@ -20,18 +20,18 @@ void    render_player(t_data *data)
     int y = data->player.py;
 
     y1 = 0;
+    draw_fov(data);
     while (y1 < PLAYER_SIZE)
     {
         x1 = 0;
         while (x1 < PLAYER_SIZE)
         {
             if (x + x1 < WIDTH && y + y1 < HEIGHT)
-                mlx_pixel_put(data->window.mlx, data->window.mlx_win, x + x1, y + y1, 0xFF0000);
+                my_pixel_put(x + x1, y + y1, 0xFF0000, data);
             x1++;
         }
         y1++;
     }
-    draw_fov(data);
 }
 
 
@@ -53,8 +53,8 @@ void draw_fov(t_data *data)
 			ca += 2 * PI;
 		else if (ca > 2 * PI)
 			ca -= 2 * PI;
-        end_x = center_x + (cos(ca) * 30);
-        end_y = center_y + (sin(ca) * 30);
+        end_x = center_x + (cos(ca) * 20);
+        end_y = center_y + (sin(ca) * 20);
         draw_line(center_x, center_y, end_x, end_y, data);
         raycasted++;
     }
