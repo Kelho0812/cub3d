@@ -11,11 +11,13 @@ RES = \033[0m
 # Compiler-related variables
 CC = cc
 CFLAGS = -Werror -Wall -Wextra -g
+LIBFLAGS = -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o
 VG = valgrind --leak-check=full --show-leak-kinds=all --suppressions=sup --track-origins=yes --log-file=leaks.log
 
 # File-related variables
 NAME = cub3D
 LIBFT = ./includes/libft/libft.a
+MINILIBX = ./includes/minilibx-linux/libmlx.a
 RM = rm -rf
 SDIR := src
 ODIR := obj
@@ -43,15 +45,15 @@ COMPILED_FILES := $(shell if [ -d "$(ODIR)" ]; then find $(ODIR) -name "*.o" | w
 # Targets
 all : ${NAME}
 
-${NAME} : ${OBJECTS} $(LIBFT)
-	@${CC} ${CFLAGS} ${OBJECTS} -o ${NAME} $(LIBFT)
+${NAME} : ${OBJECTS} $(LIBFT) $(MINILIBX)
+	@${CC} ${CFLAGS} ${LIBFLAGS} ${OBJECTS} -o ${NAME} $(LIBFT) $(MINILIBX)
 	@printf "$(GRN)➾ Compilation progress: $$(echo "$(shell find $(ODIR) -name "*.o" | wc -l) $(TOTAL_FILES)" | awk '{printf "%.2f", $$1/$$2 * 100}')%%$(RES)\r"
 	@echo "\n$(GRN)➾ ${NAME} created$(RES)"
 	@printf "\n"
 
 $(ODIR)/%.o: $(SDIR)/%.c | $(ODIR)
 	@mkdir -p $(dir $@)
-	@$(CC) $(CFLAGS) -c -o $@ $<
+	@$(CC) $(CFLAGS) -I/usr/include -Imlx_linux -O3 -c -o $@ $<
 	@printf "$(GRN)➾ Compilation progress: $$(echo "$(shell find $(ODIR) -name "*.o" | wc -l) $(TOTAL_FILES)" | awk '{printf "%.2f", $$1/$$2 * 100}')%%$(RES)\r"
 
 # Rest of your Makefile
@@ -61,6 +63,10 @@ $(ODIR):
 $(LIBFT) :
 	@cd ./includes/libft/ && make bonus -s
 	@echo "libft.a created"
+
+$(MINILIBX) :
+	@cd ./includes/minilibx-linux/ && make -s
+	@echo "libmlx.a created"
 
 clean :
 	@${RM} ${OBJECTS}

@@ -18,9 +18,13 @@
 # include <fcntl.h>
 # include <stdbool.h>
 # include <stdio.h>
+# include "./minilibx-linux/mlx.h"
 
 # define RED "\033[1;31m"
 # define RESET "\033[0m"
+
+# define WIDTH 1920
+# define HEIGHT 1080
 
 typedef struct s_player
 {
@@ -60,10 +64,18 @@ typedef struct s_map
 	t_rgb				floor_color;
 	t_map_dimensions	dimensions;
 }						t_map;
+
+typedef struct s_window
+{
+	void	*mlx;
+	void	*mlx_win;
+}				t_window;
+
 typedef struct s_data
 {
 	t_map				map;
 	t_player			player;
+	t_window			window;
 }						t_data;
 
 // PARSER
@@ -129,5 +141,8 @@ void					free_array2d(void **pnts);
 // other
 void					init_data(t_data *data);
 void					init_player(t_player *player);
+void					open_window(t_data *data);
 void					print_colored_map(char **map);
+void					render_minimap(t_data *data);
+
 #endif

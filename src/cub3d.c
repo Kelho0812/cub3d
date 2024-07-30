@@ -23,6 +23,8 @@ int	main(int argc, char **argv)
 	printf("%d,", data.map.ceiling_color.R);
 	printf("%d,", data.map.ceiling_color.G);
 	printf("%d\n", data.map.ceiling_color.B);
+	open_window(&data);
+	render_minimap(&data);
 	william_wallace(&data);
 	return (0);
 }
@@ -32,3 +34,10 @@ void	init_data(t_data *data)
 	init_map(&data->map);
 	init_player(&data->player);
 }
+
+void	open_window(t_data *data)
+{
+	data->window.mlx = mlx_init();
+	data->window.mlx_win = mlx_new_window(data->window.mlx, WIDTH, HEIGHT, "Cub3d - MegaBosses");
+}
+
