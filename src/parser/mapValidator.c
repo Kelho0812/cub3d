@@ -78,14 +78,13 @@ void	validate_and_copy_map(t_data *data)
 {
 	int		i;
 	char	**map_array;
-	char	**new_map_array;
 
 	map_array = data->map.full_file_array;
 	i = check_map_start(data);
 	check_wrong_chars(data, map_array, i);
-	new_map_array = copy_map_from_index(data, i);
-	print_colored_map(new_map_array);
-	check_path(new_map_array, data);
+	data->map.full_map_array = copy_map_from_index(data, i);
+	print_colored_map(data->map.full_map_array);
+	check_path(data->map.full_map_array, data);
 }
 
 bool	is_player_char(char c)
