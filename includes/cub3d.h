@@ -144,5 +144,6 @@ void					init_player(t_player *player);
 void					open_window(t_data *data);
 void					print_colored_map(char **map);
 void					render_minimap(t_data *data);
+void 					handle_render(t_data *data);
 
 #endif
