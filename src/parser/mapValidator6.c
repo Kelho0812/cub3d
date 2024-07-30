@@ -61,7 +61,6 @@ void	check_path(char **map, t_data *data)
 	can_reach_space_or_tab = dfs(spaced_map, data->player.y, data->player.x);
 	free_array2d((void **)spaced_map);
 	print_result_and_exit(can_reach_space_or_tab);
-	free_array2d((void **)map);
 }
 
 char	**copy_map_from_index(t_data *data, int start_index)
