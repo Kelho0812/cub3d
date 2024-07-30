@@ -28,8 +28,8 @@ void	init_map(t_map *map)
 
 void	init_player(t_player *player)
 {
-	player->x = -1;
-	player->y = -1;
+	player->px = -1;
+	player->py = -1;
 }
 
 bool	is_digit_multiple(char *digit)

@@ -24,6 +24,8 @@ void	parse_and_validate_map(char *map, t_data *data)
 	data->map.full_file_array = map_parser(fd, 0, 0, map);
 	validate_and_copy_elements(data);
 	validate_and_copy_map(data);
+	data->player.px *= BLOCK_SIZE;
+    data->player.py *= BLOCK_SIZE;
 }
 
 char	**map_parser(int fd, int i, int count, char *map_path)
@@ -69,7 +71,7 @@ void	validate_and_copy_elements(t_data *data)
 		validate_elements(data, line_words_array);
 		copy_elements(data, line_words_array);
 		free(trimmed_line);
-		free_array2d((void **)(line_words_array));
+		// free_array2d((void **)(line_words_array));
 		i++;
 	}
 }

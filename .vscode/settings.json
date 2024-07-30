@@ -4,6 +4,7 @@
 		"*.h": "c",
 		"cub3d.h": "c",
 		"libft.h": "c",
-		"random": "c"
+		"random": "c",
+		"cmath": "c"
 	}
 }

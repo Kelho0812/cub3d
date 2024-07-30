@@ -47,8 +47,8 @@ void	handle_player_char(t_data *data, int *player_count, int i, int j,
 {
 	if (*player_count == 0)
 	{
-		data->player.x = j;
-		data->player.y = i - wowzers;
+		data->player.px = j;
+		data->player.py = i - wowzers;
 		(*player_count)++;
 	}
 	else

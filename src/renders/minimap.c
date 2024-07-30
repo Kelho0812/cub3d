@@ -12,38 +12,31 @@
 
 #include "../../includes/cub3d.h"
 
-void render_block(int x, int y, int block_size, t_data *data)
+void	my_pixel_put(int x, int y, int color, t_data *data)
 {
-    int y1;
-    int x1;
+	char	*ptr;
 
-    y1 = 0;
-    while (y1 < block_size - 1)
-    {
-        x1 = 0;
-        while (x1 < block_size - 1)
-        {
-            if (x + x1 < WIDTH && y + y1 < HEIGHT)
-                mlx_pixel_put(data->window.mlx, data->window.mlx_win, x + x1, y + y1, 0xFFFFFF);
-            x1++;
-        }
-        y1++;
-    }
+	ptr = NULL;
+	if (x <= WIDTH && x >= 0 && y <= HEIGHT && y >= 0)
+	{
+		ptr = data->map.map_img.data + (x * (data->map.map_img.bpp / 8)) + (y * data->map.map_img.line_len);
+		*(unsigned int *)ptr = color;
+	}
 }
 
-void    render_player(t_data *data)
+void render_block(int x, int y, t_data *data)
 {
-    int x1;
     int y1;
+    int x1;
 
     y1 = 0;
-    while (y1 < 6)
+    while (y1 < BLOCK_SIZE - 1)
     {
         x1 = 0;
-        while (x1 < 6)
+        while (x1 < BLOCK_SIZE - 1)
         {
-            if (data->player.x * 10 + x1 < WIDTH && data->player.y * 10 + y1 < HEIGHT)
-                mlx_pixel_put(data->window.mlx, data->window.mlx_win, data->player.x * 10 + x1 + x1, data->player.y * 10 + x1 + y1, 0x222222);
+            if (x + x1 < WIDTH && y + y1 < HEIGHT)
+                my_pixel_put(x + x1, y + y1, 0xFFFFFF, data);
             x1++;
         }
         y1++;
@@ -54,20 +47,21 @@ void	render_minimap(t_data *data)
 {
     int y; 
     int x;
-	int block_size = 10;
 
     y = 0;
     x = 0;
-    while (data->map.full_file_array[y])
+    data->map.map_img.mlx_img = mlx_new_image(data->window.mlx, WIDTH, HEIGHT);
+	data->map.map_img.data = mlx_get_data_addr(data->map.map_img.mlx_img, &data->map.map_img.bpp, &data->map.map_img.line_len, &data->map.map_img.endian);
+    while (data->map.full_map_array[y])
     {
         x = 0;
-        while (data->map.full_file_array[y][x])
+        while (data->map.full_map_array[y][x])
         {
-            if (data->map.full_file_array[y][x] == '1')
-                render_block(x * block_size, y * block_size, block_size, data);
+            if (data->map.full_map_array[y][x] == '1')
+                render_block(x * BLOCK_SIZE, y * BLOCK_SIZE, data);
             x++;
         }
         y++;
     }
-    render_player(data);
+    mlx_put_image_to_window(data->window.mlx, data->window.mlx_win, data->map.map_img.mlx_img, 0, 0);
 }

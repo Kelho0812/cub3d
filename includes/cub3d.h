@@ -19,17 +19,36 @@
 # include <stdbool.h>
 # include <stdio.h>
 # include "./minilibx-linux/mlx.h"
+# include <X11/keysym.h>
+# include <X11/X.h>
+# include <math.h>
 
 # define RED "\033[1;31m"
 # define RESET "\033[0m"
 
 # define WIDTH 1920
 # define HEIGHT 1080
+# define BLOCK_SIZE 15
+# define PLAYER_SIZE 10
+# define PI 3.141592
+# define DEGRESS 0.017453 / 2
+
+typedef struct s_img
+{
+	void	*mlx_img;
+	char	*data;
+	int		bpp;
+	int		line_len;
+	int		endian;
+}	t_img;
 
 typedef struct s_player
 {
-	int					x;
-	int					y;
+	float					px;
+	float					pdx;
+	float					py;
+	float					pdy;
+	float					pa;
 }						t_player;
 
 typedef struct s_map_dimensions
@@ -64,6 +83,7 @@ typedef struct s_map
 	t_rgb				ceiling_color;
 	t_rgb				floor_color;
 	t_map_dimensions	dimensions;
+	t_img				map_img;
 }						t_map;
 
 typedef struct s_window
@@ -148,5 +168,14 @@ void					open_window(t_data *data);
 void					print_colored_map(char **map);
 void					render_minimap(t_data *data);
 void 					handle_render(t_data *data);
+void    				render_player(t_data *data);
+void					draw_line(float x, float y, float x1, float y1, t_data *data);
+void					my_pixel_put(int x, int y, int color, t_data *data);
+void 					draw_fov(t_data *data);
+
+//handlers
+
+int 					handle_keypress(int keysym, t_data *data);
+int						handle_close(t_data *data);
 
 #endif

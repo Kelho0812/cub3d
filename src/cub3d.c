@@ -23,8 +23,12 @@ int	main(int argc, char **argv)
 	printf("%d,", data.map.ceiling_color.R);
 	printf("%d,", data.map.ceiling_color.G);
 	printf("%d\n", data.map.ceiling_color.B);
+	data.player.pa = PI + PI / 2;
+	data.player.pdx = cos(data.player.pa) * 3;
+	data.player.pdy = sin(data.player.pa) * 3;
 	open_window(&data);
 	render_minimap(&data);
+	render_player(&data);
     handle_render(&data);
 	william_wallace(&data);
 	return (0);
@@ -44,5 +48,7 @@ void	open_window(t_data *data)
 
 void handle_render(t_data *data)
 {
+	mlx_hook(data->window.mlx_win, KeyPress, KeyPressMask, &handle_keypress, data);
+	mlx_hook(data->window.mlx_win, DestroyNotify, NoEventMask, &handle_close, data);
 	mlx_loop(data->window.mlx);
 }
