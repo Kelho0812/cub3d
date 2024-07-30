@@ -23,6 +23,7 @@ int	check_map_start(t_data *data)
 	{
 		trimmed_line = ft_strtrim(data->map.full_file_array[i], " \t");
 		line_words_array = ft_split(trimmed_line, ' ');
+		free(trimmed_line);
 		if (line_words_array[0] != NULL && line_words_array[0][0] != '\0')
 		{
 			if (ft_isdigit(line_words_array[0][0]))
@@ -31,9 +32,9 @@ int	check_map_start(t_data *data)
 				return (i);
 			}
 		}
+		free_array2d((void **)line_words_array);
 		i++;
 	}
-	free_array2d((void **)line_words_array);
 	return (0);
 }
 
