@@ -47,6 +47,7 @@ int handle_keypress(int keysym, t_data *data)
         data->player.pdx = cos(data->player.pa) * 3;
         data->player.pdy = sin(data->player.pa) * 3;
     }
+    mlx_destroy_image(data->window.mlx, data->map.map_img.mlx_img);
     render_minimap(data);
     render_player(data);
 	return (0);
