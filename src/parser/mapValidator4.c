@@ -78,6 +78,8 @@ char	**allocate_and_initialize_map(int rows, int cols)
 	int		j;
 
 	new_map = (char **)malloc((rows + 2) * sizeof(char *));
+	if (new_map == NULL)
+		return (NULL);
 	i = 0;
 	while (i < rows + 2)
 	{

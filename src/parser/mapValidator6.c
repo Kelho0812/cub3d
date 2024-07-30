@@ -59,6 +59,7 @@ void	check_path(char **map, t_data *data)
 	get_map_dimensions(map, &rows, &cols);
 	spaced_map = duplicate_map_with_border(map, rows, cols);
 	can_reach_space_or_tab = dfs(spaced_map, data->player.y, data->player.x);
+	free_array2d((void **)spaced_map);
 	print_result_and_exit(can_reach_space_or_tab);
 	free_array2d((void **)map);
 }
