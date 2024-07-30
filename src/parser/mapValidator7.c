@@ -19,6 +19,7 @@ int	check_map_start(t_data *data)
 	char	**line_words_array;
 
 	i = 0;
+	line_words_array = NULL;
 	while (data->map.full_file_array[i] != NULL)
 	{
 		trimmed_line = ft_strtrim(data->map.full_file_array[i], " \t");
