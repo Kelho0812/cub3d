@@ -49,6 +49,7 @@ typedef struct s_map
 	int					width;
 	int					height;
 	char				**full_file_array;
+	char				**full_map_array;
 	int					player_count;
 	int					no_count;
 	int					so_count;
