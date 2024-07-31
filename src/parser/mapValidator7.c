@@ -25,9 +25,15 @@ void	validateWords(t_data *data, char **line_words_array)
 	char	*line;
 
 	line = line_words_array[0];
-	if (!is_player(line) && !is_ceiling(line) && !is_floor(line)
+	if (line == NULL && line[0] == '\0')
+	{
+		free_array2d((void **)line_words_array);
+		error_handler3(data, INVALID_WORD);
+	}
+	else if (!is_player(line) && !is_ceiling(line) && !is_floor(line)
 		&& !ft_isdigit(line[0]))
 	{
+		free_array2d((void **)line_words_array);
 		error_handler3(data, INVALID_WORD);
 	}
 }
@@ -79,5 +85,8 @@ void	validateLineOrder(t_data *data, char **line_words_array)
 {
 	if (line_words_array != NULL && line_words_array[0] != NULL
 		&& ft_isdigit(line_words_array[0][0]) && !check_element_count(data))
+	{
+		free_array2d((void **)line_words_array);
 		error_handler2(data, NOT_ENOUGH_ELEMENTS);
+	}
 }

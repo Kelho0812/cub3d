@@ -86,7 +86,7 @@ bool					is_rgb_range(int RGB_Num);
 void					validate_and_copy_elements(t_data *data);
 void					validate_and_copy_map(t_data *data);
 void					copy_elements(t_data *data, char **line);
-void					set_rgb(t_data *data, t_rgb *rgb, char *line);
+void					set_rgb(t_data *data, t_rgb *rgb, char **line);
 bool					is_north(char *map);
 bool					is_south(char *map);
 bool					is_west(char *map);
@@ -109,7 +109,8 @@ void					copy_original_map(char **new_map, char **map, int rows);
 void					validateWords(t_data *data, char **line_words_array);
 bool					check_element_count(t_data *data);
 bool					is_player(char *line);
-void					validateNumber(t_data *data, char **colors_array);
+void					validateNumber(t_data *data, char **colors_array, char **line);
+
 
 // ERROR_HANDLERS
 typedef enum e_error

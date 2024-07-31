@@ -63,14 +63,16 @@ bool	is_rgb_range(int RGB_Num)
 	return (false);
 }
 
-void	set_rgb(t_data *data, t_rgb *rgb, char *line)
+void	set_rgb(t_data *data, t_rgb *rgb, char **line)
 {
 	char	**colors_array;
+	char	*line_real;
 	int		i;
 
 	i = 0;
-	colors_array = ft_split(line, ',');
-	validateNumber(data, colors_array);
+	line_real = line[1];
+	colors_array = ft_split(line_real, ',');
+	validateNumber(data, colors_array, line);
 	while (colors_array != NULL && colors_array[i] != NULL)
 	{
 		if (rgb->R == -1)
@@ -90,7 +92,7 @@ void	set_rgb(t_data *data, t_rgb *rgb, char *line)
 	free_array2d((void **)colors_array);
 }
 
-void	validateNumber(t_data *data, char **colors_array)
+void	validateNumber(t_data *data, char **colors_array, char **line)
 {
 	int	i;
 
@@ -100,11 +102,13 @@ void	validateNumber(t_data *data, char **colors_array)
 		if (!is_digit_multiple(colors_array[i]))
 		{
 			free_array2d((void **)colors_array);
+			free_array2d((void **)line);
 			error_handler2(data, RGB_ERROR);
 		}
 		if (!is_rgb_range(ft_atoi(colors_array[i])))
 		{
 			free_array2d((void **)colors_array);
+			free_array2d((void **)line);
 			error_handler2(data, RGB_ERROR);
 		}
 		i++;

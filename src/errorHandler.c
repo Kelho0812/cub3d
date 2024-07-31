@@ -51,6 +51,7 @@ void	error_handler2(t_data *data, t_error error)
 	}
 	if (error == RGB_ERROR)
 	{
+		william_wallace(data);
 		printf(RED "ERROR" RESET "\n");
 		printf(RED "ONE OF THE RGB VALUES IS INVALID" RESET "\n");
 		exit(1);

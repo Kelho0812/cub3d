@@ -38,8 +38,8 @@ void	copy_elements(t_data *data, char **line)
 		else if (is_east(line[0]))
 			map->east_texture = ft_strdup(line[1]);
 		else if (is_ceiling(line[0]))
-			set_rgb(data, &map->ceiling_color, line[1]);
+			set_rgb(data, &map->ceiling_color, line);
 		else if (is_floor(line[0]))
-			set_rgb(data, &map->floor_color, line[1]);
+			set_rgb(data, &map->floor_color, line);
 	}
 }

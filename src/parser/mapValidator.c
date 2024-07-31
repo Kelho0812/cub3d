@@ -68,9 +68,9 @@ void	validate_and_copy_elements(t_data *data)
 		if (data->map.full_file_array[i][0] != '\0')
 		{
 			line_words_array = ft_split(trimmed_line, ' ');
+			free(trimmed_line);
 			validate_elements(data, line_words_array);
 			copy_elements(data, line_words_array);
-			free(trimmed_line);
 			free_array2d((void **)(line_words_array));
 		}
 		i++;

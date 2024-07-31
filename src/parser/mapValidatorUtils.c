@@ -14,15 +14,18 @@
 //#TODO checkar com flood fill se consegue chegar a algum espaçol
 
 #include "../../includes/cub3d.h"
-
 bool	is_north(char *line)
 {
-	if (ft_strlen(line) != 2)
-		return (false);
-	if (ft_strncmp(line, "NO", 2) != 0)
-		return (false);
-	else
-		return (true);
+	if (line != NULL && line[0] != '\0')
+	{
+		if (ft_strlen(line) != 2)
+			return (false);
+		if (ft_strncmp(line, "NO", 2) != 0)
+			return (false);
+		else
+			return (true);
+	}
+	return (false);
 }
 
 bool	is_south(char *line)
