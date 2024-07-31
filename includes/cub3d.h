@@ -42,8 +42,7 @@ typedef struct s_rgb
 }						t_rgb;
 typedef struct s_map
 {
-	int					width;
-	int					height;
+
 	char				**full_file_array;
 	char				**full_map_array;
 	int					player_count;
@@ -117,8 +116,9 @@ typedef enum e_error
 	OPEN_MAP_ERROR,
 	TEXTURE_ERROR,
 	RGB_ERROR,
-	WRONG_CHARS_MAP_ERROR
-
+	WRONG_CHARS_MAP_ERROR,
+	NOT_ENOUGH_ELEMENTS,
+	EMPTY_MAP
 }						t_error;
 
 void					error_handler(t_error error);
