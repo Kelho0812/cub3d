@@ -12,6 +12,13 @@
 
 #include "../../includes/cub3d.h"
 
+void	validate_elements(t_data *data, char **line_words_array)
+{
+	increment_element_count(data, line_words_array[0]);
+	check_word_order(data, line_words_array);
+	check_line_order(data, line_words_array);
+}
+
 int	check_map_start(t_data *data)
 {
 	int		i;
@@ -36,13 +43,6 @@ int	check_map_start(t_data *data)
 		i++;
 	}
 	return (0);
-}
-
-void	validate_elements(t_data *data, char **line_words_array)
-{
-	increment_element_count(data, line_words_array[0]);
-	check_word_order(data, line_words_array);
-	check_line_order(data, line_words_array);
 }
 
 void	check_word_order(t_data *data, char **line_array)

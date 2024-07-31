@@ -33,7 +33,7 @@ char	**map_parser(int fd, int i, int count, char *map_path)
 
 	line = get_next_line(fd);
 	if (!line)
-		exit(1);
+		error_handler(EMPTY_MAP);
 	while (line)
 	{
 		count++;
@@ -71,6 +71,12 @@ void	validate_and_copy_elements(t_data *data)
 		free(trimmed_line);
 		free_array2d((void **)(line_words_array));
 		i++;
+	}
+	if ((data->map.no_count != 1 || data->map.so_count != 1
+			|| data->map.we_count != 1 || data->map.ea_count != 1
+			|| data->map.c_count != 1 || data->map.f_count != 1))
+	{
+		error_handler2(data, NOT_ENOUGH_ELEMENTS);
 	}
 }
 
