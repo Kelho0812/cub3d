@@ -57,3 +57,4 @@ leaks-old.log
 leaks.log
 sup
 .vscode/settings.json
+valgrind_failures.log
