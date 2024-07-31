@@ -58,3 +58,4 @@ leaks.log
 sup
 .vscode/settings.json
 valgrind_failures.log
+valgrind_log_invalid.txt
