@@ -16,18 +16,27 @@ void	error_handler(t_error error)
 {
 	if (error == WRONG_ARG_NUM)
 	{
+		printf(RED "ERROR" RESET "\n");
 		printf("You should write: ./cub3d <map_relative_path>\n");
 		printf("Example: ./cub3d ./maps/example.cub");
 		exit(1);
 	}
 	else if (error == WRONG_EXTENSION)
 	{
-		printf("Error: Invalid map extension.\n");
+		printf(RED "ERROR" RESET "\n");
+		printf(RED "WRONG MAP EXTENSION. SHOULD BE .CUB" RESET "\n");
 		exit(1);
 	}
 	else if (error == OPEN_MAP_ERROR)
 	{
-		printf("Error: Could not open map.\n");
+		printf(RED "ERROR" RESET "\n");
+		printf(RED "CAN'T OPEN MAP FILE. MAKE SURE FILE EXISTS." RESET "\n");
+		exit(1);
+	}
+	else if (error == EMPTY_MAP)
+	{
+		printf(RED "ERROR" RESET "\n");
+		printf(RED "MAP SEEMS TO BE EMPTY" RESET "\n");
 		exit(1);
 	}
 }
@@ -50,6 +59,13 @@ void	error_handler2(t_data *data, t_error error)
 	{
 		william_wallace(data);
 		printf(RED "WRONG CHARS NO MAPA ERROR OH BOI." RESET "\n");
+		exit(1);
+	}
+	if (error == NOT_ENOUGH_ELEMENTS)
+	{
+		william_wallace(data);
+		printf(RED "ERROR" RESET "\n");
+		printf(RED "NOT ENOUGH ELEMENTS ON MAP" RESET "\n");
 		exit(1);
 	}
 }
