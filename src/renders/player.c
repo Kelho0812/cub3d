@@ -32,6 +32,8 @@ void    render_player(t_data *data)
         }
         y1++;
     }
+    mlx_put_image_to_window(data->window.mlx, data->window.mlx_win, data->map.map_img.mlx_img, 0, 0);
+    mlx_destroy_image(data->window.mlx, data->map.map_img.mlx_img);
 }
 
 
@@ -45,16 +47,16 @@ void draw_fov(t_data *data)
     float end_y;
 
     raycasted = 0;
-    ca = data->player.pa - (DEGRESS * 30);
-    while (raycasted < 60)
+    ca = data->player.pa - (DEGRESS * 40);
+    while (raycasted < 80)
     {
         ca += DEGRESS;
         if (ca < 0)
 			ca += 2 * PI;
 		else if (ca > 2 * PI)
 			ca -= 2 * PI;
-        end_x = center_x + (cos(ca) * 20);
-        end_y = center_y + (sin(ca) * 20);
+        end_x = center_x + (cos(ca) * 30);
+        end_y = center_y + (sin(ca) * 30);
         draw_line(center_x, center_y, end_x, end_y, data);
         raycasted++;
     }

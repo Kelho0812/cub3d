@@ -28,7 +28,7 @@
 
 # define WIDTH 1920
 # define HEIGHT 1080
-# define BLOCK_SIZE 15
+# define BLOCK_SIZE 20
 # define PLAYER_SIZE 10
 # define PI 3.141592
 # define DEGRESS 0.017453 / 2
@@ -41,6 +41,14 @@ typedef struct s_img
 	int		line_len;
 	int		endian;
 }	t_img;
+
+typedef struct s_minimap
+{
+	t_img	texture;
+	void	*xpm_texture;
+	int		height;
+	int 	width;
+}				t_minimap;
 
 typedef struct s_player
 {
@@ -97,6 +105,7 @@ typedef struct s_data
 	t_map				map;
 	t_player			player;
 	t_window			window;
+	t_minimap			minimap;
 }						t_data;
 
 // PARSER

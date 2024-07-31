@@ -30,13 +30,16 @@ void render_block(int x, int y, t_data *data)
     int x1;
 
     y1 = 0;
-    while (y1 < BLOCK_SIZE - 1)
+    while (y1 < data->minimap.height)
     {
         x1 = 0;
-        while (x1 < BLOCK_SIZE - 1)
+        while (x1 < data->minimap.width)
         {
             if (x + x1 < WIDTH && y + y1 < HEIGHT)
-                my_pixel_put(x + x1, y + y1, 0xFFFFFF, data);
+            {
+                int color = *(int *)(data->minimap.texture.data + y1 * data->minimap.texture.line_len + x1 * (data->minimap.texture.bpp / 8));
+                my_pixel_put(x + x1, y + y1, color, data);
+            }
             x1++;
         }
         y1++;
@@ -63,5 +66,4 @@ void	render_minimap(t_data *data)
         }
         y++;
     }
-    mlx_put_image_to_window(data->window.mlx, data->window.mlx_win, data->map.map_img.mlx_img, 0, 0);
 }
