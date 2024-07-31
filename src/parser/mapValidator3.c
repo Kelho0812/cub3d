@@ -30,17 +30,17 @@ void	copy_elements(t_data *data, char **line)
 	map = &data->map;
 	if (line != NULL && line[0] != NULL && !ft_isdigit(line[0][0]))
 	{
-		if (!ft_strncmp(line[0], "NO", 2))
+		if (is_north(line[0]))
 			map->north_texture = ft_strdup(line[1]);
-		else if (!ft_strncmp(line[0], "SO", 2))
+		else if (is_south(line[0]))
 			map->south_texture = ft_strdup(line[1]);
-		else if (!ft_strncmp(line[0], "WE", 2))
+		else if (is_west(line[0]))
 			map->west_texture = ft_strdup(line[1]);
-		else if (!ft_strncmp(line[0], "EA", 2))
+		else if (is_east(line[0]))
 			map->east_texture = ft_strdup(line[1]);
-		else if (!ft_strncmp(line[0], "C", 2))
+		else if (is_ceiling(line[0]))
 			set_rgb(data, &map->ceiling_color, line[1]);
-		else if (!ft_strncmp(line[0], "F", 2))
+		else if (is_floor(line[0]))
 			set_rgb(data, &map->floor_color, line[1]);
 	}
 }
