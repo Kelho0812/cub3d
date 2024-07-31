@@ -51,14 +51,47 @@ void	error_handler2(t_data *data, t_error error)
 	}
 	if (error == RGB_ERROR)
 	{
-		william_wallace(data);
-		printf(RED "RGB ERROR OH CABRAO." RESET "\n");
+		printf(RED "ERROR" RESET "\n");
+		printf(RED "ONE OF THE RGB VALUES IS INVALID" RESET "\n");
 		exit(1);
 	}
 	if (error == WRONG_CHARS_MAP_ERROR)
 	{
 		william_wallace(data);
 		printf(RED "WRONG CHARS NO MAPA ERROR OH BOI." RESET "\n");
+		exit(1);
+	}
+	if (error == NOT_ENOUGH_ELEMENTS)
+	{
+		william_wallace(data);
+		printf(RED "ERROR" RESET "\n");
+		printf(RED "WRONG ORDER OR NOT CORRECT NUM OF ELEMENTS ON MAP " RESET "\n");
+		exit(1);
+	}
+}
+
+
+void	error_handler3(t_data *data, t_error error)
+{
+	if (error == TEXTURE_ORDER)
+	{
+		william_wallace(data);
+		printf(RED "ERROR" RESET "\n");
+		printf(RED "TEXTURES SEEMS TO HAVE WRONG ORDER OR AMOUNT OF ARGUMENTS" RESET "\n");
+		exit(1);
+	}
+	if (error == INVALID_WORD)
+	{
+		william_wallace(data);
+		printf(RED "ERROR" RESET "\n");
+		printf(RED "THERE IS AN INVALID WORD IN ONE OF THE LINES" RESET "\n");
+		exit(1);
+	}
+	if (error == WRONG_FORMAT)
+	{
+		william_wallace(data);
+		printf(RED "ERROR" RESET "\n");
+		printf(RED "THERE IS AN INVALID AMOUNT OF WORDS IN ONE OF THE ELEMENTS" RESET "\n");
 		exit(1);
 	}
 	if (error == NOT_ENOUGH_ELEMENTS)

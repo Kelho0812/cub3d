@@ -42,7 +42,6 @@ typedef struct s_rgb
 }						t_rgb;
 typedef struct s_map
 {
-
 	char				**full_file_array;
 	char				**full_map_array;
 	int					player_count;
@@ -75,9 +74,11 @@ void					validate_elements(t_data *data,
 void					textures_correct_format(t_data *data);
 bool					is_digit_multiple(char *digit);
 int						get_array_size(char **line_array);
-void					check_word_order(t_data *data, char **line_words_array);
-void					check_line_order(t_data *data, char **line_words_array);
-void					increment_element_count(t_data *data, char *first_word);
+void					verifyWordSequence(t_data *data,
+							char **line_words_array);
+void					validateLineOrder(t_data *data,
+							char **line_words_array);
+void					updateElementCount(t_data *data, char *first_word);
 void					check_wrong_chars(t_data *data, char **map_lines,
 							int i);
 int						check_map_start(t_data *data);
@@ -105,8 +106,10 @@ void					get_map_dimensions(char **map, int *rows, int *cols);
 void					print_result_and_exit(bool can_reach_space_or_tab);
 char					**allocate_and_initialize_map(int rows, int cols);
 void					copy_original_map(char **new_map, char **map, int rows);
-
+void					validateWords(t_data *data, char **line_words_array);
+bool					check_element_count(t_data *data);
 bool					is_player(char *line);
+void					validateNumber(t_data *data, char **colors_array);
 
 // ERROR_HANDLERS
 typedef enum e_error
@@ -115,14 +118,18 @@ typedef enum e_error
 	WRONG_EXTENSION,
 	OPEN_MAP_ERROR,
 	TEXTURE_ERROR,
+	TEXTURE_ORDER,
 	RGB_ERROR,
 	WRONG_CHARS_MAP_ERROR,
 	NOT_ENOUGH_ELEMENTS,
-	EMPTY_MAP
+	EMPTY_MAP,
+	INVALID_WORD,
+	WRONG_FORMAT
 }						t_error;
 
 void					error_handler(t_error error);
 void					error_handler2(t_data *data, t_error error);
+void					error_handler3(t_data *data, t_error error);
 
 // FREEDOM
 void					william_wallace(t_data *data);

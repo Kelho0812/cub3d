@@ -24,6 +24,12 @@ void	init_map(t_map *map)
 	map->ea_count = 0;
 	map->c_count = 0;
 	map->f_count = 0;
+	map->ceiling_color.R = -1;
+	map->ceiling_color.B = -1;
+	map->ceiling_color.G = -1;
+	map->floor_color.R = -1;
+	map->floor_color.B = -1;
+	map->floor_color.G = -1;
 }
 
 void	init_player(t_player *player)
@@ -60,28 +66,47 @@ bool	is_rgb_range(int RGB_Num)
 void	set_rgb(t_data *data, t_rgb *rgb, char *line)
 {
 	char	**colors_array;
-	int		r;
-	int		g;
-	int		b;
+	int		i;
 
+	i = 0;
 	colors_array = ft_split(line, ',');
-	if (get_array_size(colors_array) != 3 || !is_digit_multiple(colors_array[0])
-		|| !is_digit_multiple(colors_array[1])
-		|| !is_digit_multiple(colors_array[2]))
+	validateNumber(data, colors_array);
+	while (colors_array != NULL && colors_array[i] != NULL)
 	{
-		free_array2d((void **)colors_array);
-		error_handler2(data, RGB_ERROR);
+		if (rgb->R == -1)
+		{
+			rgb->R = ft_atoi(colors_array[i]);
+		}
+		else if (rgb->G == -1)
+		{
+			rgb->G = ft_atoi(colors_array[i]);
+		}
+		else if (rgb->B == -1)
+		{
+			rgb->B = ft_atoi(colors_array[i]);
+		}
+		i++;
 	}
-	r = ft_atoi(colors_array[0]);
-	g = ft_atoi(colors_array[1]);
-	b = ft_atoi(colors_array[2]);
-	if (!is_rgb_range(r) || !is_rgb_range(g) || !is_rgb_range(b))
-	{
-		free_array2d((void **)colors_array);
-		error_handler2(data, RGB_ERROR);
-	}
-	rgb->R = r;
-	rgb->G = g;
-	rgb->B = b;
 	free_array2d((void **)colors_array);
+}
+
+void	validateNumber(t_data *data, char **colors_array)
+{
+	int	i;
+
+	i = 0;
+	while (colors_array != NULL && colors_array[i] != NULL)
+	{
+		if (!is_digit_multiple(colors_array[i]))
+		{
+			free_array2d((void **)colors_array);
+			error_handler2(data, RGB_ERROR);
+		}
+		if (!is_rgb_range(ft_atoi(colors_array[i])))
+		{
+			free_array2d((void **)colors_array);
+			error_handler2(data, RGB_ERROR);
+		}
+		i++;
+	}
 }

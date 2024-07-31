@@ -17,10 +17,9 @@
 
 bool	is_north(char *line)
 {
-	int	i;
-
-	i = ft_strlen(line);
-	if (ft_strncmp(line, "NO", i) != 0)
+	if (ft_strlen(line) != 2)
+		return (false);
+	if (ft_strncmp(line, "NO", 2) != 0)
 		return (false);
 	else
 		return (true);
@@ -28,10 +27,9 @@ bool	is_north(char *line)
 
 bool	is_south(char *line)
 {
-	int	i;
-
-	i = ft_strlen(line);
-	if (ft_strncmp(line, "SO", i) != 0)
+	if (ft_strlen(line) != 2)
+		return (false);
+	if (ft_strncmp(line, "SO", 2) != 0)
 		return (false);
 	else
 		return (true);
@@ -39,10 +37,9 @@ bool	is_south(char *line)
 
 bool	is_west(char *line)
 {
-	int	i;
-
-	i = ft_strlen(line);
-	if (ft_strncmp(line, "WE", i) != 0)
+	if (ft_strlen(line) != 2)
+		return (false);
+	if (ft_strncmp(line, "WE", 2) != 0)
 		return (false);
 	else
 		return (true);
@@ -50,10 +47,9 @@ bool	is_west(char *line)
 
 bool	is_east(char *line)
 {
-	int	i;
-
-	i = ft_strlen(line);
-	if (ft_strncmp(line, "EA", i) != 0)
+	if (ft_strlen(line) != 2)
+		return (false);
+	if (ft_strncmp(line, "EA", 2) != 0)
 		return (false);
 	else
 		return (true);
@@ -61,10 +57,9 @@ bool	is_east(char *line)
 
 bool	is_floor(char *line)
 {
-	int	i;
-
-	i = ft_strlen(line);
-	if (ft_strncmp(line, "F", i) != 0)
+	if (ft_strlen(line) != 1)
+		return (false);
+	if (ft_strncmp(line, "F", 1) != 0)
 		return (false);
 	else
 		return (true);

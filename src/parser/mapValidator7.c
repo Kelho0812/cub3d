@@ -14,9 +14,22 @@
 
 void	validate_elements(t_data *data, char **line_words_array)
 {
-	increment_element_count(data, line_words_array[0]);
-	check_word_order(data, line_words_array);
-	check_line_order(data, line_words_array);
+	validateWords(data, line_words_array);
+	updateElementCount(data, line_words_array[0]);
+	verifyWordSequence(data, line_words_array);
+	validateLineOrder(data, line_words_array);
+}
+
+void	validateWords(t_data *data, char **line_words_array)
+{
+	char	*line;
+
+	line = line_words_array[0];
+	if (!is_player(line) && !is_ceiling(line) && !is_floor(line)
+		&& !ft_isdigit(line[0]))
+	{
+		error_handler3(data, INVALID_WORD);
+	}
 }
 
 int	check_map_start(t_data *data)
@@ -45,19 +58,26 @@ int	check_map_start(t_data *data)
 	return (0);
 }
 
-void	check_word_order(t_data *data, char **line_array)
+void	verifyWordSequence(t_data *data, char **line_array)
 {
+	if (line_array != NULL && line_array[0] != NULL && is_player(line_array[0])
+		&& get_array_size(line_array) != 2)
+	{
+		free_array2d((void **)line_array);
+		error_handler3(data, WRONG_FORMAT);
+	}
 	if (line_array != NULL && line_array[0] != NULL
-		&& !ft_isdigit(line_array[0][0]) && (is_player(line_array[0])) && (get_array_size(line_array) != 2))
-		error_handler2(data, TEXTURE_ERROR);
+		&& (is_ceiling(line_array[0]) || is_floor(line_array[0]))
+		&& (get_array_size(line_array) < 2 || get_array_size(line_array) > 4))
+	{
+		free_array2d((void **)line_array);
+		error_handler3(data, WRONG_FORMAT);
+	}
 }
 
-void	check_line_order(t_data *data, char **line_words_array)
+void	validateLineOrder(t_data *data, char **line_words_array)
 {
 	if (line_words_array != NULL && line_words_array[0] != NULL
-		&& ft_isdigit(line_words_array[0][0]) && (data->map.no_count != 1
-			|| data->map.so_count != 1 || data->map.we_count != 1
-			|| data->map.ea_count != 1 || data->map.c_count != 1
-			|| data->map.f_count != 1))
-		error_handler2(data, TEXTURE_ERROR);
+		&& ft_isdigit(line_words_array[0][0]) && !check_element_count(data))
+		error_handler2(data, NOT_ENOUGH_ELEMENTS);
 }

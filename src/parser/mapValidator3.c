@@ -14,10 +14,9 @@
 
 bool	is_ceiling(char *line)
 {
-	int	i;
-
-	i = ft_strlen(line);
-	if (ft_strncmp(line, "C", i) != 0)
+	if (ft_strlen(line) != 1)
+		return (false);
+	if (ft_strncmp(line, "C", 1) != 0)
 		return (false);
 	else
 		return (true);

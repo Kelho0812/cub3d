@@ -26,7 +26,7 @@ int	get_array_size(char **line_array)
 	return (i);
 }
 
-void	increment_element_count(t_data *data, char *first_word)
+void	updateElementCount(t_data *data, char *first_word)
 {
 	if (first_word)
 	{
