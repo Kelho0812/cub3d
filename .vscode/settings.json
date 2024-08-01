@@ -5,6 +5,13 @@
 		"cub3d.h": "c",
 		"libft.h": "c",
 		"random": "c",
+<<<<<<< HEAD
 		"cmath": "c"
+=======
+		"array": "c",
+		"string": "c",
+		"string_view": "c",
+		"numbers": "c"
+>>>>>>> origin/main
 	}
 }

@@ -26,7 +26,7 @@ int	get_array_size(char **line_array)
 	return (i);
 }
 
-void	increment_element_count(t_data *data, char *first_word)
+void	updateElementCount(t_data *data, char *first_word)
 {
 	if (first_word)
 	{
@@ -58,7 +58,8 @@ void	check_path(char **map, t_data *data)
 
 	get_map_dimensions(map, &rows, &cols);
 	spaced_map = duplicate_map_with_border(map, rows, cols);
-	can_reach_space_or_tab = dfs(spaced_map, data->player.py, data->player.px);
+	// print_colored_map(data->map.full_map_array);
+	can_reach_space_or_tab = dfs(spaced_map, data->player.y+1, data->player.x+1);
 	// free_array2d((void **)spaced_map);
 	print_result_and_exit(can_reach_space_or_tab);
 }

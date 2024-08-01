@@ -35,7 +35,7 @@ char	**map_parser(int fd, int i, int count, char *map_path)
 
 	line = get_next_line(fd);
 	if (!line)
-		exit(1);
+		error_handler(EMPTY_MAP);
 	while (line)
 	{
 		count++;
@@ -67,13 +67,36 @@ void	validate_and_copy_elements(t_data *data)
 	while (data->map.full_file_array[i] != NULL)
 	{
 		trimmed_line = ft_strtrim(data->map.full_file_array[i], " \t");
-		line_words_array = ft_split(trimmed_line, ' ');
-		validate_elements(data, line_words_array);
-		copy_elements(data, line_words_array);
-		free(trimmed_line);
-		// free_array2d((void **)(line_words_array));
+		if (data->map.full_file_array[i][0] != '\0')
+		{
+			line_words_array = ft_split(trimmed_line, ' ');
+			if (line_words_array != NULL && line_words_array[0] != NULL
+				&& line_words_array[0][0] != '\0')
+			{
+				free(trimmed_line);
+				validate_elements(data, line_words_array);
+				copy_elements(data, line_words_array);
+				free_array2d((void **)(line_words_array));
+			}
+		}
 		i++;
 	}
+	if ((data->map.no_count != 1 || data->map.so_count != 1
+			|| data->map.we_count != 1 || data->map.ea_count != 1
+			|| data->map.c_count != 1 || data->map.f_count != 1))
+	{
+		error_handler2(data, NOT_ENOUGH_ELEMENTS);
+	}
+}
+
+bool	check_element_count(t_data *data)
+{
+	if ((data->map.no_count != 1 || data->map.so_count != 1
+			|| data->map.we_count != 1 || data->map.ea_count != 1
+			|| data->map.c_count != 1 || data->map.f_count != 1))
+		return (false);
+	else
+		return (true);
 }
 
 void	validate_and_copy_map(t_data *data)
