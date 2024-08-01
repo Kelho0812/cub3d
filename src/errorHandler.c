@@ -103,3 +103,14 @@ void	error_handler3(t_data *data, t_error error)
 		exit(1);
 	}
 }
+
+void	error_handler4(t_data *data, t_error error)
+{
+	if (error == WRONG_IMAGE)
+	{
+		william_wallace(data);
+		printf(RED "ERROR" RESET "\n");
+		printf(RED "CANNOT OPEN LE IMAGE" RESET "\n");
+		exit(1);
+	}
+}

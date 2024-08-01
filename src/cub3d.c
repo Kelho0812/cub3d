@@ -23,10 +23,10 @@ int	main(int argc, char **argv)
 	printf("%d,", data.map.ceiling_color.R);
 	printf("%d,", data.map.ceiling_color.G);
 	printf("%d\n", data.map.ceiling_color.B);
-	open_window(&data);
-	render_minimap(&data);
-	render_player(&data);
-    handle_render(&data);
+	// open_window(&data);
+	// render_minimap(&data);
+	// render_player(&data);
+    // handle_render(&data);
 	william_wallace(&data);
 	return (0);
 }

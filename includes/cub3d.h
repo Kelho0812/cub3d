@@ -181,6 +181,7 @@ bool					check_element_count(t_data *data);
 bool					is_player(char *line);
 void					validateNumber(t_data *data, char **colors_array,
 							char **line);
+void					doublecheckelements(t_data *data);
 
 // ERROR_HANDLERS
 typedef enum e_error
@@ -195,12 +196,14 @@ typedef enum e_error
 	NOT_ENOUGH_ELEMENTS,
 	EMPTY_MAP,
 	INVALID_WORD,
-	WRONG_FORMAT
+	WRONG_FORMAT,
+	WRONG_IMAGE
 }						t_error;
 
 void					error_handler(t_error error);
 void					error_handler2(t_data *data, t_error error);
 void					error_handler3(t_data *data, t_error error);
+void					error_handler4(t_data *data, t_error error);
 
 // FREEDOM
 void					william_wallace(t_data *data);
