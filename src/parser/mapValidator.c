@@ -114,34 +114,34 @@ bool	is_player_char(char c)
 
 void	doublecheckelements(t_data *data)
 {
-	void	*mlx;
-	int		i;
-	void	*img;
-	char	*paths[4];
-	int		img_width;
-	int		img_height;
+	// void	*mlx;
+	// int		i;
+	// void	*img;
+	// char	*paths[4];
+	// int		img_width;
+	// int		img_height;
 
-	paths[0] = data->map.north_texture;
-	paths[1] = data->map.south_texture;
-	paths[2] = data->map.east_texture;
-	paths[3] = data->map.west_texture;
-	i = 0;
+	// paths[0] = data->map.north_texture;
+	// paths[1] = data->map.south_texture;
+	// paths[2] = data->map.east_texture;
+	// paths[3] = data->map.west_texture;
+	// i = 0;
 	if ((data->map.no_count != 1 || data->map.so_count != 1
 			|| data->map.we_count != 1 || data->map.ea_count != 1
 			|| data->map.c_count != 1 || data->map.f_count != 1))
 	{
 		error_handler2(data, NOT_ENOUGH_ELEMENTS);
 	}
-	mlx = mlx_init();
-	while (i < 4)
-	{
-		img = NULL;
-		img = mlx_xpm_file_to_image(mlx, paths[i], &img_width,
-				&img_height);
-		if (img == NULL)
-		{
-			error_handler4(data, WRONG_IMAGE);
-		}
-		i++;
-	}
+	// mlx = mlx_init();
+	// while (i < 4)
+	// {
+	// 	img = NULL;
+	// 	img = mlx_xpm_file_to_image(mlx, paths[i], &img_width,
+	// 			&img_height);
+	// 	if (img == NULL)
+	// 	{
+	// 		error_handler4(data, WRONG_IMAGE);
+	// 	}
+	// 	i++;
+	// }
 }
