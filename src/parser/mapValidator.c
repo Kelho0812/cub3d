@@ -96,6 +96,19 @@ bool	check_element_count(t_data *data)
 		return (true);
 }
 
+void free_map_array(char **map_array)
+{
+    int i = 0;
+    if (map_array == NULL)
+        return;
+    while (map_array[i] != NULL)
+    {
+        free(map_array[i]);
+        i++;
+    }
+    free(map_array);
+}
+
 void	validate_and_copy_map(t_data *data)
 {
 	int		i;
@@ -107,6 +120,7 @@ void	validate_and_copy_map(t_data *data)
 	data->map.full_map_array = copy_map_from_index(data, i);
 	print_colored_map(data->map.full_map_array);
 	check_path(data->map.full_map_array, data);
+	free_map_array(data->map.full_map_array);
 }
 
 bool	is_player_char(char c)

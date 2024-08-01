@@ -72,7 +72,7 @@ void	set_rgb(t_data *data, t_rgb *rgb, char **line)
 
 	i = 0;
 	j = 0;
-	line_real = line + 1;
+	line_real = line + 1; //#TODO O LEAK TA AQUI FOR SURE
 	while (line_real[j] != NULL && line_real[j][0] != '\0')
 	{
 		i = 0;
@@ -88,15 +88,14 @@ void	set_rgb(t_data *data, t_rgb *rgb, char **line)
 				rgb->B = ft_atoi(colors_array[i]);
 			i++;
 		}
+		free_array2d((void **)colors_array);
 		j++;
 	}
 	if ((rgb->R == -1 || rgb->G == -1 || rgb->B == -1))
 	{
 		free_array2d((void **)line);
-		free_array2d((void **)colors_array);
 		error_handler2(data, RGB_ERROR);
 	}
-	free_array2d((void **)colors_array);
 }
 
 void	validateNumber(t_data *data, char **colors_array, char **line)

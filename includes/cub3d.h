@@ -148,6 +148,7 @@ void					verifyWordSequence(t_data *data,
 							char **line_words_array);
 void					validateLineOrder(t_data *data,
 							char **line_words_array);
+void					free_map_array(char **map_array);
 void					updateElementCount(t_data *data, char *first_word);
 void					check_wrong_chars(t_data *data, char **map_lines,
 							int i);

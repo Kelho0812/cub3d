@@ -10,8 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-//#TODO Add the error handlers and take care of leaks check_path function
-
 #include "../../includes/cub3d.h"
 
 int	get_array_size(char **line_array)
@@ -75,6 +73,7 @@ void	check_path(char **map, t_data *data)
 	free_mapi(spaced_map, rows);
 	if (can_reach_space_or_tab)
 	{
+		free_map_array(data->map.full_map_array);
 		error_handler4(data, MAP_HOLE);
 	}
 	// print_result_and_exit(can_reach_space_or_tab);

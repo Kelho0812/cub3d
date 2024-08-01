@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 //#TODO Add errors when reading the texture path
-//#TODO checkar com flood fill se consegue chegar a algum espaçol
 
 #include "../../includes/cub3d.h"
 bool	is_north(char *line)
