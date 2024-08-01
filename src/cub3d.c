@@ -41,8 +41,10 @@ void	open_window(t_data *data)
 {
 	data->window.mlx = mlx_init();
 	data->window.mlx_win = mlx_new_window(data->window.mlx, WIDTH, HEIGHT, "Cub3d - MegaBosses");
-	data->minimap.xpm_texture = mlx_xpm_file_to_image(data->window.mlx, "./src/assets/texture.xpm", &data->minimap.width, &data->minimap.height);
-	data->minimap.texture.data = mlx_get_data_addr(data->minimap.xpm_texture, &data->minimap.texture.bpp, &data->minimap.texture.line_len, &data->minimap.texture.endian);
+	data->minimap.wall_texture = mlx_xpm_file_to_image(data->window.mlx, "./src/assets/wall.xpm", &data->minimap.width, &data->minimap.height);
+	data->minimap.wall.data = mlx_get_data_addr(data->minimap.wall_texture, &data->minimap.wall.bpp, &data->minimap.wall.line_len, &data->minimap.wall.endian);
+	data->minimap.floor_texture = mlx_xpm_file_to_image(data->window.mlx, "./src/assets/floor.xpm", &data->minimap.width, &data->minimap.height);
+	data->minimap.floor.data = mlx_get_data_addr(data->minimap.floor_texture, &data->minimap.floor.bpp, &data->minimap.floor.line_len, &data->minimap.floor.endian);
 	data->player.pa = 2.4;
 	data->player.pdx = 0.0;
 	data->player.pdy = 0.0;

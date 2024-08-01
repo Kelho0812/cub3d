@@ -23,13 +23,19 @@ int handle_keypress(int keysym, t_data *data)
 	}
     if (keysym == XK_Up)
     {
-        data->player.px += data->player.pdx;
-        data->player.py += data->player.pdy;
+        if (data->map.full_map_array[(int)(data->player.py + data->player.pdy) / BLOCK_SIZE][(int)(data->player.px + data->player.pdx) / BLOCK_SIZE] != '1')
+        {
+            data->player.px += data->player.pdx;
+            data->player.py += data->player.pdy;
+        }
     }
     if (keysym == XK_Down)
      {
-        data->player.px -= data->player.pdx;
-        data->player.py -= data->player.pdy;
+        if (data->map.full_map_array[(int)(data->player.py - data->player.pdy) / BLOCK_SIZE][(int)(data->player.px - data->player.pdx) / BLOCK_SIZE] != '1')
+        {
+            data->player.px -= data->player.pdx;
+            data->player.py -= data->player.pdy;
+        }
     }
     if (keysym == XK_Left)
     {

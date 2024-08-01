@@ -24,7 +24,7 @@ void	my_pixel_put(int x, int y, int color, t_data *data)
 	}
 }
 
-void render_block(int x, int y, t_data *data)
+void render_wall(int x, int y, t_data *data)
 {
     int y1;
     int x1;
@@ -37,7 +37,29 @@ void render_block(int x, int y, t_data *data)
         {
             if (x + x1 < WIDTH && y + y1 < HEIGHT)
             {
-                int color = *(int *)(data->minimap.texture.data + y1 * data->minimap.texture.line_len + x1 * (data->minimap.texture.bpp / 8));
+                int color = *(int *)(data->minimap.wall.data + y1 * data->minimap.wall.line_len + x1 * (data->minimap.wall.bpp / 8));
+                my_pixel_put(x + x1, y + y1, color, data);
+            }
+            x1++;
+        }
+        y1++;
+    }
+}
+
+void render_floor(int x, int y, t_data *data)
+{
+    int y1;
+    int x1;
+
+    y1 = 0;
+    while (y1 < data->minimap.height)
+    {
+        x1 = 0;
+        while (x1 < data->minimap.width)
+        {
+            if (x + x1 < WIDTH && y + y1 < HEIGHT)
+            {
+                int color = *(int *)(data->minimap.floor.data + y1 * data->minimap.floor.line_len + x1 * (data->minimap.floor.bpp / 8));
                 my_pixel_put(x + x1, y + y1, color, data);
             }
             x1++;
@@ -62,7 +84,9 @@ void	render_minimap(t_data *data)
         while (data->map.full_map_array[y][x])
         {
             if (data->map.full_map_array[y][x] == '1')
-                render_block(x * BLOCK_SIZE, y * BLOCK_SIZE, data);
+                render_wall(x * BLOCK_SIZE, y * BLOCK_SIZE, data);
+            else
+                render_floor(x * BLOCK_SIZE, y * BLOCK_SIZE, data);
             x++;
         }
         if (data->map.width < x)

@@ -46,8 +46,10 @@ typedef struct s_img
 
 typedef struct s_minimap
 {
-	t_img	texture;
-	void	*xpm_texture;
+	t_img	wall;
+	t_img	floor;
+	void	*wall_texture;
+	void	*floor_texture;
 	int		height;
 	int 	width;
 }				t_minimap;
@@ -133,6 +135,7 @@ typedef struct s_data
 	t_window			window;
 	t_minimap			minimap;
 	t_ray				rays;
+	t_dist				dist;
 }						t_data;
 
 // PARSER
