@@ -66,28 +66,34 @@ bool	is_rgb_range(int RGB_Num)
 void	set_rgb(t_data *data, t_rgb *rgb, char **line)
 {
 	char	**colors_array;
-	char	*line_real;
+	char	**line_real;
 	int		i;
+	int		j;
 
 	i = 0;
-	line_real = line[1];
-	colors_array = ft_split(line_real, ',');
-	validateNumber(data, colors_array, line);
-	while (colors_array != NULL && colors_array[i] != NULL)
+	j = 0;
+	line_real = line + 1;
+	while (line_real[j] != NULL && line_real[j][0] != '\0')
 	{
-		if (rgb->R == -1)
+		i = 0;
+		colors_array = ft_split(line_real[j], ',');
+		validateNumber(data, colors_array, line);
+		while (colors_array != NULL && colors_array[i] != NULL)
 		{
-			rgb->R = ft_atoi(colors_array[i]);
+			if (rgb->R == -1)
+				rgb->R = ft_atoi(colors_array[i]);
+			else if (rgb->G == -1)
+				rgb->G = ft_atoi(colors_array[i]);
+			else if (rgb->B == -1)
+				rgb->B = ft_atoi(colors_array[i]);
+			i++;
 		}
-		else if (rgb->G == -1)
-		{
-			rgb->G = ft_atoi(colors_array[i]);
-		}
-		else if (rgb->B == -1)
-		{
-			rgb->B = ft_atoi(colors_array[i]);
-		}
-		i++;
+		j++;
+	}
+	if ((rgb->R == -1 || rgb->G == -1 || rgb->B == -1))
+	{
+		free_array2d((void **)colors_array);
+		error_handler2(data, RGB_ERROR);
 	}
 	free_array2d((void **)colors_array);
 }

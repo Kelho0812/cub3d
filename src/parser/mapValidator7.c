@@ -25,7 +25,7 @@ void	validateWords(t_data *data, char **line_words_array)
 	char	*line;
 
 	line = line_words_array[0];
-	if (line == NULL && line[0] == '\0')
+	if (line == NULL || line[0] == '\0')
 	{
 		free_array2d((void **)line_words_array);
 		error_handler3(data, INVALID_WORD);
