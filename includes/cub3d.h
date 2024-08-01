@@ -15,13 +15,13 @@
 
 # include "./getNextLine/getNextLine.h"
 # include "./libft/libft.h"
+# include "./minilibx-linux/mlx.h"
+# include <X11/X.h>
+# include <X11/keysym.h>
 # include <fcntl.h>
+# include <math.h>
 # include <stdbool.h>
 # include <stdio.h>
-# include "./minilibx-linux/mlx.h"
-# include <X11/keysym.h>
-# include <X11/X.h>
-# include <math.h>
 
 # define RED "\033[1;31m"
 # define RESET "\033[0m"
@@ -37,52 +37,52 @@
 
 typedef struct s_img
 {
-	void	*mlx_img;
-	char	*data;
-	int		bpp;
-	int		line_len;
-	int		endian;
-}	t_img;
+	void				*mlx_img;
+	char				*data;
+	int					bpp;
+	int					line_len;
+	int					endian;
+}						t_img;
 
 typedef struct s_minimap
 {
-	t_img	texture;
-	void	*xpm_texture;
-	int		height;
-	int 	width;
-}				t_minimap;
+	t_img				texture;
+	void				*xpm_texture;
+	int					height;
+	int					width;
+}						t_minimap;
 
 typedef struct s_ray
 {
-	float	atan;
-	float	ntan;
-	float	ry;
-	float	rx;
-	float	ystep;
-	float	xstep;
-    float   ra;
-	int		mx;
-	int		my;
-}				t_ray;
+	float				atan;
+	float				ntan;
+	float				ry;
+	float				rx;
+	float				ystep;
+	float				xstep;
+	float				ra;
+	int					mx;
+	int					my;
+}						t_ray;
 
 typedef struct s_dist
 {
-    int		hx;
-	int		hy;
-	int		vx;
-	int		vy;
-	float	distH;
-	float	distV;
-	float	distT;
-}   t_dist;
+	int					hx;
+	int					hy;
+	int					vx;
+	int					vy;
+	float				distH;
+	float				distV;
+	float				distT;
+}						t_dist;
 
 typedef struct s_player
 {
-	float					px;
-	float					pdx;
-	float					py;
-	float					pdy;
-	float					pa;
+	float				px;
+	float				pdx;
+	float				py;
+	float				pdy;
+	float				pa;
 }						t_player;
 
 typedef struct s_map_dimensions
@@ -99,6 +99,8 @@ typedef struct s_rgb
 }						t_rgb;
 typedef struct s_map
 {
+	int					width;
+	int					height;
 	char				**full_file_array;
 	char				**full_map_array;
 	int					player_count;
@@ -120,9 +122,9 @@ typedef struct s_map
 
 typedef struct s_window
 {
-	void	*mlx;
-	void	*mlx_win;
-}				t_window;
+	void				*mlx;
+	void				*mlx_win;
+}						t_window;
 
 typedef struct s_data
 {
@@ -177,8 +179,8 @@ void					copy_original_map(char **new_map, char **map, int rows);
 void					validateWords(t_data *data, char **line_words_array);
 bool					check_element_count(t_data *data);
 bool					is_player(char *line);
-void					validateNumber(t_data *data, char **colors_array, char **line);
-
+void					validateNumber(t_data *data, char **colors_array,
+							char **line);
 
 // ERROR_HANDLERS
 typedef enum e_error
@@ -211,15 +213,16 @@ void					init_player(t_player *player);
 void					open_window(t_data *data);
 void					print_colored_map(char **map);
 void					render_minimap(t_data *data);
-void 					handle_render(t_data *data);
-void    				render_player(t_data *data);
-void					draw_line(float x, float y, float x1, float y1, t_data *data);
+void					handle_render(t_data *data);
+void					render_player(t_data *data);
+void					draw_line(float x, float y, float x1, float y1,
+							t_data *data);
 void					my_pixel_put(int x, int y, int color, t_data *data);
-void 					draw_fov(t_data *data);
+void					draw_fov(t_data *data);
 
-//handlers
+// handlers
 
-int 					handle_keypress(int keysym, t_data *data);
+int						handle_keypress(int keysym, t_data *data);
 int						handle_close(t_data *data);
 
 #endif
