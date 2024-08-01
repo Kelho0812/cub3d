@@ -152,7 +152,7 @@ void	draw_shader(t_data *data, int raycasted, int color)
 	int 		frame_size;
 	float		ty;
 	float		ty_step;
-	// float 		tx;
+	float 		tx;
 	int			angle_dif;
 
 	angle_dif = data->player.pa - data->rays.ra;
@@ -164,18 +164,19 @@ void	draw_shader(t_data *data, int raycasted, int color)
 	i = 0;
 	lineH =	(BLOCK_SIZE * HEIGHT) / data->dist.distT;
 	ty_step = data->minimap.height/(float)lineH;
+	// printf("%d\n", (int)ty_step * BLOCK_SIZE);
 	if (lineH > HEIGHT)
 		lineH = HEIGHT;
 	lineO = (HEIGHT / 2) - lineH / 2;
-	frame_size = 8;
-	ty = 0;
-	// tx = (int)(data->rays.rx / 2.0) % BLOCK_SIZE;
+	frame_size = 16;
+	tx = (int)(data->rays.rx / 2.0) % BLOCK_SIZE;
 	while (i < frame_size)
 	{
 		int j = 0;
+		ty = 0;
 		while (j < lineH)
 		{
-			// color = *(int *)(data->minimap.wall.data + ((int)(ty) * data->minimap.height) * data->minimap.wall.line_len + (int)tx * (data->minimap.wall.bpp / 8));
+			color = *(int *)(data->minimap.wall.data + (int)(ty) * data->minimap.wall.line_len + (int)tx * (data->minimap.wall.bpp / 8));
 			my_pixel_put(raycasted * frame_size + i, j + lineO, color, data);
 			j++;
 			ty += ty_step;
