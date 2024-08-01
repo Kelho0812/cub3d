@@ -99,6 +99,8 @@ typedef struct s_rgb
 }						t_rgb;
 typedef struct s_map
 {
+	int					width;
+	int					height;
 	char				**full_file_array;
 	char				**full_map_array;
 	int					player_count;
@@ -208,6 +210,7 @@ void					free_array2d(void **pnts);
 // other
 void					init_data(t_data *data);
 void					init_player(t_player *player);
+char					*ft_strdup_dif(const char *s, int size);
 void					open_window(t_data *data);
 void					print_colored_map(char **map);
 void					render_minimap(t_data *data);

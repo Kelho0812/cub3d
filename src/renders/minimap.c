@@ -55,6 +55,7 @@ void	render_minimap(t_data *data)
     x = 0;
     data->map.map_img.mlx_img = mlx_new_image(data->window.mlx, WIDTH, HEIGHT);
 	data->map.map_img.data = mlx_get_data_addr(data->map.map_img.mlx_img, &data->map.map_img.bpp, &data->map.map_img.line_len, &data->map.map_img.endian);
+    data->map.width = 0;
     while (data->map.full_map_array[y])
     {
         x = 0;
@@ -63,11 +64,10 @@ void	render_minimap(t_data *data)
             if (data->map.full_map_array[y][x] == '1')
                 render_block(x * BLOCK_SIZE, y * BLOCK_SIZE, data);
             x++;
-            data->map.width = x;
         }
+        if (data->map.width < x)
+            data->map.width = x;
         y++;
     }
     data->map.height = y - 1;
-    // printf("%d\n", data->map.width);
-    // printf("%d\n", data->map.height);
 }
