@@ -93,5 +93,7 @@ void	render_minimap(t_data *data)
             data->map.width = x;
         y++;
     }
-    data->map.height = y - 1;
+    data->map.height = y;
+    // printf("%d\n", data->map.width);
+    // printf("%d\n", data->map.height);
 }

@@ -147,30 +147,38 @@ void	init_default_values(t_data * data)
 void	draw_shader(t_data *data, int raycasted, int color)
 {
 	int			i;
-	float 		lineH;
-	float 		lineO;
+	int 		lineH;
+	int 		lineO;
 	int 		frame_size;
-	// int			angle_dif;
+	float		ty;
+	float		ty_step;
+	// float 		tx;
+	int			angle_dif;
 
+	angle_dif = data->player.pa - data->rays.ra;
+	if (angle_dif < 0)
+		angle_dif += 2 * PI;
+	else if (angle_dif > 2 * PI)
+		angle_dif -= 2 * PI;
+	data->dist.distT *= cos(angle_dif);
 	i = 0;
-	// angle_dif = data->player.pa - data->rays.ra;
-	// if (angle_dif < 0)
-	// 	angle_dif += 2 * PI;
-	// else if (angle_dif > 2 * PI)
-	// 	angle_dif -= 2 * PI;
-	// data->dist.distT *= cos(angle_dif);
 	lineH =	(BLOCK_SIZE * HEIGHT) / data->dist.distT;
+	ty_step = data->minimap.height/(float)lineH;
 	if (lineH > HEIGHT)
 		lineH = HEIGHT;
 	lineO = (HEIGHT / 2) - lineH / 2;
-	frame_size = 15;
+	frame_size = 8;
+	ty = 0;
+	// tx = (int)(data->rays.rx / 2.0) % BLOCK_SIZE;
 	while (i < frame_size)
 	{
-		int j = lineO;
-		while (j < lineH+lineO)
+		int j = 0;
+		while (j < lineH)
 		{
-			my_pixel_put(raycasted*frame_size + i, j, color, data);
+			// color = *(int *)(data->minimap.wall.data + ((int)(ty) * data->minimap.height) * data->minimap.wall.line_len + (int)tx * (data->minimap.wall.bpp / 8));
+			my_pixel_put(raycasted * frame_size + i, j + lineO, color, data);
 			j++;
+			ty += ty_step;
 		}
 		i++;
 	}	

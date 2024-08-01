@@ -28,8 +28,8 @@
 
 # define WIDTH 1920
 # define HEIGHT 1080
-# define BLOCK_SIZE 10
-# define PLAYER_SIZE 5
+# define BLOCK_SIZE 20
+# define PLAYER_SIZE 10
 # define PI 3.141592
 # define P2 PI / 2
 # define P3 3 * PI / 2
