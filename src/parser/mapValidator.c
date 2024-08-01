@@ -79,6 +79,8 @@ void	validate_and_copy_elements(t_data *data)
 				free_array2d((void **)(line_words_array));
 			}
 		}
+		else
+			free(trimmed_line);
 		i++;
 	}
 	doublecheckelements(data);
@@ -120,7 +122,6 @@ void	doublecheckelements(t_data *data)
 	// char	*paths[4];
 	// int		img_width;
 	// int		img_height;
-
 	// paths[0] = data->map.north_texture;
 	// paths[1] = data->map.south_texture;
 	// paths[2] = data->map.east_texture;
