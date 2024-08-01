@@ -49,6 +49,17 @@ void	updateElementCount(t_data *data, char *first_word)
 	}
 }
 
+void	free_mapi(char **map, int rows)
+{
+	int	i;
+
+	for (i = 0; i < rows + 2; i++)
+	{
+		free(map[i]);
+	}
+	free(map);
+}
+
 void	check_path(char **map, t_data *data)
 {
 	char	**spaced_map;
@@ -59,9 +70,14 @@ void	check_path(char **map, t_data *data)
 	get_map_dimensions(map, &rows, &cols);
 	spaced_map = duplicate_map_with_border(map, rows, cols);
 	// print_colored_map(data->map.full_map_array);
-	can_reach_space_or_tab = dfs(spaced_map, data->player.py+1, data->player.px+1);
-	// free_array2d((void **)spaced_map);
-	print_result_and_exit(can_reach_space_or_tab);
+	can_reach_space_or_tab = dfs(spaced_map, data->player.py + 1,
+			data->player.px + 1);
+	free_mapi(spaced_map, rows);
+	if (can_reach_space_or_tab)
+	{
+		error_handler4(data, MAP_HOLE);
+	}
+	// print_result_and_exit(can_reach_space_or_tab);
 }
 
 char	**copy_map_from_index(t_data *data, int start_index)
@@ -77,7 +93,7 @@ char	**copy_map_from_index(t_data *data, int start_index)
 	{
 		num_lines++;
 	}
-	new_map_array = (char **)malloc((num_lines + 1) * sizeof(char *));
+	new_map_array = (char **)calloc((num_lines + 1), sizeof(char *));
 	for (i = 0; i < num_lines; i++)
 	{
 		new_map_array[i] = ft_strdup(map_array[start_index + i]);
@@ -93,8 +109,8 @@ bool	dfs(char **map, int x, int y)
 	if (map[x][y] == ' ' || map[x][y] == '\t')
 		return (true);
 	map[x][y] = 'V';
-	if (dfs(map, x - 1, y) || dfs(map, x + 1, y) || dfs(map,
-			x, y - 1) || dfs(map, x, y + 1))
+	if (dfs(map, x - 1, y) || dfs(map, x + 1, y) || dfs(map, x, y - 1)
+		|| dfs(map, x, y + 1))
 	{
 		return (true);
 	}

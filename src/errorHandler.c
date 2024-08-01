@@ -113,4 +113,12 @@ void	error_handler4(t_data *data, t_error error)
 		printf(RED "CANNOT OPEN LE IMAGE" RESET "\n");
 		exit(1);
 	}
+	if (error == MAP_HOLE)
+	{
+		william_wallace(data);
+		printf(RED "ERROR" RESET "\n");
+		printf(RED "HOLE IN DA MAP" RESET "\n");
+		exit(1);
+	}
+
 }

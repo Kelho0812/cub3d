@@ -197,7 +197,8 @@ typedef enum e_error
 	EMPTY_MAP,
 	INVALID_WORD,
 	WRONG_FORMAT,
-	WRONG_IMAGE
+	WRONG_IMAGE,
+	MAP_HOLE
 }						t_error;
 
 void					error_handler(t_error error);
