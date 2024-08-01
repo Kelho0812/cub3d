@@ -39,19 +39,19 @@ int handle_keypress(int keysym, t_data *data)
     }
     if (keysym == XK_Left)
     {
-        data->player.pa -= 0.1;
+        data->player.pa -= 0.04;
         if (data->player.pa < 0)
             data->player.pa += 2 * PI;
-        data->player.pdx = cos(data->player.pa) * 5;
-        data->player.pdy = sin(data->player.pa) * 5;
+        data->player.pdx = cos(data->player.pa);
+        data->player.pdy = sin(data->player.pa);
     }
     if (keysym == XK_Right)
     {
-        data->player.pa += 0.1;
+        data->player.pa += 0.04;
         if (data->player.pa > 2 * PI)
             data->player.pa -= 2 * PI;
-        data->player.pdx = cos(data->player.pa) * 5;
-        data->player.pdy = sin(data->player.pa) * 5;
+        data->player.pdx = cos(data->player.pa);
+        data->player.pdy = sin(data->player.pa);
     }
     render_minimap(data);
     render_player(data);
