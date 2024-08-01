@@ -45,23 +45,6 @@ float	distance(float ax, float ay, float bx, float by, float ang)
 void	horizontal_lines_calc(t_ray *calc, t_dist *dist, t_data *display)
 {
 	int		itr;
-	int map[15][20] = {
-		{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0},
-		{1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0},
-		{1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0},
-		{1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0},
-		{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0},
-		{1, 0, 1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0},
-		{1, 0, 1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0},
-		{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1},
-		{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-		{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1},
-		{1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0},
-		{1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0},
-		{1, 0, 1, 1, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0},
-		{1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0},
-		{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0}
-	};
 
 	itr = 0;
 	if (calc->ra > PI)
@@ -82,18 +65,18 @@ void	horizontal_lines_calc(t_ray *calc, t_dist *dist, t_data *display)
 	{
 		calc->ry = display->player.py;
 		calc->rx = display->player.px;
-		itr = 15;
+		itr = display->map.height;
 	}
-	while (itr < 15)
+	while (itr < display->map.height)
 	{
 		calc->mx = (int)(calc->rx) / BLOCK_SIZE;
 		calc->my = (int)(calc->ry) / BLOCK_SIZE;
-		if (calc->mx >= 0 && calc->mx < 20 && calc->my >= 0 && calc->my < 15 && map[calc->my][calc->mx] == 1)
+		if (calc->mx >= 0 && calc->mx < display->map.width && calc->my >= 0 && calc->my < display->map.height && display->map.full_map_array[calc->my][calc->mx] == '1')
 		{
 			dist->hx = calc->rx;
 			dist->hy = calc->ry;
 			dist->distH = distance(display->player.px, display->player.py, dist->hx, dist->hy, calc->ra);
-			itr = 15;
+			itr = display->map.height;
 		}
 		else
 		{
@@ -107,23 +90,6 @@ void	horizontal_lines_calc(t_ray *calc, t_dist *dist, t_data *display)
 void	vertical_lines_calc(t_ray *calc, t_dist *dist, t_data * display)
 {
 	int		itr;
-	int map[15][20] = {
-		{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0},
-		{1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0},
-		{1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0},
-		{1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0},
-		{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0},
-		{1, 0, 1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0},
-		{1, 0, 1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0},
-		{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1},
-		{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-		{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1},
-		{1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0},
-		{1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0},
-		{1, 0, 1, 1, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0},
-		{1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0},
-		{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0}
-	};
 
 	itr = 0;
 	if (calc->ra > P2 && calc->ra < P3)
@@ -144,18 +110,18 @@ void	vertical_lines_calc(t_ray *calc, t_dist *dist, t_data * display)
 	{
 		calc->ry = display->player.py;
 		calc->rx = display->player.px;
-		itr = 20;
+		itr = display->map.width;
 	}
-	while (itr < 20)
+	while (itr < display->map.width)
 	{
 		calc->mx = (int)(calc->rx) / BLOCK_SIZE;
 		calc->my = (int)(calc->ry) / BLOCK_SIZE;
-		if (calc->mx >= 0 && calc->mx < 20 && calc->my >= 0 && calc->my < 15 && map[calc->my][calc->mx] == 1)
+		if (calc->mx >= 0 && calc->mx < display->map.width && calc->my >= 0 && calc->my < display->map.height && display->map.full_map_array[calc->my][calc->mx] == '1')
 		{	
 			dist->vx = calc->rx;
 			dist->vy = calc->ry;
 			dist->distV = distance(display->player.px, display->player.py, dist->vx, dist->vy, calc->ra);
-			itr = 20;
+			itr = display->map.width;
         }
 		else
 		{
