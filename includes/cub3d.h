@@ -26,10 +26,11 @@
 # define RED "\033[1;31m"
 # define RESET "\033[0m"
 
-# define WIDTH 1920
-# define HEIGHT 1080
+# define WIDTH 1080
+# define HEIGHT 600
 # define BLOCK_SIZE 32
 # define MINIMAP_SIZE 16
+# define MAP_SIZE 42
 # define PLAYER_SIZE 10
 # define PI 3.141592
 # define P2 PI / 2
