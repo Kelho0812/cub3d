@@ -36,16 +36,16 @@ int handle_keypress(int keysym, t_data *data)
         data->player.pa -= 0.1;
         if (data->player.pa < 0)
             data->player.pa += 2 * PI;
-        data->player.pdx = cos(data->player.pa) * 3;
-        data->player.pdy = sin(data->player.pa) * 3;
+        data->player.pdx = cos(data->player.pa) * 5;
+        data->player.pdy = sin(data->player.pa) * 5;
     }
     if (keysym == XK_Right)
     {
         data->player.pa += 0.1;
         if (data->player.pa > 2 * PI)
             data->player.pa -= 2 * PI;
-        data->player.pdx = cos(data->player.pa) * 3;
-        data->player.pdy = sin(data->player.pa) * 3;
+        data->player.pdx = cos(data->player.pa) * 5;
+        data->player.pdy = sin(data->player.pa) * 5;
     }
     render_minimap(data);
     render_player(data);

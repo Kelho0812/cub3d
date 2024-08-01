@@ -31,6 +31,8 @@
 # define BLOCK_SIZE 20
 # define PLAYER_SIZE 10
 # define PI 3.141592
+# define P2 PI / 2
+# define P3 3 * PI / 2
 # define DEGRESS 0.017453 / 2
 
 typedef struct s_img
@@ -49,6 +51,30 @@ typedef struct s_minimap
 	int		height;
 	int 	width;
 }				t_minimap;
+
+typedef struct s_ray
+{
+	float	atan;
+	float	ntan;
+	float	ry;
+	float	rx;
+	float	ystep;
+	float	xstep;
+    float   ra;
+	int		mx;
+	int		my;
+}				t_ray;
+
+typedef struct s_dist
+{
+    int		hx;
+	int		hy;
+	int		vx;
+	int		vy;
+	float	distH;
+	float	distV;
+	float	distT;
+}   t_dist;
 
 typedef struct s_player
 {
@@ -106,6 +132,7 @@ typedef struct s_data
 	t_player			player;
 	t_window			window;
 	t_minimap			minimap;
+	t_ray				rays;
 }						t_data;
 
 // PARSER

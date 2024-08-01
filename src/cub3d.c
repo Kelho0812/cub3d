@@ -43,9 +43,9 @@ void	open_window(t_data *data)
 	data->window.mlx_win = mlx_new_window(data->window.mlx, WIDTH, HEIGHT, "Cub3d - MegaBosses");
 	data->minimap.xpm_texture = mlx_xpm_file_to_image(data->window.mlx, "./src/assets/texture.xpm", &data->minimap.width, &data->minimap.height);
 	data->minimap.texture.data = mlx_get_data_addr(data->minimap.xpm_texture, &data->minimap.texture.bpp, &data->minimap.texture.line_len, &data->minimap.texture.endian);
-	data->player.pa = PI + PI / 2;
-	data->player.pdx = cos(data->player.pa) * 3;
-	data->player.pdy = sin(data->player.pa) * 3;
+	data->player.pa = 2.4;
+	data->player.pdx = 0.0;
+	data->player.pdy = 0.0;
 }
 
 void handle_render(t_data *data)

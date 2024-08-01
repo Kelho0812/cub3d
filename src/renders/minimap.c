@@ -50,17 +50,34 @@ void	render_minimap(t_data *data)
 {
     int y; 
     int x;
+    int map[15][15] = {
+		{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+		{1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1},
+		{1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1},
+		{1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+		{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+		{1, 0, 1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1},
+		{1, 0, 1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1},
+		{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+		{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+		{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+		{1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 1},
+		{1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 1},
+		{1, 0, 1, 1, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 1},
+		{1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1},
+		{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
+	};
 
     y = 0;
     x = 0;
     data->map.map_img.mlx_img = mlx_new_image(data->window.mlx, WIDTH, HEIGHT);
 	data->map.map_img.data = mlx_get_data_addr(data->map.map_img.mlx_img, &data->map.map_img.bpp, &data->map.map_img.line_len, &data->map.map_img.endian);
-    while (data->map.full_map_array[y])
+    while (y < 15)
     {
         x = 0;
-        while (data->map.full_map_array[y][x])
+        while (x < 15)
         {
-            if (data->map.full_map_array[y][x] == '1')
+            if (map[y][x] == 1)
                 render_block(x * BLOCK_SIZE, y * BLOCK_SIZE, data);
             x++;
         }

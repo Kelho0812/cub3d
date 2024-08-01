@@ -36,28 +36,161 @@ void    render_player(t_data *data)
     mlx_destroy_image(data->window.mlx, data->map.map_img.mlx_img);
 }
 
+float	distance(float ax, float ay, float bx, float by, float ang)
+{
+	(void) ang;
+	return (sqrt((bx - ax) * (bx - ax) + (by - ay) * (by - ay)));
+}
+
+void	horizontal_lines_calc(t_ray *calc, t_dist *dist, t_data *display)
+{
+	int		itr;
+	int map[15][15] = {
+		{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+		{1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1},
+		{1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1},
+		{1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+		{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+		{1, 0, 1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1},
+		{1, 0, 1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1},
+		{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+		{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+		{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+		{1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 1},
+		{1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 1},
+		{1, 0, 1, 1, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 1},
+		{1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1},
+		{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
+	};
+
+	itr = 0;
+	if (calc->ra > PI)
+	{
+		calc->ry = (((int)display->player.py / BLOCK_SIZE) * BLOCK_SIZE) - 0.0001;
+		calc->rx = (display->player.py - calc->ry) * calc->atan + display->player.px;
+		calc->ystep = -BLOCK_SIZE;
+		calc->xstep = (calc->ystep * -1) * calc->atan;
+	}
+	if (calc->ra < PI)
+	{
+		calc->ry = (((int)display->player.py / BLOCK_SIZE) * BLOCK_SIZE) + BLOCK_SIZE;
+		calc->rx = (display->player.py - calc->ry) * calc->atan + display->player.px;
+		calc->ystep = BLOCK_SIZE;
+		calc->xstep = (calc->ystep * -1) * calc->atan;
+	}
+	if (calc->ra == PI || calc->ra == 0.0)
+	{
+		calc->ry = display->player.py;
+		calc->rx = display->player.px;
+		itr = 15;
+	}
+	while (itr < 15)
+	{
+		calc->mx = (int)(calc->rx) / BLOCK_SIZE;
+		calc->my = (int)(calc->ry) / BLOCK_SIZE;
+		if (calc->mx >= 0 && calc->mx < 15 && calc->my >= 0 && calc->my <  15 && map[calc->my][calc->mx] == 1)
+		{
+			dist->hx = calc->rx;
+			dist->hy = calc->ry;
+			dist->distH = distance(display->player.px, display->player.py, dist->hx, dist->hy, calc->ra);
+			itr = 15;
+		}
+		else
+		{
+			calc->rx += calc->xstep;
+			calc->ry += calc->ystep;
+			itr++;
+		}
+	}
+}
+
+void	vertical_lines_calc(t_ray *calc, t_dist *dist, t_data * display)
+{
+	int		itr;
+	int map[15][15] = {
+		{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+		{1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1},
+		{1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1},
+		{1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+		{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+		{1, 0, 1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1},
+		{1, 0, 1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1},
+		{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+		{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+		{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+		{1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 1},
+		{1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 1},
+		{1, 0, 1, 1, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 1},
+		{1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1},
+		{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
+	};
+
+	itr = 0;
+	if (calc->ra > P2 && calc->ra < P3)
+	{
+		calc->rx = (((int)display->player.px / BLOCK_SIZE) * BLOCK_SIZE) - 0.0001;
+		calc->ry = (display->player.px - calc->rx) * calc->ntan + display->player.py;
+		calc->xstep = -BLOCK_SIZE;
+		calc->ystep = (calc->xstep * -1) * calc->ntan;
+	}
+	if (calc->ra < P2 || calc->ra > P3)
+	{
+		calc->rx = (((int)display->player.px / BLOCK_SIZE) * BLOCK_SIZE) + BLOCK_SIZE;
+		calc->ry = (display->player.px - calc->rx) * calc->ntan + display->player.py;
+		calc->xstep = BLOCK_SIZE;
+		calc->ystep = (calc->xstep * -1) * calc->ntan;
+	}
+	if (calc->ra == PI || calc->ra == 0)
+	{
+		calc->ry = display->player.py;
+		calc->rx = display->player.px;
+		itr = 15;
+	}
+	while (itr < 15)
+	{
+		calc->mx = (int)(calc->rx) / BLOCK_SIZE;
+		calc->my = (int)(calc->ry) / BLOCK_SIZE;
+		if (calc->mx >= 0 && calc->mx < 15 && calc->my >= 0 && calc->my < 15 && map[calc->my][calc->mx] == 1)
+		{	
+			dist->vx = calc->rx;
+			dist->vy = calc->ry;
+			dist->distV = distance(display->player.px, display->player.py, dist->vx, dist->vy, calc->ra);
+			itr = 15;
+        }
+		else
+		{
+			calc->rx += calc->xstep;
+			calc->ry += calc->ystep;
+			itr++;
+		}
+	}
+}
 
 void draw_fov(t_data *data)
 {
-    float ca;
-    int raycasted;
-    float center_x = data->player.px + (PLAYER_SIZE / 2);
-    float center_y = data->player.py + (PLAYER_SIZE / 2);
-    float end_x;
-    float end_y;
+    t_ray calc;
+	t_dist dist;
 
-    raycasted = 0;
-    ca = data->player.pa - (DEGRESS * 40);
-    while (raycasted < 80)
-    {
-        ca += DEGRESS;
-        if (ca < 0)
-			ca += 2 * PI;
-		else if (ca > 2 * PI)
-			ca -= 2 * PI;
-        end_x = center_x + (cos(ca) * 30);
-        end_y = center_y + (sin(ca) * 30);
-        draw_line(center_x, center_y, end_x, end_y, data);
-        raycasted++;
-    }
+    calc.ra = data->player.pa;
+	calc.atan = -1/tan(calc.ra);
+	calc.ntan = tan(calc.ra) * -1;
+	dist.hx = data->player.px;
+	dist.hy = data->player.py;
+	dist.vx = data->player.px;
+	dist.vy = data->player.py;
+	dist.distH = 10000000;
+	dist.distV = 10000000;
+    vertical_lines_calc(&calc, &dist, data);
+    horizontal_lines_calc(&calc, &dist, data);
+	if (dist.distV < dist.distH)
+	{
+		calc.rx = dist.vx;
+		calc.ry = dist.vy;
+	}
+	if (dist.distH < dist.distV)
+	{
+		calc.rx = dist.hx;
+		calc.ry = dist.hy;
+	}
+    draw_line(data->player.px, data->player.py, calc.rx, calc.ry, data);
 }
