@@ -49,16 +49,16 @@ void	horizontal_lines_calc(t_data *data)
 	itr = 0;
 	if (data->rays.ra > PI)
 	{
-		data->rays.ry = (((int)data->player.py / BLOCK_SIZE) * BLOCK_SIZE) - 0.0001;
+		data->rays.ry = (((int)data->player.py / MAP_SIZE) * MAP_SIZE) - 0.0001;
 		data->rays.rx = (data->player.py - data->rays.ry) * data->rays.atan + data->player.px;
-		data->rays.ystep = -BLOCK_SIZE;
+		data->rays.ystep = -MAP_SIZE;
 		data->rays.xstep = (data->rays.ystep * -1) * data->rays.atan;
 	}
 	if (data->rays.ra < PI)
 	{
-		data->rays.ry = (((int)data->player.py / BLOCK_SIZE) * BLOCK_SIZE) + BLOCK_SIZE;
+		data->rays.ry = (((int)data->player.py / MAP_SIZE) * MAP_SIZE) + MAP_SIZE;
 		data->rays.rx = (data->player.py - data->rays.ry) * data->rays.atan + data->player.px;
-		data->rays.ystep = BLOCK_SIZE;
+		data->rays.ystep = MAP_SIZE;
 		data->rays.xstep = (data->rays.ystep * -1) * data->rays.atan;
 	}
 	if (data->rays.ra == PI || data->rays.ra == 0.0)
@@ -69,8 +69,8 @@ void	horizontal_lines_calc(t_data *data)
 	}
 	while (itr < data->map.height)
 	{
-		data->rays.mx = (int)(data->rays.rx) / BLOCK_SIZE;
-		data->rays.my = (int)(data->rays.ry) / BLOCK_SIZE;
+		data->rays.mx = (int)(data->rays.rx) / MAP_SIZE;
+		data->rays.my = (int)(data->rays.ry) / MAP_SIZE;
 		if (data->rays.mx >= 0 && data->rays.mx < data->map.width && data->rays.my >= 0 && data->rays.my < data->map.height && data->map.full_map_array[data->rays.my][data->rays.mx] == '1')
 		{
 			data->dist.hx = data->rays.rx;
@@ -94,16 +94,16 @@ void	vertical_lines_calc(t_data * data)
 	itr = 0;
 	if (data->rays.ra > P2 && data->rays.ra < P3)
 	{
-		data->rays.rx = (((int)data->player.px / BLOCK_SIZE) * BLOCK_SIZE) - 0.0001;
+		data->rays.rx = (((int)data->player.px / MAP_SIZE) * MAP_SIZE) - 0.0001;
 		data->rays.ry = (data->player.px - data->rays.rx) * data->rays.ntan + data->player.py;
-		data->rays.xstep = -BLOCK_SIZE;
+		data->rays.xstep = -MAP_SIZE;
 		data->rays.ystep = (data->rays.xstep * -1) * data->rays.ntan;
 	}
 	if (data->rays.ra < P2 || data->rays.ra > P3)
 	{
-		data->rays.rx = (((int)data->player.px / BLOCK_SIZE) * BLOCK_SIZE) + BLOCK_SIZE;
+		data->rays.rx = (((int)data->player.px / MAP_SIZE) * MAP_SIZE) + MAP_SIZE;
 		data->rays.ry = (data->player.px - data->rays.rx) * data->rays.ntan + data->player.py;
-		data->rays.xstep = BLOCK_SIZE;
+		data->rays.xstep = MAP_SIZE;
 		data->rays.ystep = (data->rays.xstep * -1) * data->rays.ntan;
 	}
 	if (data->rays.ra == PI || data->rays.ra == 0)
@@ -114,8 +114,8 @@ void	vertical_lines_calc(t_data * data)
 	}
 	while (itr < data->map.width)
 	{
-		data->rays.mx = (int)(data->rays.rx) / BLOCK_SIZE;
-		data->rays.my = (int)(data->rays.ry) / BLOCK_SIZE;
+		data->rays.mx = (int)(data->rays.rx) / MAP_SIZE;
+		data->rays.my = (int)(data->rays.ry) / MAP_SIZE;
 		if (data->rays.mx >= 0 && data->rays.mx < data->map.width && data->rays.my >= 0 && data->rays.my < data->map.height && data->map.full_map_array[data->rays.my][data->rays.mx] == '1')
 		{	
 			data->dist.vx = data->rays.rx;
@@ -153,23 +153,22 @@ void	draw_shader(t_data *data, int raycasted, int color)
 	float		ty;
 	float		ty_step;
 	float 		tx;
-	int			angle_dif;
+	// int			angle_dif;
 
-	angle_dif = data->player.pa - data->rays.ra;
-	if (angle_dif < 0)
-		angle_dif += 2 * PI;
-	else if (angle_dif > 2 * PI)
-		angle_dif -= 2 * PI;
-	data->dist.distT *= cos(angle_dif);
+	// angle_dif = data->player.pa - data->rays.ra;
+	// if (angle_dif < 0)
+	// 	angle_dif += 2 * PI;
+	// else if (angle_dif > 2 * PI)
+	// 	angle_dif -= 2 * PI;
+	// data->dist.distT *= cos(angle_dif);
 	i = 0;
-	lineH =	(BLOCK_SIZE * HEIGHT) / data->dist.distT;
+	lineH =	(MAP_SIZE * HEIGHT) / data->dist.distT;
 	ty_step = data->minimap.height/(float)lineH;
-	// printf("%d\n", (int)ty_step * BLOCK_SIZE);
 	if (lineH > HEIGHT)
 		lineH = HEIGHT;
 	lineO = (HEIGHT / 2) - lineH / 2;
-	frame_size = 16;
-	tx = (int)(data->rays.rx / 2.0) % BLOCK_SIZE;
+	frame_size = WIDTH / 160;
+	tx = (int)(data->rays.rx / 2.0) % MAP_SIZE;
 	while (i < frame_size)
 	{
 		int j = 0;
@@ -190,10 +189,10 @@ void draw_fov(t_data *data)
 	int	raycasted;
 	int color;
 	raycasted = 0;
-    data->rays.ra = data->player.pa - (DEGRESS * 45);
+    data->rays.ra = data->player.pa - (DEGRESS * 80);
 	if (data->rays.ra < 0)
 		data->rays.ra += 2 * PI;
-	while (raycasted < 90)
+	while (raycasted < 160)
 	{
 		init_default_values(data);
 		vertical_lines_calc(data);

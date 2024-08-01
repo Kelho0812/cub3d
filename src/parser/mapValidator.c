@@ -24,8 +24,8 @@ void	parse_and_validate_map(char *map, t_data *data)
 	data->map.full_file_array = map_parser(fd, 0, 0, map);
 	validate_and_copy_elements(data);
 	validate_and_copy_map(data);
-	data->player.px *= BLOCK_SIZE;
-    data->player.py *= BLOCK_SIZE;
+	data->player.px *= MAP_SIZE;
+    data->player.py *= MAP_SIZE;
 }
 
 char	**map_parser(int fd, int i, int count, char *map_path)
