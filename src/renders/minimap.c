@@ -83,10 +83,10 @@ void	render_minimap(t_data *data)
         x = 0;
         while (data->map.full_map_array[y][x])
         {
-            if (data->map.full_map_array[y][x] == '1')
-                render_wall(x * BLOCK_SIZE, y * BLOCK_SIZE, data);
-            else
-                render_floor(x * BLOCK_SIZE, y * BLOCK_SIZE, data);
+            // if (data->map.full_map_array[y][x] == '1')
+            //     render_wall(x * BLOCK_SIZE, y * BLOCK_SIZE, data);
+            // else
+            //     render_floor(x * BLOCK_SIZE, y * BLOCK_SIZE, data);
             x++;
         }
         if (data->map.width < x)

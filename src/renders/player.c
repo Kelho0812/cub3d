@@ -144,7 +144,7 @@ void	init_default_values(t_data * data)
 	data->dist.distV = 10000000;
 }
 
-void	draw_shader(t_data *data, int raycasted, int color)
+void	draw_shader(t_data *data, int raycasted, float shade)
 {
 	int			i;
 	int 		lineH;
@@ -153,22 +153,34 @@ void	draw_shader(t_data *data, int raycasted, int color)
 	float		ty;
 	float		ty_step;
 	float 		tx;
-	// int			angle_dif;
+	int 		color;
+	int			angle_dif;
 
-	// angle_dif = data->player.pa - data->rays.ra;
-	// if (angle_dif < 0)
-	// 	angle_dif += 2 * PI;
-	// else if (angle_dif > 2 * PI)
-	// 	angle_dif -= 2 * PI;
-	// data->dist.distT *= cos(angle_dif);
+	angle_dif = data->player.pa - data->rays.ra;
+	if (angle_dif < 0)
+		angle_dif += 2 * PI;
+	else if (angle_dif > 2 * PI)
+		angle_dif -= 2 * PI;
+	data->dist.distT *= cos(angle_dif);
 	i = 0;
 	lineH =	(MAP_SIZE * HEIGHT) / data->dist.distT;
 	ty_step = data->minimap.height/(float)lineH;
 	if (lineH > HEIGHT)
 		lineH = HEIGHT;
 	lineO = (HEIGHT / 2) - lineH / 2;
-	frame_size = WIDTH / 160;
-	tx = (int)(data->rays.rx / 2.0) % MAP_SIZE;
+	frame_size = WIDTH / 140;
+	if (shade == 1)
+	{
+		tx = (int)(data->rays.rx / 2.0) % MAP_SIZE;
+		if (data->rays.ra > 180)
+			tx = (MAP_SIZE - 1) - tx;
+	}
+	else
+	{
+		tx = (int)(data->rays.ry / 2.0) % MAP_SIZE;
+		if (data->rays.ra > 90 && data->rays.ra < 270)
+			tx = (MAP_SIZE - 1) - tx;
+	}
 	while (i < frame_size)
 	{
 		int j = 0;
@@ -187,12 +199,14 @@ void	draw_shader(t_data *data, int raycasted, int color)
 void draw_fov(t_data *data)
 {
 	int	raycasted;
-	int color;
+	float shade;
+
 	raycasted = 0;
-    data->rays.ra = data->player.pa - (DEGRESS * 80);
+	shade = 1;
+    data->rays.ra = data->player.pa - (DEGRESS * 70);
 	if (data->rays.ra < 0)
 		data->rays.ra += 2 * PI;
-	while (raycasted < 160)
+	while (raycasted < 140)
 	{
 		init_default_values(data);
 		vertical_lines_calc(data);
@@ -202,17 +216,16 @@ void draw_fov(t_data *data)
 			data->rays.rx = data->dist.hx;
 			data->rays.ry = data->dist.hy;
 			data->dist.distT = data->dist.distH;
-			color = 0xEC2D01;
 		}
 		if (data->dist.distV < data->dist.distH)
 		{
 			data->rays.rx = data->dist.vx;
 			data->rays.ry = data->dist.vy;
 			data->dist.distT = data->dist.distV;
-			color = 0xBC2400;
+			shade = 0.5;
 		}
 		draw_line(data->player.px, data->player.py, data->rays.rx, data->rays.ry, data);
-		draw_shader(data, raycasted, color);
+		draw_shader(data, raycasted, shade);
 		data->rays.ra += DEGRESS;
 		if (data->rays.ra > 2 * PI)
             data->rays.ra -= 2 * PI;
