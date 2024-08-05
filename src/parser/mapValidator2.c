@@ -70,9 +70,8 @@ void	set_rgb(t_data *data, t_rgb *rgb, char **line)
 	int		i;
 	int		j;
 
-	i = 0;
-	j = 0;
-	line_real = line + 1; //#TODO O LEAK TA AQUI FOR SURE
+	j = 1;
+	line_real = line; //#TODO O LEAK TA AQUI FOR SURE
 	while (line_real[j] != NULL && line_real[j][0] != '\0')
 	{
 		i = 0;
