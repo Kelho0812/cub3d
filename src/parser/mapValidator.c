@@ -96,17 +96,19 @@ bool	check_element_count(t_data *data)
 		return (true);
 }
 
-void free_map_array(char **map_array)
+void	free_map_array(char **map_array)
 {
-    int i = 0;
-    if (map_array == NULL)
-        return;
-    while (map_array[i] != NULL)
-    {
-        free(map_array[i]);
-        i++;
-    }
-    free(map_array);
+	int	i;
+
+	i = 0;
+	if (map_array == NULL)
+		return ;
+	while (map_array[i] != NULL)
+	{
+		free(map_array[i]);
+		i++;
+	}
+	free(map_array);
 }
 
 void	validate_and_copy_map(t_data *data)
@@ -130,33 +132,20 @@ bool	is_player_char(char c)
 
 void	doublecheckelements(t_data *data)
 {
-	// void	*mlx;
-	// int		i;
-	// void	*img;
-	// char	*paths[4];
-	// int		img_width;
-	// int		img_height;
-	// paths[0] = data->map.north_texture;
-	// paths[1] = data->map.south_texture;
-	// paths[2] = data->map.east_texture;
-	// paths[3] = data->map.west_texture;
-	// i = 0;
-	if ((data->map.no_count != 1 || data->map.so_count != 1
-			|| data->map.we_count != 1 || data->map.ea_count != 1
-			|| data->map.c_count != 1 || data->map.f_count != 1))
-	{
+	if (!check_element_count(data))
 		error_handler2(data, NOT_ENOUGH_ELEMENTS);
-	}
-	// mlx = mlx_init();
-	// while (i < 4)
+	// if (/* condition */)
 	// {
-	// 	img = NULL;
-	// 	img = mlx_xpm_file_to_image(mlx, paths[i], &img_width,
-	// 			&img_height);
-	// 	if (img == NULL)
-	// 	{
-	// 		error_handler4(data, WRONG_IMAGE);
-	// 	}
-	// 	i++;
+	// 	/* code */
 	// }
+	
 }
+
+// bool check_correct_path(t_data *data)
+// {
+// 	if (ft_strncmp(data->map.north_texture, "textures/north.xpm"))
+// 	{
+// 		/* code */
+// 	}
+	
+// }
