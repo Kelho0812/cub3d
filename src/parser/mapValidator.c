@@ -76,8 +76,8 @@ void	validate_and_copy_elements(t_data *data)
 			{
 				validate_elements(data, line_words_array);
 				copy_elements(data, line_words_array);
-				free_array2d((void **)(line_words_array));
 			}
+			free_array2d((void **)(line_words_array));
 		}
 		else
 			free(trimmed_line);

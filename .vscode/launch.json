@@ -9,11 +9,7 @@
 			"type": "cppdbg",
 			"request": "launch",
 			"program": "${workspaceFolder}/cub3D",
-<<<<<<< HEAD
-			"args": ["./maps/good/dungeon.cub"],
-=======
-			"args": ["maps/valid/test_pos_right.cub"],
->>>>>>> origin/main
+			"args": ["maps/invalid/wrong37.cub"],
 			"stopAtEntry": false,
 			"cwd": "${workspaceFolder}",
 			"environment": [],

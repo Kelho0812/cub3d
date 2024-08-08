@@ -27,16 +27,21 @@ void	free_map(t_data *data)
 		free(map->east_texture);
 }
 
-void	free_array2d(void **pnts)
+void	free_array2d(void **array)
 {
 	int	i;
 
-	if (!pnts)
+	i = 0;
+	if (array == NULL)
 		return ;
-	i = -1;
-	while (pnts[++i])
-		free(pnts[i]);
-	free(pnts);
+	while (array[i] != NULL)
+	{
+		printf("Freeing array[%d]\n", i); // Debug print
+		free(array[i]);
+		i++;
+	}
+	printf("Freeing array\n"); // Debug print
+	free(array);
 }
 
 void	william_wallace(t_data *data)
