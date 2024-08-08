@@ -19,10 +19,12 @@ bool	is_valid_char(char c)
 
 void	check_wrong_chars(t_data *data, char **map_lines, int i)
 {
-	int	j;
-	int	wowzers;
-	int	player_count;
+	int		j;
+	int		wowzers;
+	int		player_count;
+	bool	map_end;
 
+	map_end = false;
 	wowzers = i;
 	player_count = 0;
 	while (map_lines[i] != NULL)
@@ -30,12 +32,18 @@ void	check_wrong_chars(t_data *data, char **map_lines, int i)
 		j = 0;
 		while (map_lines[i][j] != '\0')
 		{
+			if (map_end == true)
+			{
+				error_handler2(data, WRONG_CHARS_MAP_ERROR);
+			}
 			if (is_player_char(map_lines[i][j]))
 				handle_player_char(data, &player_count, i, j, wowzers);
 			else if (!is_valid_char(map_lines[i][j]))
 				error_handler2(data, WRONG_CHARS_MAP_ERROR);
 			j++;
 		}
+		if (j == 0 && map_lines[i][j] == '\0')
+			map_end = true;
 		i++;
 	}
 	if (player_count != 1)
