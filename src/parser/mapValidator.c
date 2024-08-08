@@ -138,7 +138,6 @@ void	doublecheckelements(t_data *data)
 	// {
 	// 	/* code */
 	// }
-	
 }
 
 // bool check_correct_path(t_data *data)
@@ -147,5 +146,5 @@ void	doublecheckelements(t_data *data)
 // 	{
 // 		/* code */
 // 	}
-	
+
 // }

@@ -12,7 +12,7 @@
 
 #include "../../includes/cub3d.h"
 
-int handle_keypress(int keysym, t_data *data)
+int	handle_keypress(int keysym, t_data *data)
 {
 	if (keysym == XK_Escape)
 	{
@@ -21,33 +21,33 @@ int handle_keypress(int keysym, t_data *data)
 		free(data->window.mlx);
 		exit(0);
 	}
-    if (keysym == XK_Up)
-    {
-        data->player.px += data->player.pdx;
-        data->player.py += data->player.pdy;
-    }
-    if (keysym == XK_Down)
-     {
-        data->player.px -= data->player.pdx;
-        data->player.py -= data->player.pdy;
-    }
-    if (keysym == XK_Left)
-    {
-        data->player.pa -= 0.1;
-        if (data->player.pa < 0)
-            data->player.pa += 2 * PI;
-        data->player.pdx = cos(data->player.pa) * 5;
-        data->player.pdy = sin(data->player.pa) * 5;
-    }
-    if (keysym == XK_Right)
-    {
-        data->player.pa += 0.1;
-        if (data->player.pa > 2 * PI)
-            data->player.pa -= 2 * PI;
-        data->player.pdx = cos(data->player.pa) * 5;
-        data->player.pdy = sin(data->player.pa) * 5;
-    }
-    render_minimap(data);
-    render_player(data);
+	if (keysym == XK_Up)
+	{
+		data->player.px += data->player.pdx;
+		data->player.py += data->player.pdy;
+	}
+	if (keysym == XK_Down)
+	{
+		data->player.px -= data->player.pdx;
+		data->player.py -= data->player.pdy;
+	}
+	if (keysym == XK_Left)
+	{
+		data->player.pa -= 0.1;
+		if (data->player.pa < 0)
+			data->player.pa += 2 * PI;
+		data->player.pdx = cos(data->player.pa) * 5;
+		data->player.pdy = sin(data->player.pa) * 5;
+	}
+	if (keysym == XK_Right)
+	{
+		data->player.pa += 0.1;
+		if (data->player.pa > 2 * PI)
+			data->player.pa -= 2 * PI;
+		data->player.pdx = cos(data->player.pa) * 5;
+		data->player.pdy = sin(data->player.pa) * 5;
+	}
+	render_minimap(data);
+	render_player(data);
 	return (0);
 }
