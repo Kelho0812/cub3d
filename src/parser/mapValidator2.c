@@ -51,16 +51,7 @@ void	set_rgb(t_data *data, t_rgb *rgb, char **line)
 		i = 0;
 		colors_array = ft_split(line_real[j], ',');
 		validate_number(data, colors_array, line);
-		while (colors_array != NULL && colors_array[i] != NULL)
-		{
-			if (rgb->R == -1)
-				rgb->R = ft_atoi(colors_array[i]);
-			else if (rgb->G == -1)
-				rgb->G = ft_atoi(colors_array[i]);
-			else if (rgb->B == -1)
-				rgb->B = ft_atoi(colors_array[i]);
-			i++;
-		}
+		assign_rgb(rgb, colors_array);
 		free_array2d((void **)colors_array);
 		j++;
 	}
@@ -90,6 +81,23 @@ void	validate_number(t_data *data, char **colors_array, char **line)
 			free_array2d((void **)line);
 			error_handler2(data, RGB_ERROR);
 		}
+		i++;
+	}
+}
+
+void	assign_rgb(t_rgb *rgb, char **colors_array)
+{
+	int	i;
+
+	i = 0;
+	while (colors_array != NULL && colors_array[i] != NULL)
+	{
+		if (rgb->R == -1)
+			rgb->R = ft_atoi(colors_array[i]);
+		else if (rgb->G == -1)
+			rgb->G = ft_atoi(colors_array[i]);
+		else if (rgb->B == -1)
+			rgb->B = ft_atoi(colors_array[i]);
 		i++;
 	}
 }

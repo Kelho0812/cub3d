@@ -183,6 +183,7 @@ bool					is_player(char *line);
 void					validate_number(t_data *data, char **colors_array,
 							char **line);
 void					doublecheckelements(t_data *data);
+void					assign_rgb(t_rgb *rgb, char **colors_array);
 
 // ERROR_HANDLERS
 typedef enum e_error
