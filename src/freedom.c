@@ -36,11 +36,9 @@ void	free_array2d(void **array)
 		return ;
 	while (array[i] != NULL)
 	{
-		printf("Freeing array[%d]\n", i); // Debug print
 		free(array[i]);
 		i++;
 	}
-	printf("Freeing array\n"); // Debug print
 	free(array);
 }
 
