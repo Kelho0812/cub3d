@@ -21,7 +21,7 @@ void	print_colored_map(char **map)
 	while (map != NULL && map[i] != NULL)
 	{
 		j = 0;
-		while (map != NULL && map[i] != NULL &&map[i][j] != '\0')
+		while (map != NULL && map[i] != NULL && map[i][j] != '\0')
 		{
 			if (map[i][j] == '1')
 				printf("\033[0;31m%c\033[0m", map[i][j]);

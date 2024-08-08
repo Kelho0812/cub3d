@@ -24,7 +24,7 @@ int	get_array_size(char **line_array)
 	return (i);
 }
 
-void	updateElementCount(t_data *data, char *first_word)
+void	update_element_count(t_data *data, char *first_word)
 {
 	if (first_word)
 	{
@@ -47,17 +47,6 @@ void	updateElementCount(t_data *data, char *first_word)
 	}
 }
 
-void	free_mapi(char **map, int rows)
-{
-	int	i;
-
-	for (i = 0; i < rows + 2; i++)
-	{
-		free(map[i]);
-	}
-	free(map);
-}
-
 void	check_path(char **map, t_data *data)
 {
 	char	**spaced_map;
@@ -67,7 +56,6 @@ void	check_path(char **map, t_data *data)
 
 	get_map_dimensions(map, &rows, &cols);
 	spaced_map = duplicate_map_with_border(map, rows, cols);
-	// print_colored_map(data->map.full_map_array);
 	can_reach_space_or_tab = dfs(spaced_map, data->player.py + 1,
 			data->player.px + 1);
 	free_mapi(spaced_map, rows);
@@ -76,7 +64,6 @@ void	check_path(char **map, t_data *data)
 		free_map_array(data->map.full_map_array);
 		error_handler4(data, MAP_HOLE);
 	}
-	// print_result_and_exit(can_reach_space_or_tab);
 }
 
 char	**copy_map_from_index(t_data *data, int start_index)
@@ -88,14 +75,16 @@ char	**copy_map_from_index(t_data *data, int start_index)
 
 	map_array = data->map.full_file_array;
 	num_lines = 0;
+	i = 0;
 	while (map_array[start_index + num_lines] != NULL)
 	{
 		num_lines++;
 	}
 	new_map_array = (char **)calloc((num_lines + 1), sizeof(char *));
-	for (i = 0; i < num_lines; i++)
+	while (i < num_lines)
 	{
 		new_map_array[i] = ft_strdup(map_array[start_index + i]);
+		i++;
 	}
 	new_map_array[num_lines] = NULL;
 	return (new_map_array);

@@ -60,7 +60,7 @@ void	handle_player_char(t_data *data, int *player_count, int i, int j,
 bool	is_player(char *line)
 {
 	if (is_north(line) || is_south(line) || is_west(line) || is_east(line))
-		return true;
+		return (true);
 	else
-		return false;
+		return (false);
 }

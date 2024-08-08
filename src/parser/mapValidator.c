@@ -96,21 +96,6 @@ bool	check_element_count(t_data *data)
 		return (true);
 }
 
-void	free_map_array(char **map_array)
-{
-	int	i;
-
-	i = 0;
-	if (map_array == NULL)
-		return ;
-	while (map_array[i] != NULL)
-	{
-		free(map_array[i]);
-		i++;
-	}
-	free(map_array);
-}
-
 void	validate_and_copy_map(t_data *data)
 {
 	int		i;
@@ -124,27 +109,3 @@ void	validate_and_copy_map(t_data *data)
 	check_path(data->map.full_map_array, data);
 	free_map_array(data->map.full_map_array);
 }
-
-bool	is_player_char(char c)
-{
-	return (c == 'N' || c == 'S' || c == 'W' || c == 'E');
-}
-
-void	doublecheckelements(t_data *data)
-{
-	if (!check_element_count(data))
-		error_handler2(data, NOT_ENOUGH_ELEMENTS);
-	// if (/* condition */)
-	// {
-	// 	/* code */
-	// }
-}
-
-// bool check_correct_path(t_data *data)
-// {
-// 	if (ft_strncmp(data->map.north_texture, "textures/north.xpm"))
-// 	{
-// 		/* code */
-// 	}
-
-// }

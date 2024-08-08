@@ -144,12 +144,12 @@ void					validate_elements(t_data *data,
 void					textures_correct_format(t_data *data);
 bool					is_digit_multiple(char *digit);
 int						get_array_size(char **line_array);
-void					verifyWordSequence(t_data *data,
+void					verify_word_sequence(t_data *data,
 							char **line_words_array);
-void					validateLineOrder(t_data *data,
+void					validate_line_order(t_data *data,
 							char **line_words_array);
 void					free_map_array(char **map_array);
-void					updateElementCount(t_data *data, char *first_word);
+void					update_element_count(t_data *data, char *first_word);
 void					check_wrong_chars(t_data *data, char **map_lines,
 							int i);
 int						check_map_start(t_data *data);
@@ -177,10 +177,10 @@ void					get_map_dimensions(char **map, int *rows, int *cols);
 void					print_result_and_exit(bool can_reach_space_or_tab);
 char					**allocate_and_initialize_map(int rows, int cols);
 void					copy_original_map(char **new_map, char **map, int rows);
-void					validateWords(t_data *data, char **line_words_array);
+void					validate_words(t_data *data, char **line_words_array);
 bool					check_element_count(t_data *data);
 bool					is_player(char *line);
-void					validateNumber(t_data *data, char **colors_array,
+void					validate_number(t_data *data, char **colors_array,
 							char **line);
 void					doublecheckelements(t_data *data);
 
@@ -211,6 +211,7 @@ void					error_handler4(t_data *data, t_error error);
 void					william_wallace(t_data *data);
 void					free_map(t_data *data);
 void					free_array2d(void **pnts);
+void					free_mapi(char **map, int rows);
 
 // other
 void					init_data(t_data *data);

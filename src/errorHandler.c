@@ -71,7 +71,6 @@ void	error_handler2(t_data *data, t_error error)
 	}
 }
 
-
 void	error_handler3(t_data *data, t_error error)
 {
 	if (error == TEXTURE_ORDER)
@@ -120,5 +119,4 @@ void	error_handler4(t_data *data, t_error error)
 		printf(RED "HOLE IN DA MAP" RESET "\n");
 		exit(1);
 	}
-
 }

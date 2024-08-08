@@ -27,6 +27,21 @@ void	free_map(t_data *data)
 		free(map->east_texture);
 }
 
+void	free_map_array(char **map_array)
+{
+	int	i;
+
+	i = 0;
+	if (map_array == NULL)
+		return ;
+	while (map_array[i] != NULL)
+	{
+		free(map_array[i]);
+		i++;
+	}
+	free(map_array);
+}
+
 void	free_array2d(void **array)
 {
 	int	i;
@@ -46,4 +61,17 @@ void	william_wallace(t_data *data)
 {
 	free_array2d((void **)data->map.full_file_array);
 	free_map(data);
+}
+
+void	free_mapi(char **map, int rows)
+{
+	int	i;
+
+	i = 0;
+	while (i < rows + 2)
+	{
+		free(map[i]);
+		i++;
+	}
+	free(map);
 }

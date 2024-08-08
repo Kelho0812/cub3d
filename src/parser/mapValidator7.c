@@ -14,13 +14,13 @@
 
 void	validate_elements(t_data *data, char **line_words_array)
 {
-	validateWords(data, line_words_array);
-	updateElementCount(data, line_words_array[0]);
-	verifyWordSequence(data, line_words_array);
-	validateLineOrder(data, line_words_array);
+	validate_words(data, line_words_array);
+	update_element_count(data, line_words_array[0]);
+	verify_word_sequence(data, line_words_array);
+	validate_line_order(data, line_words_array);
 }
 
-void	validateWords(t_data *data, char **line_words_array)
+void	validate_words(t_data *data, char **line_words_array)
 {
 	char	*line;
 
@@ -65,7 +65,7 @@ int	check_map_start(t_data *data)
 	return (0);
 }
 
-void	verifyWordSequence(t_data *data, char **line_array)
+void	verify_word_sequence(t_data *data, char **line_array)
 {
 	if (line_array != NULL && line_array[0] != NULL && is_player(line_array[0])
 		&& get_array_size(line_array) != 2)
@@ -82,7 +82,7 @@ void	verifyWordSequence(t_data *data, char **line_array)
 	}
 }
 
-void	validateLineOrder(t_data *data, char **line_words_array)
+void	validate_line_order(t_data *data, char **line_words_array)
 {
 	if (line_words_array != NULL && line_words_array[0] != NULL
 		&& ft_isdigit(line_words_array[0][0]) && !check_element_count(data))
