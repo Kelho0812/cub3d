@@ -36,4 +36,5 @@ void	init_player(t_player *player)
 {
 	player->px = -1;
 	player->py = -1;
+	//#TODO Add Direction
 }
