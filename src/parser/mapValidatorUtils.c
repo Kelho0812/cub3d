@@ -10,8 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-//#TODO Add errors when reading the texture path
-
 #include "../../includes/cub3d.h"
 
 bool	is_north(char *line)
