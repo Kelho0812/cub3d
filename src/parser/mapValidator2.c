@@ -41,14 +41,12 @@ void	set_rgb(t_data *data, t_rgb *rgb, char **line)
 {
 	char	**colors_array;
 	char	**line_real;
-	int		i;
 	int		j;
 
 	j = 1;
 	line_real = line;
 	while (line_real[j] != NULL && line_real[j][0] != '\0')
 	{
-		i = 0;
 		colors_array = ft_split(line_real[j], ',');
 		validate_number(data, colors_array, line);
 		assign_rgb(rgb, colors_array);
