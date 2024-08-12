@@ -20,9 +20,6 @@ int	main(int argc, char **argv)
 		error_handler(WRONG_ARG_NUM);
 	init_data(&data);
 	parse_and_validate_map(argv[1], &data);
-	printf("%d,", data.map.ceiling_color.R);
-	printf("%d,", data.map.ceiling_color.G);
-	printf("%d\n", data.map.ceiling_color.B);
 	// open_window(&data);
 	// render_minimap(&data);
 	// render_player(&data);
@@ -40,6 +37,7 @@ void	init_data(t_data *data)
 void	open_window(t_data *data)
 {
 	data->window.mlx = mlx_init();
+	//#TODO Read textures & check validity
 	data->window.mlx_win = mlx_new_window(data->window.mlx, WIDTH, HEIGHT,
 			"Cub3d - MegaBosses");
 	data->minimap.xpm_texture = mlx_xpm_file_to_image(data->window.mlx,
