@@ -30,19 +30,13 @@ char	**map_parser(int fd, int i, int count, char *map_path)
 {
 	char	**lines;
 	char	*line;
-	int		max_col;
-	int		size;
 
-	max_col = 0;
 	line = get_next_line(fd);
 	if (!line)
 		error_handler(EMPTY_MAP);
 	while (line)
 	{
 		count++;
-		size = ft_strlen(line);
-		if (max_col < size)
-			max_col = size;
 		free(line);
 		line = get_next_line(fd);
 	}
