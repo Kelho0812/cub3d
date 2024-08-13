@@ -57,6 +57,14 @@ void	handle_player_char(t_data *data, int *player_count, int i, int j,
 	{
 		data->player.px = j;
 		data->player.py = i - wowzers;
+		if (data->map.full_file_array[i][j] == 'N')
+			data->player.direction = N;
+		else if (data->map.full_file_array[i][j] == 'S')
+			data->player.direction = S;
+		else if (data->map.full_file_array[i][j] == 'E')
+			data->player.direction = E;
+		else if (data->map.full_file_array[i][j] == 'W')
+			data->player.direction = W;
 		(*player_count)++;
 	}
 	else

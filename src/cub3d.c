@@ -20,6 +20,7 @@ int	main(int argc, char **argv)
 		error_handler(WRONG_ARG_NUM);
 	init_data(&data);
 	parse_and_validate_map(argv[1], &data);
+	printf("%d", data.player.direction);
 	open_window(&data);
 	// render_minimap(&data);
 	// render_player(&data);

@@ -76,6 +76,14 @@ typedef struct s_dist
 	float				distT;
 }						t_dist;
 
+typedef enum e_direction
+{
+	N,
+	S,
+	E,
+	W
+}						t_direction;
+
 typedef struct s_player
 {
 	float				px;
@@ -83,6 +91,7 @@ typedef struct s_player
 	float				py;
 	float				pdy;
 	float				pa;
+	t_direction			direction;
 }						t_player;
 
 typedef struct s_map_dimensions
