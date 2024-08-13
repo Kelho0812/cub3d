@@ -53,7 +53,7 @@ char	**map_parser(int fd, int i, int count, char *map_path)
 	line = get_next_line(fd);
 	while (line)
 	{
-		lines[i++] = ft_strdup_dif(line, size);
+		lines[i++] = ft_strdup(line);
 		free(line);
 		line = get_next_line(fd);
 	}
