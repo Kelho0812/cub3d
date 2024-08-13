@@ -178,7 +178,6 @@ void					init_map(t_map *map);
 char					**map_parser(int fd, int i, int count, char *map_path);
 void					validate_elements(t_data *data,
 							char **line_words_array);
-void					textures_correct_format(t_data *data);
 bool					is_digit_multiple(char *digit);
 int						get_array_size(char **line_array);
 void					verify_word_sequence(t_data *data,

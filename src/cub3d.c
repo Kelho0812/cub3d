@@ -85,6 +85,8 @@ void	open_window(t_data *data)
 {
 	data->window.mlx = mlx_init();
 	check_textures(data);
+	mlx_destroy_display(data->window.mlx);
+	free(data->window.mlx);
 	// get_data_textures(data);
 	// get_direction(data);
 	// data->window.mlx_win = mlx_new_window(data->window.mlx, WIDTH, HEIGHT, "Cub3d - MegaBosses");
