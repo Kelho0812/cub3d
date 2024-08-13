@@ -19,15 +19,17 @@ void	my_pixel_put(int x, int y, int color, t_data *data)
 	ptr = NULL;
 	if (x <= WIDTH && x >= 0 && y <= HEIGHT && y >= 0)
 	{
-		ptr = data->map.map_img.data + (x * (data->map.map_img.bpp / 8)) + (y * data->map.map_img.line_len);
+		ptr = data->map.map_img.data + (x * (data->map.map_img.bpp / 8)) + (y
+				* data->map.map_img.line_len);
 		*(unsigned int *)ptr = color;
 	}
 }
 
 void render_wall(int x, int y, t_data *data)
 {
-    int y1;
-    int x1;
+	int	y1;
+	int	x1;
+	int	color;
 
     y1 = 0;
     while (y1 < 12)
@@ -71,8 +73,8 @@ void render_floor(int x, int y, t_data *data)
 
 void	render_minimap(t_data *data)
 {
-    int y; 
-    int x;
+	int	y;
+	int	x;
 
     y = 0;
     x = 0;

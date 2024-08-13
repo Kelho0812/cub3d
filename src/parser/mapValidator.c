@@ -74,23 +74,20 @@ void	validate_and_copy_elements(t_data *data)
 		if (data->map.full_file_array[i][0] != '\0')
 		{
 			line_words_array = ft_split(trimmed_line, ' ');
+			free(trimmed_line);
 			if (line_words_array != NULL && line_words_array[0] != NULL
 				&& line_words_array[0][0] != '\0')
 			{
-				free(trimmed_line);
 				validate_elements(data, line_words_array);
 				copy_elements(data, line_words_array);
-				free_array2d((void **)(line_words_array));
 			}
+			free_array2d((void **)(line_words_array));
 		}
+		else
+			free(trimmed_line);
 		i++;
 	}
-	if ((data->map.no_count != 1 || data->map.so_count != 1
-			|| data->map.we_count != 1 || data->map.ea_count != 1
-			|| data->map.c_count != 1 || data->map.f_count != 1))
-	{
-		error_handler2(data, NOT_ENOUGH_ELEMENTS);
-	}
+	doublecheckelements(data);
 }
 
 bool	check_element_count(t_data *data)
@@ -114,9 +111,5 @@ void	validate_and_copy_map(t_data *data)
 	data->map.full_map_array = copy_map_from_index(data, i);
 	print_colored_map(data->map.full_map_array);
 	check_path(data->map.full_map_array, data);
-}
-
-bool	is_player_char(char c)
-{
-	return (c == 'N' || c == 'S' || c == 'W' || c == 'E');
+	free_map_array(data->map.full_map_array);
 }

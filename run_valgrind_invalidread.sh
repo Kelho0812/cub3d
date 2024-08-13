@@ -22,7 +22,7 @@ run_valgrind() {
     echo "Executando valgrind no arquivo: $map_file"
     valgrind --leak-check=full --show-leak-kinds=all ./cub3D "$map_file" &> "$log_file"
     
-    if grep -q -E "definitely lost|still reachable" "$log_file"; then
+    if grep -q -E "Invalid read" "$log_file"; then
         echo "Falha encontrada no arquivo: $map_file"
         echo "==== Falha no arquivo: $map_file ====" >> "$LOG_FILE"
         cat "$log_file" >> "$LOG_FILE"

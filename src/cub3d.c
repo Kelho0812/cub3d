@@ -20,9 +20,7 @@ int	main(int argc, char **argv)
 		error_handler(WRONG_ARG_NUM);
 	init_data(&data);
 	parse_and_validate_map(argv[1], &data);
-	printf("%d,", data.map.ceiling_color.R);
-	printf("%d,", data.map.ceiling_color.G);
-	printf("%d\n", data.map.ceiling_color.B);
+	printf("%d", data.player.direction);
 	open_window(&data);
 	create_background_buffer(&data);
 	render_map(&data);
@@ -42,6 +40,7 @@ void	init_data(t_data *data)
 void	open_window(t_data *data)
 {
 	data->window.mlx = mlx_init();
+	check_textures(data);
 	data->window.mlx_win = mlx_new_window(data->window.mlx, WIDTH, HEIGHT, "Cub3d - MegaBosses");
 	data->minimap.minimap_wall.texture = mlx_xpm_file_to_image(data->window.mlx, \
 		"./src/assets/wall_mini.xpm", &data->minimap.minimap_wall.width, &data->minimap.minimap_wall.height);
@@ -60,7 +59,7 @@ void	open_window(t_data *data)
 	data->game.rotate_speed = 0.05;
 }
 
-void handle_render(t_data *data)
+void	handle_render(t_data *data)
 {
 	mlx_hook(data->window.mlx_win, KeyPress, KeyPressMask, &handle_keypress, data);
 	mlx_hook(data->window.mlx_win, DestroyNotify, NoEventMask, &handle_close, data);
@@ -68,6 +67,7 @@ void handle_render(t_data *data)
 	mlx_hook(data->window.mlx_win, 6, 1L << 6, &handle_mouse_move, data);
 	mlx_loop(data->window.mlx);
 }
+
 
 // north:
 // 	data->player.dirX = 0;
@@ -93,3 +93,35 @@ void handle_render(t_data *data)
 // 		data->player.dirY = 0;
 // 		data->player.planeX = 0;
 // 		data->player.planeY = 0.66;
+
+void	check_textures(t_data *data)
+{
+	data->map.north_texture = mlx_xpm_file_to_image(data->window.mlx,
+			data->map.north_texture_path, &data->minimap.width,
+			&data->minimap.height);
+	data->map.south_texture = mlx_xpm_file_to_image(data->window.mlx,
+			data->map.south_texture_path, &data->minimap.width,
+			&data->minimap.height);
+	data->map.east_texture = mlx_xpm_file_to_image(data->window.mlx,
+			data->map.east_texture_path, &data->minimap.width,
+			&data->minimap.height);
+	data->map.west_texture = mlx_xpm_file_to_image(data->window.mlx,
+			data->map.west_texture_path, &data->minimap.width,
+			&data->minimap.height);
+	if (data->map.north_texture == NULL || data->map.south_texture == NULL
+		|| data->map.east_texture == NULL || data->map.west_texture == NULL)
+		error_handler4(data, TEXTURE_OPEN_ERROR);
+	destroy_images(data);
+}
+
+void	destroy_images(t_data *data)
+{
+	if (data->map.north_texture != NULL)
+		mlx_destroy_image(data->window.mlx, data->map.north_texture);
+	if (data->map.south_texture != NULL)
+		mlx_destroy_image(data->window.mlx, data->map.south_texture);
+	if (data->map.east_texture != NULL)
+		mlx_destroy_image(data->window.mlx, data->map.east_texture);
+	if (data->map.west_texture != NULL)
+		mlx_destroy_image(data->window.mlx, data->map.west_texture);
+}

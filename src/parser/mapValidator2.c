@@ -12,32 +12,6 @@
 
 #include "../../includes/cub3d.h"
 
-void	init_map(t_map *map)
-{
-	map->north_texture = NULL;
-	map->south_texture = NULL;
-	map->east_texture = NULL;
-	map->west_texture = NULL;
-	map->no_count = 0;
-	map->so_count = 0;
-	map->we_count = 0;
-	map->ea_count = 0;
-	map->c_count = 0;
-	map->f_count = 0;
-	map->ceiling_color.R = -1;
-	map->ceiling_color.B = -1;
-	map->ceiling_color.G = -1;
-	map->floor_color.R = -1;
-	map->floor_color.B = -1;
-	map->floor_color.G = -1;
-}
-
-void	init_player(t_player *player)
-{
-	player->px = -1;
-	player->py = -1;
-}
-
 bool	is_digit_multiple(char *digit)
 {
 	int	i;
@@ -67,38 +41,26 @@ void	set_rgb(t_data *data, t_rgb *rgb, char **line)
 {
 	char	**colors_array;
 	char	**line_real;
-	int		i;
 	int		j;
 
-	i = 0;
-	j = 0;
-	line_real = line + 1;
+	j = 1;
+	line_real = line;
 	while (line_real[j] != NULL && line_real[j][0] != '\0')
 	{
-		i = 0;
 		colors_array = ft_split(line_real[j], ',');
-		validateNumber(data, colors_array, line);
-		while (colors_array != NULL && colors_array[i] != NULL)
-		{
-			if (rgb->R == -1)
-				rgb->R = ft_atoi(colors_array[i]);
-			else if (rgb->G == -1)
-				rgb->G = ft_atoi(colors_array[i]);
-			else if (rgb->B == -1)
-				rgb->B = ft_atoi(colors_array[i]);
-			i++;
-		}
+		validate_number(data, colors_array, line);
+		assign_rgb(rgb, colors_array);
+		free_array2d((void **)colors_array);
 		j++;
 	}
 	if ((rgb->R == -1 || rgb->G == -1 || rgb->B == -1))
 	{
-		free_array2d((void **)colors_array);
+		free_array2d((void **)line);
 		error_handler2(data, RGB_ERROR);
 	}
-	free_array2d((void **)colors_array);
 }
 
-void	validateNumber(t_data *data, char **colors_array, char **line)
+void	validate_number(t_data *data, char **colors_array, char **line)
 {
 	int	i;
 
@@ -117,6 +79,23 @@ void	validateNumber(t_data *data, char **colors_array, char **line)
 			free_array2d((void **)line);
 			error_handler2(data, RGB_ERROR);
 		}
+		i++;
+	}
+}
+
+void	assign_rgb(t_rgb *rgb, char **colors_array)
+{
+	int	i;
+
+	i = 0;
+	while (colors_array != NULL && colors_array[i] != NULL)
+	{
+		if (rgb->R == -1)
+			rgb->R = ft_atoi(colors_array[i]);
+		else if (rgb->G == -1)
+			rgb->G = ft_atoi(colors_array[i]);
+		else if (rgb->B == -1)
+			rgb->B = ft_atoi(colors_array[i]);
 		i++;
 	}
 }

@@ -1,21 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   close_handlers.c                                   :+:      :+:    :+:   */
+/*   mapValidator9.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ruiolive  <ruiolive@student.42.fr   >      +#+  +:+       +#+        */
+/*   By: jorteixe  <jorteixe@student.42.fr   >      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/30 15:34:32 by ruiolive          #+#    #+#             */
-/*   Updated: 2024/07/30 15:34:32 by ruiolive         ###   ########.fr       */
+/*   Created: 2024/08/08 11:37:01 by jorteixe          #+#    #+#             */
+/*   Updated: 2024/08/08 11:37:01 by jorteixe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-int	handle_close(t_data *data)
+bool	is_player_char(char c)
 {
-	mlx_destroy_window(data->window.mlx, data->window.mlx_win);
-	mlx_destroy_display(data->window.mlx);
-	free(data->window.mlx);
-	exit(0);
+	return (c == 'N' || c == 'S' || c == 'W' || c == 'E');
+}
+
+void	doublecheckelements(t_data *data)
+{
+	if (!check_element_count(data))
+		error_handler2(data, NOT_ENOUGH_ELEMENTS);
 }

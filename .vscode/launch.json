@@ -6,14 +6,10 @@
 	"configurations": [
 		{
 			"name": "(gdb) Launch",
-			"type": "cppdbg",
+			"type": "cppbg",
 			"request": "launch",
 			"program": "${workspaceFolder}/cub3D",
-<<<<<<< HEAD
-			"args": ["./maps/good/dungeon.cub"],
-=======
-			"args": ["maps/valid/test_pos_right.cub"],
->>>>>>> origin/main
+			"args": ["./maps/valid/file_letter_end.cub"],
 			"stopAtEntry": false,
 			"cwd": "${workspaceFolder}",
 			"environment": [],

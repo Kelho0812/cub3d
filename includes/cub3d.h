@@ -15,7 +15,11 @@
 
 # include "./getNextLine/getNextLine.h"
 # include "./libft/libft.h"
+# include "./minilibx-linux/mlx.h"
+# include <X11/X.h>
+# include <X11/keysym.h>
 # include <fcntl.h>
+# include <math.h>
 # include <stdbool.h>
 # include <stdio.h>
 # include "./minilibx-linux/mlx.h"
@@ -41,12 +45,12 @@
 
 typedef struct s_img
 {
-	void	*mlx_img;
-	char	*data;
-	int		bpp;
-	int		line_len;
-	int		endian;
-}	t_img;
+	void				*mlx_img;
+	char				*data;
+	int					bpp;
+	int					line_len;
+	int					endian;
+}						t_img;
 
 typedef struct s_texture
 {
@@ -84,6 +88,14 @@ typedef struct s_camera
 	int	prev_y;
 }	t_camera;
 
+typedef enum e_direction
+{
+	N,
+	S,
+	E,
+	W
+}						t_direction;
+
 typedef struct s_player
 {
 	double					px;
@@ -92,6 +104,7 @@ typedef struct s_player
 	double					dirY;
 	double					planeX;
 	double					planeY;
+	t_direction			direction;
 }						t_player;
 
 
@@ -109,6 +122,8 @@ typedef struct s_rgb
 }						t_rgb;
 typedef struct s_map
 {
+	int					width;
+	int					height;
 	char				**full_file_array;
 	char				**full_map_array;
 	int					player_count;
@@ -118,10 +133,14 @@ typedef struct s_map
 	int					ea_count;
 	int					f_count;
 	int					c_count;
-	char				*north_texture;
-	char				*south_texture;
-	char				*west_texture;
-	char				*east_texture;
+	char				*north_texture_path;
+	char				*south_texture_path;
+	char				*west_texture_path;
+	char				*east_texture_path;
+	void				*north_texture;
+	void				*south_texture;
+	void				*east_texture;
+	void				*west_texture;
 	t_rgb				ceiling_color;
 	t_rgb				floor_color;
 	t_map_dimensions	dimensions;
@@ -138,9 +157,9 @@ typedef struct s_game
 
 typedef struct s_window
 {
-	void	*mlx;
-	void	*mlx_win;
-}				t_window;
+	void				*mlx;
+	void				*mlx_win;
+}						t_window;
 
 typedef struct s_data
 {
@@ -164,11 +183,12 @@ void					validate_elements(t_data *data,
 void					textures_correct_format(t_data *data);
 bool					is_digit_multiple(char *digit);
 int						get_array_size(char **line_array);
-void					verifyWordSequence(t_data *data,
+void					verify_word_sequence(t_data *data,
 							char **line_words_array);
-void					validateLineOrder(t_data *data,
+void					validate_line_order(t_data *data,
 							char **line_words_array);
-void					updateElementCount(t_data *data, char *first_word);
+void					free_map_array(char **map_array);
+void					update_element_count(t_data *data, char *first_word);
 void					check_wrong_chars(t_data *data, char **map_lines,
 							int i);
 int						check_map_start(t_data *data);
@@ -196,11 +216,14 @@ void					get_map_dimensions(char **map, int *rows, int *cols);
 void					print_result_and_exit(bool can_reach_space_or_tab);
 char					**allocate_and_initialize_map(int rows, int cols);
 void					copy_original_map(char **new_map, char **map, int rows);
-void					validateWords(t_data *data, char **line_words_array);
+void					validate_words(t_data *data, char **line_words_array);
 bool					check_element_count(t_data *data);
 bool					is_player(char *line);
-void					validateNumber(t_data *data, char **colors_array, char **line);
-
+void					validate_number(t_data *data, char **colors_array,
+							char **line);
+void					doublecheckelements(t_data *data);
+void					assign_rgb(t_rgb *rgb, char **colors_array);
+void					check_textures(t_data *data);
 
 // ERROR_HANDLERS
 typedef enum e_error
@@ -208,24 +231,29 @@ typedef enum e_error
 	WRONG_ARG_NUM,
 	WRONG_EXTENSION,
 	OPEN_MAP_ERROR,
-	TEXTURE_ERROR,
 	TEXTURE_ORDER,
 	RGB_ERROR,
 	WRONG_CHARS_MAP_ERROR,
 	NOT_ENOUGH_ELEMENTS,
 	EMPTY_MAP,
 	INVALID_WORD,
-	WRONG_FORMAT
+	WRONG_FORMAT,
+	MAP_HOLE,
+	TEXTURE_OPEN_ERROR
 }						t_error;
 
+void					print_error(char *error_msg);
 void					error_handler(t_error error);
 void					error_handler2(t_data *data, t_error error);
 void					error_handler3(t_data *data, t_error error);
+void					error_handler4(t_data *data, t_error error);
 
 // FREEDOM
 void					william_wallace(t_data *data);
 void					free_map(t_data *data);
 void					free_array2d(void **pnts);
+void					free_mapi(char **map, int rows);
+void					destroy_images(t_data *data);
 
 // other
 void					init_data(t_data *data);
@@ -234,14 +262,15 @@ char					*ft_strdup_dif(const char *s, int size);
 void					open_window(t_data *data);
 void					print_colored_map(char **map);
 void					render_minimap(t_data *data);
-void 					handle_render(t_data *data);
-void    				render_player(t_data *data);
-void					draw_line(float x, float y, float x1, float y1, t_data *data);
+void					handle_render(t_data *data);
+void					render_player(t_data *data);
+void					draw_line(float x, float y, float x1, float y1,
+							t_data *data);
 void					my_pixel_put(int x, int y, int color, t_data *data);
 void 					render_map(t_data *data);
 void 					create_background_buffer(t_data *data);
 
-//handlers
+// handlers
 
 int 					handle_keypress(int keysym, t_data *data);
 int 					handle_mouse_move(int x, int y, t_data *data);
