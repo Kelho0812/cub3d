@@ -15,6 +15,7 @@ int	handle_keypress(int keysym, t_data *data)
 {
 	if (keysym == XK_Escape)
 	{
+	    destroy_images(data);
 		mlx_destroy_window(data->window.mlx, data->window.mlx_win);
 		mlx_destroy_display(data->window.mlx);
         free(data->buffer_background);
@@ -57,33 +58,4 @@ int	handle_keypress(int keysym, t_data *data)
     render_minimap(data);
     render_player(data);
 	return (0);
-}
-
-
-int handle_mouse_move(int x, int y, t_data *data)
-{
-    if (data->camera.prev_x < x)
-    {
-        double oldDirX = data->player.dirX;
-        data->player.dirX = data->player.dirX * cos(data->game.rotate_speed) - data->player.dirY * sin(data->game.rotate_speed);
-        data->player.dirY = oldDirX * sin(data->game.rotate_speed) + data->player.dirY * cos(data->game.rotate_speed);
-        double oldPlaneX = data->player.planeX;
-        data->player.planeX = data->player.planeX * cos(data->game.rotate_speed) - data->player.planeY * sin(data->game.rotate_speed);
-        data->player.planeY = oldPlaneX * sin(data->game.rotate_speed) + data->player.planeY * cos(data->game.rotate_speed);
-    }
-    else if (data->camera.prev_x > x)
-    {
-        double oldDirX = data->player.dirX;
-        data->player.dirX = data->player.dirX * cos(-data->game.rotate_speed) - data->player.dirY * sin(-data->game.rotate_speed);
-        data->player.dirY = oldDirX * sin(-data->game.rotate_speed) + data->player.dirY * cos(-data->game.rotate_speed);
-        double oldPlaneX = data->player.planeX;
-        data->player.planeX = data->player.planeX * cos(-data->game.rotate_speed) - data->player.planeY * sin(-data->game.rotate_speed);
-        data->player.planeY = oldPlaneX * sin(-data->game.rotate_speed) + data->player.planeY * cos(-data->game.rotate_speed);
-    }
-    data->camera.prev_x = x;
-    data->camera.prev_y = y;
-    render_map(data);
-    render_minimap(data);
-    render_player(data);
-    return (0);
 }

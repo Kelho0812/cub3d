@@ -22,12 +22,16 @@ int	main(int argc, char **argv)
 	parse_and_validate_map(argv[1], &data);
 	printf("%d", data.player.direction);
 	open_window(&data);
-	// create_background_buffer(&data);
-	// render_map(&data);
-	// render_minimap(&data);
-	// render_player(&data);
-    // handle_render(&data);
+	create_background_buffer(&data);
+	render_map(&data);
+	render_minimap(&data);
+	render_player(&data);
+    handle_render(&data);
+	mlx_destroy_window(data.window.mlx, data.window.mlx_win);
+	mlx_destroy_display(data.window.mlx);
+	free(data.window.mlx);
 	william_wallace(&data);
+	free_map_array(data.map.full_map_array);
 	return (0);
 }
 
@@ -85,20 +89,18 @@ void	open_window(t_data *data)
 {
 	data->window.mlx = mlx_init();
 	check_textures(data);
-	mlx_destroy_display(data->window.mlx);
-	free(data->window.mlx);
-	// get_data_textures(data);
-	// get_direction(data);
-	// data->window.mlx_win = mlx_new_window(data->window.mlx, WIDTH, HEIGHT, "Cub3d - MegaBosses");
-	// data->minimap.minimap_wall.texture = mlx_xpm_file_to_image(data->window.mlx, 
-	// 	"./src/assets/wall_mini.xpm", &data->minimap.minimap_wall.width, &data->minimap.minimap_wall.height);
-	// data->minimap.minimap_wall.info_texture.data = mlx_get_data_addr(data->minimap.minimap_wall.texture, 
-	// 	&data->minimap.minimap_wall.info_texture.bpp, &data->minimap.minimap_wall.info_texture.line_len, &data->minimap.minimap_wall.info_texture.endian);
-	// data->camera.prev_x = 0;
-	// data->player.px += 0.5;
-	// data->player.py += 0.5;
-	// data->game.move_speed = 0.08;
-	// data->game.rotate_speed = 0.05;
+	get_data_textures(data);
+	get_direction(data);
+	data->window.mlx_win = mlx_new_window(data->window.mlx, WIDTH, HEIGHT, "Cub3d - MegaBosses");
+	data->minimap.minimap_wall.texture = mlx_xpm_file_to_image(data->window.mlx, 
+		"./src/assets/wall_mini.xpm", &data->minimap.minimap_wall.width, &data->minimap.minimap_wall.height);
+	data->minimap.minimap_wall.info_texture.data = mlx_get_data_addr(data->minimap.minimap_wall.texture, 
+		&data->minimap.minimap_wall.info_texture.bpp, &data->minimap.minimap_wall.info_texture.line_len, &data->minimap.minimap_wall.info_texture.endian);
+	data->camera.prev_x = 0;
+	data->player.px += 0.5;
+	data->player.py += 0.5;
+	data->game.move_speed = 0.08;
+	data->game.rotate_speed = 0.05;
 }
 
 void	handle_render(t_data *data)
@@ -106,7 +108,6 @@ void	handle_render(t_data *data)
 	mlx_hook(data->window.mlx_win, KeyPress, KeyPressMask, &handle_keypress, data);
 	mlx_hook(data->window.mlx_win, DestroyNotify, NoEventMask, &handle_close, data);
 	mlx_hook(data->window.mlx_win, DestroyNotify, NoEventMask, &handle_close, data);
-	mlx_hook(data->window.mlx_win, 6, 1L << 6, &handle_mouse_move, data);
 	mlx_loop(data->window.mlx);
 }
 
@@ -128,7 +129,6 @@ void	check_textures(t_data *data)
 		|| data->game.east_texture.texture == NULL || data->game.west_texture.texture == NULL)
 		error_handler4(data, TEXTURE_OPEN_ERROR);
 	// #TODO check width height
-	destroy_images(data);
 }
 
 void	destroy_images(t_data *data)

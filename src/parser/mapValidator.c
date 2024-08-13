@@ -105,5 +105,4 @@ void	validate_and_copy_map(t_data *data)
 	data->map.full_map_array = copy_map_from_index(data, i);
 	print_colored_map(data->map.full_map_array);
 	check_path(data->map.full_map_array, data);
-	free_map_array(data->map.full_map_array);
 }

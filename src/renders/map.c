@@ -53,7 +53,16 @@ void	draw_stripe(int lineHeight, int x, int side, t_data *data)
 	int texX;
 	int texY;
 	int color;
+	t_texture ptr;
 
+	if (side == 1 && data->rays.rayDirY < 0)
+		ptr = data->game.north_texture;
+	else if (side == 1 && data->rays.rayDirY > 0)
+		ptr = data->game.east_texture;
+	else if (side == 0 && data->rays.rayDirX < 0)
+		ptr = data->game.south_texture;
+	else if (side == 0 && data->rays.rayDirX > 0)
+		ptr = data->game.west_texture;
 	drawStart = -lineHeight / 2 + HEIGHT / 2;
 	if (drawStart < 0)
 		drawStart = 0;
@@ -77,12 +86,8 @@ void	draw_stripe(int lineHeight, int x, int side, t_data *data)
 	{
 		texY = (int)texPos & (data->game.north_texture.height - 1);
 		texPos += step;
-		color = *(int *)(data->game.north_texture.info_texture.data + texY \
-			* data->game.north_texture.info_texture.line_len + texX * (data->game.north_texture.info_texture.bpp / 8));
-		if (data->dist.perpWallDist > 5)
-			color = (color >> 2) & 8355711;
-		else if (data->dist.perpWallDist > 3)
-			color = (color >> 1) & 8355711;
+		color = *(int *)(ptr.info_texture.data + texY \
+			* ptr.info_texture.line_len + texX * (ptr.info_texture.bpp / 8));
 		my_pixel_put(x, i, color, data);
 		i++;
 	}

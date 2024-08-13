@@ -93,12 +93,14 @@ void	error_handler4(t_data *data, t_error error)
 	if (error == MAP_HOLE)
 	{
 		william_wallace(data);
+		free_map_array(data->map.full_map_array);
 		print_error("HOLE IN DA MAP");
 		exit(1);
 	}
 	if (error == TEXTURE_OPEN_ERROR)
 	{
 		william_wallace(data);
+		free_map_array(data->map.full_map_array);
 		destroy_images(data);
 		mlx_destroy_display(data->window.mlx);
 		free(data->window.mlx);
