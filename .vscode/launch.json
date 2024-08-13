@@ -6,10 +6,10 @@
 	"configurations": [
 		{
 			"name": "(gdb) Launch",
-			"type": "cppbg",
+			"type": "cppdbg",
 			"request": "launch",
 			"program": "${workspaceFolder}/cub3D",
-			"args": ["./maps/valid/file_letter_end.cub"],
+			"args": ["./maps/valid/map.cub"],
 			"stopAtEntry": false,
 			"cwd": "${workspaceFolder}",
 			"environment": [],

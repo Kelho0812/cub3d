@@ -65,20 +65,20 @@ void	draw_stripe(int lineHeight, int x, int side, t_data *data)
 	else
 		wallX = data->player.px + data->dist.perpWallDist * data->rays.rayDirX;
 	wallX -= floor((wallX));
-	texX = (int)(wallX * (double)data->minimap.game_wall.width);
+	texX = (int)(wallX * (double)data->game.north_texture.width);
 	if (side == 0 && data->rays.rayDirX > 0)
-		texX = data->minimap.game_wall.width - texX - 1;
+		texX = data->game.north_texture.width - texX - 1;
 	if (side == 1 && data->rays.rayDirY < 0)
-		texX = data->minimap.game_wall.width - texX - 1;
-	double step = 1.0 * data->minimap.game_wall.height / lineHeight;
+		texX = data->game.north_texture.width - texX - 1;
+	double step = 1.0 * data->game.north_texture.height / lineHeight;
 	double texPos = (drawStart - HEIGHT / 2 + lineHeight / 2) * step;
 	i = drawStart;
 	while (i < drawEnd)
 	{
-		texY = (int)texPos & (data->minimap.game_wall.height - 1);
+		texY = (int)texPos & (data->game.north_texture.height - 1);
 		texPos += step;
-		color = *(int *)(data->minimap.game_wall.info_texture.data + texY \
-			* data->minimap.game_wall.info_texture.line_len + texX * (data->minimap.game_wall.info_texture.bpp / 8));
+		color = *(int *)(data->game.north_texture.info_texture.data + texY \
+			* data->game.north_texture.info_texture.line_len + texX * (data->game.north_texture.info_texture.bpp / 8));
 		if (data->dist.perpWallDist > 5)
 			color = (color >> 2) & 8355711;
 		else if (data->dist.perpWallDist > 3)

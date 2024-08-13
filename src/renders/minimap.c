@@ -39,7 +39,7 @@ void render_wall(int x, int y, t_data *data)
         {
             if (x + x1 < WIDTH && y + y1 < HEIGHT)
             {
-                int color = *(int *)(data->minimap.minimap_wall.info_texture.data + y1 \
+                color = *(int *)(data->minimap.minimap_wall.info_texture.data + y1 \
                     * data->minimap.minimap_wall.info_texture.line_len + x1 * (data->minimap.minimap_wall.info_texture.bpp / 8));
                 my_pixel_put(x + x1, y + y1, color, data);
             }

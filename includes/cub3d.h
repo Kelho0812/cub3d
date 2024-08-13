@@ -122,8 +122,6 @@ typedef struct s_rgb
 }						t_rgb;
 typedef struct s_map
 {
-	int					width;
-	int					height;
 	char				**full_file_array;
 	char				**full_map_array;
 	int					player_count;
@@ -137,10 +135,6 @@ typedef struct s_map
 	char				*south_texture_path;
 	char				*west_texture_path;
 	char				*east_texture_path;
-	void				*north_texture;
-	void				*south_texture;
-	void				*east_texture;
-	void				*west_texture;
 	t_rgb				ceiling_color;
 	t_rgb				floor_color;
 	t_map_dimensions	dimensions;
@@ -153,6 +147,10 @@ typedef struct s_game
 	double				move_speed;
 	double				time;
 	double				oldtime;
+	t_texture			north_texture;
+	t_texture			south_texture;
+	t_texture			east_texture;
+	t_texture			west_texture;
 }			t_game;
 
 typedef struct s_window

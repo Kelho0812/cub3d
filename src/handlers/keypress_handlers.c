@@ -53,7 +53,6 @@ int	handle_keypress(int keysym, t_data *data)
         data->player.planeX = data->player.planeX * cos(data->game.rotate_speed) - data->player.planeY * sin(data->game.rotate_speed);
         data->player.planeY = oldPlaneX * sin(data->game.rotate_speed) + data->player.planeY * cos(data->game.rotate_speed);
     }
-    printf("DX: %lf\n DY: %lf\n PLX: %lf\n PLY: %lf\n", data->player.dirX, data->player.dirY, data->player.planeX, data->player.planeY);
     render_map(data);
     render_minimap(data);
     render_player(data);
@@ -66,20 +65,20 @@ int handle_mouse_move(int x, int y, t_data *data)
     if (data->camera.prev_x < x)
     {
         double oldDirX = data->player.dirX;
-        data->player.dirX = data->player.dirX * cos(-data->game.rotate_speed) - data->player.dirY * sin(-data->game.rotate_speed);
-        data->player.dirY = oldDirX * sin(-data->game.rotate_speed) + data->player.dirY * cos(-data->game.rotate_speed);
-        double oldPlaneX = data->player.planeX;
-        data->player.planeX = data->player.planeX * cos(-data->game.rotate_speed) - data->player.planeY * sin(-data->game.rotate_speed);
-        data->player.planeY = oldPlaneX * sin(-data->game.rotate_speed) + data->player.planeY * cos(-data->game.rotate_speed);
-    }
-    else if (data->camera.prev_x > x)
-    {
-        double oldDirX = data->player.dirX;
         data->player.dirX = data->player.dirX * cos(data->game.rotate_speed) - data->player.dirY * sin(data->game.rotate_speed);
         data->player.dirY = oldDirX * sin(data->game.rotate_speed) + data->player.dirY * cos(data->game.rotate_speed);
         double oldPlaneX = data->player.planeX;
         data->player.planeX = data->player.planeX * cos(data->game.rotate_speed) - data->player.planeY * sin(data->game.rotate_speed);
         data->player.planeY = oldPlaneX * sin(data->game.rotate_speed) + data->player.planeY * cos(data->game.rotate_speed);
+    }
+    else if (data->camera.prev_x > x)
+    {
+        double oldDirX = data->player.dirX;
+        data->player.dirX = data->player.dirX * cos(-data->game.rotate_speed) - data->player.dirY * sin(-data->game.rotate_speed);
+        data->player.dirY = oldDirX * sin(-data->game.rotate_speed) + data->player.dirY * cos(-data->game.rotate_speed);
+        double oldPlaneX = data->player.planeX;
+        data->player.planeX = data->player.planeX * cos(-data->game.rotate_speed) - data->player.planeY * sin(-data->game.rotate_speed);
+        data->player.planeY = oldPlaneX * sin(-data->game.rotate_speed) + data->player.planeY * cos(-data->game.rotate_speed);
     }
     data->camera.prev_x = x;
     data->camera.prev_y = y;
@@ -88,10 +87,3 @@ int handle_mouse_move(int x, int y, t_data *data)
     render_player(data);
     return (0);
 }
-
-// SUL
-// DX: 0.079121
-//  DY: 0.996865
-//  PX: 0.657931
-//  PY: -0.052220
-
