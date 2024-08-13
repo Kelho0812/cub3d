@@ -22,15 +22,17 @@
 # include <X11/keysym.h>
 # include <X11/X.h>
 # include <math.h>
+# include <unistd.h>
+# include <stdint.h>
+# include <time.h>
 
 # define RED "\033[1;31m"
 # define RESET "\033[0m"
 
-# define WIDTH 1920
-# define HEIGHT 1080
-# define BLOCK_SIZE 32
-# define MINIMAP_SIZE 16
-# define MAP_SIZE 64
+# define WIDTH 1204
+# define HEIGHT 960
+# define TEXTURE_SIZE 64
+# define MINIMAP_SIZE 12
 # define PLAYER_SIZE 10
 # define PI 3.141592
 # define P2 PI / 2
@@ -46,48 +48,52 @@ typedef struct s_img
 	int		endian;
 }	t_img;
 
-typedef struct s_minimap
+typedef struct s_texture
 {
-	t_img	wall;
-	t_img	floor;
-	void	*wall_texture;
-	void	*floor_texture;
+	t_img	info_texture;
+	void	*texture;
 	int		height;
 	int 	width;
+}				t_texture;
+
+typedef struct s_minimap
+{
+	t_texture	game_wall;
+	t_texture	minimap_wall;
 }				t_minimap;
 
 typedef struct s_ray
 {
-	float	atan;
-	float	ntan;
-	float	ry;
-	float	rx;
-	float	ystep;
-	float	xstep;
-    float   ra;
-	int		mx;
-	int		my;
+	double rayDirX;
+	double rayDirY;
+	double cameraX;
 }				t_ray;
 
 typedef struct s_dist
 {
-    int		hx;
-	int		hy;
-	int		vx;
-	int		vy;
-	float	distH;
-	float	distV;
-	float	distT;
+    double sideDistX;
+    double sideDistY;
+    double deltaDistX;
+    double deltaDistY;
+	double perpWallDist;
 }   t_dist;
+
+typedef struct s_camera
+{
+	int	prev_x;
+	int	prev_y;
+}	t_camera;
 
 typedef struct s_player
 {
-	float					px;
-	float					pdx;
-	float					py;
-	float					pdy;
-	float					pa;
+	double					px;
+	double					py;
+	double					dirX;
+	double					dirY;
+	double					planeX;
+	double					planeY;
 }						t_player;
+
 
 typedef struct s_map_dimensions
 {
@@ -103,8 +109,6 @@ typedef struct s_rgb
 }						t_rgb;
 typedef struct s_map
 {
-	int					width;
-	int					height;
 	char				**full_file_array;
 	char				**full_map_array;
 	int					player_count;
@@ -124,6 +128,14 @@ typedef struct s_map
 	t_img				map_img;
 }						t_map;
 
+typedef struct s_game 
+{
+	double				rotate_speed;
+	double				move_speed;
+	double				time;
+	double				oldtime;
+}			t_game;
+
 typedef struct s_window
 {
 	void	*mlx;
@@ -135,9 +147,12 @@ typedef struct s_data
 	t_map				map;
 	t_player			player;
 	t_window			window;
+	t_game				game;
 	t_minimap			minimap;
 	t_ray				rays;
 	t_dist				dist;
+	t_camera			camera;
+	unsigned int		*buffer_background;
 }						t_data;
 
 // PARSER
@@ -223,11 +238,13 @@ void 					handle_render(t_data *data);
 void    				render_player(t_data *data);
 void					draw_line(float x, float y, float x1, float y1, t_data *data);
 void					my_pixel_put(int x, int y, int color, t_data *data);
-void 					draw_fov(t_data *data);
+void 					render_map(t_data *data);
+void 					create_background_buffer(t_data *data);
 
 //handlers
 
 int 					handle_keypress(int keysym, t_data *data);
+int 					handle_mouse_move(int x, int y, t_data *data);
 int						handle_close(t_data *data);
 
 #endif

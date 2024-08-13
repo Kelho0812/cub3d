@@ -37,6 +37,7 @@ SOURCES := cub3d.c\
 			renders/minimap.c\
 			renders/bresenham.c\
 			renders/player.c\
+			renders/map.c\
 			handlers/close_handlers.c\
 			handlers/keypress_handlers.c\
 			utils/strdup_dif.c\

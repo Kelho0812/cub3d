@@ -30,14 +30,15 @@ void render_wall(int x, int y, t_data *data)
     int x1;
 
     y1 = 0;
-    while (y1 < data->minimap.height)
+    while (y1 < 12)
     {
         x1 = 0;
-        while (x1 < data->minimap.width)
+        while (x1 < 12)
         {
             if (x + x1 < WIDTH && y + y1 < HEIGHT)
             {
-                int color = *(int *)(data->minimap.wall.data + y1 * data->minimap.wall.line_len + x1 * (data->minimap.wall.bpp / 8));
+                int color = *(int *)(data->minimap.minimap_wall.info_texture.data + y1 \
+                    * data->minimap.minimap_wall.info_texture.line_len + x1 * (data->minimap.minimap_wall.info_texture.bpp / 8));
                 my_pixel_put(x + x1, y + y1, color, data);
             }
             x1++;
@@ -52,14 +53,14 @@ void render_floor(int x, int y, t_data *data)
     int x1;
 
     y1 = 0;
-    while (y1 < data->minimap.height)
+    while (y1 < 12)
     {
         x1 = 0;
-        while (x1 < data->minimap.width)
+        while (x1 < 12)
         {
+            int color =  data->map.floor_color.R << 16 | data->map.floor_color.G << 8 | data->map.floor_color.B;
             if (x + x1 < WIDTH && y + y1 < HEIGHT)
             {
-                int color = *(int *)(data->minimap.floor.data + y1 * data->minimap.floor.line_len + x1 * (data->minimap.floor.bpp / 8));
                 my_pixel_put(x + x1, y + y1, color, data);
             }
             x1++;
@@ -75,25 +76,17 @@ void	render_minimap(t_data *data)
 
     y = 0;
     x = 0;
-    data->map.map_img.mlx_img = mlx_new_image(data->window.mlx, WIDTH, HEIGHT);
-	data->map.map_img.data = mlx_get_data_addr(data->map.map_img.mlx_img, &data->map.map_img.bpp, &data->map.map_img.line_len, &data->map.map_img.endian);
-    data->map.width = 0;
     while (data->map.full_map_array[y])
     {
         x = 0;
         while (data->map.full_map_array[y][x])
         {
-            // if (data->map.full_map_array[y][x] == '1')
-            //     render_wall(x * BLOCK_SIZE, y * BLOCK_SIZE, data);
-            // else
-            //     render_floor(x * BLOCK_SIZE, y * BLOCK_SIZE, data);
+            if (data->map.full_map_array[y][x] == '1')
+                render_wall(x * MINIMAP_SIZE, y * MINIMAP_SIZE, data);
+            else
+                render_floor(x * MINIMAP_SIZE, y * MINIMAP_SIZE, data);
             x++;
         }
-        if (data->map.width < x)
-            data->map.width = x;
         y++;
     }
-    data->map.height = y;
-    // printf("%d\n", data->map.width);
-    // printf("%d\n", data->map.height);
 }
