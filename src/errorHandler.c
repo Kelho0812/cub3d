@@ -119,4 +119,12 @@ void	error_handler4(t_data *data, t_error error)
 		printf(RED "HOLE IN DA MAP" RESET "\n");
 		exit(1);
 	}
+	if (error == TEXTURE_OPEN_ERROR)
+	{
+		william_wallace(data);
+		free(data->window.mlx);
+		printf(RED "ERROR" RESET "\n");
+		printf(RED "Textures couldn't be loaded." RESET "\n");
+		exit(1);
+	}
 }

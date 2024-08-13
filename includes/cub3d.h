@@ -184,6 +184,7 @@ void					validate_number(t_data *data, char **colors_array,
 							char **line);
 void					doublecheckelements(t_data *data);
 void					assign_rgb(t_rgb *rgb, char **colors_array);
+void					check_textures(t_data *data);
 
 // ERROR_HANDLERS
 typedef enum e_error
@@ -200,7 +201,8 @@ typedef enum e_error
 	INVALID_WORD,
 	WRONG_FORMAT,
 	WRONG_IMAGE,
-	MAP_HOLE
+	MAP_HOLE,
+	TEXTURE_OPEN_ERROR
 }						t_error;
 
 void					error_handler(t_error error);
