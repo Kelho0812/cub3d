@@ -38,6 +38,8 @@ void	open_window(t_data *data)
 {
 	data->window.mlx = mlx_init();
 	check_textures(data);
+	mlx_destroy_display(data->window.mlx);
+	free(data->window.mlx);
 	// data->window.mlx_win = mlx_new_window(data->window.mlx, WIDTH, HEIGHT,
 	// 		"Cub3d - MegaBosses");
 	// data->minimap.xpm_texture = mlx_xpm_file_to_image(data->window.mlx,
@@ -62,20 +64,32 @@ void	handle_render(t_data *data)
 
 void	check_textures(t_data *data)
 {
-	void	*north;
-	void	*south;
-	void	*east;
-	void	*west;
-
-	printf("%s\n", data->map.north_texture);
-	north = mlx_xpm_file_to_image(data->window.mlx, data->map.north_texture,
-			&data->minimap.width, &data->minimap.height);
-	south = mlx_xpm_file_to_image(data->window.mlx, data->map.south_texture,
-			&data->minimap.width, &data->minimap.height);
-	east = mlx_xpm_file_to_image(data->window.mlx, data->map.east_texture,
-			&data->minimap.width, &data->minimap.height);
-	west = mlx_xpm_file_to_image(data->window.mlx, data->map.west_texture,
-			&data->minimap.width, &data->minimap.height);
-	if (north == NULL || south == NULL || east == NULL || west == NULL)
+	data->map.north_texture = mlx_xpm_file_to_image(data->window.mlx,
+			data->map.north_texture_path, &data->minimap.width,
+			&data->minimap.height);
+	data->map.south_texture = mlx_xpm_file_to_image(data->window.mlx,
+			data->map.south_texture_path, &data->minimap.width,
+			&data->minimap.height);
+	data->map.east_texture = mlx_xpm_file_to_image(data->window.mlx,
+			data->map.east_texture_path, &data->minimap.width,
+			&data->minimap.height);
+	data->map.west_texture = mlx_xpm_file_to_image(data->window.mlx,
+			data->map.west_texture_path, &data->minimap.width,
+			&data->minimap.height);
+	if (data->map.north_texture == NULL || data->map.south_texture == NULL
+		|| data->map.east_texture == NULL || data->map.west_texture == NULL)
 		error_handler4(data, TEXTURE_OPEN_ERROR);
+	destroy_images(data);
+}
+
+void	destroy_images(t_data *data)
+{
+	if (data->map.north_texture != NULL)
+		mlx_destroy_image(data->window.mlx, data->map.north_texture);
+	if (data->map.south_texture != NULL)
+		mlx_destroy_image(data->window.mlx, data->map.south_texture);
+	if (data->map.east_texture != NULL)
+		mlx_destroy_image(data->window.mlx, data->map.east_texture);
+	if (data->map.west_texture != NULL)
+		mlx_destroy_image(data->window.mlx, data->map.west_texture);
 }

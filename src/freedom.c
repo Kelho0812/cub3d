@@ -17,14 +17,14 @@ void	free_map(t_data *data)
 	t_map	*map;
 
 	map = &data->map;
-	if (map->north_texture != NULL)
-		free(map->north_texture);
-	if (map->south_texture != NULL)
-		free(map->south_texture);
-	if (map->west_texture != NULL)
-		free(map->west_texture);
-	if (map->east_texture != NULL)
-		free(map->east_texture);
+	if (map->north_texture_path != NULL)
+		free(map->north_texture_path);
+	if (map->south_texture_path != NULL)
+		free(map->south_texture_path);
+	if (map->west_texture_path != NULL)
+		free(map->west_texture_path);
+	if (map->east_texture_path != NULL)
+		free(map->east_texture_path);
 }
 
 void	free_map_array(char **map_array)

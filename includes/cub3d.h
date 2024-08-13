@@ -110,10 +110,14 @@ typedef struct s_map
 	int					ea_count;
 	int					f_count;
 	int					c_count;
-	char				*north_texture;
-	char				*south_texture;
-	char				*west_texture;
-	char				*east_texture;
+	char				*north_texture_path;
+	char				*south_texture_path;
+	char				*west_texture_path;
+	char				*east_texture_path;
+	void				*north_texture;
+	void				*south_texture;
+	void				*east_texture;
+	void				*west_texture;
 	t_rgb				ceiling_color;
 	t_rgb				floor_color;
 	t_map_dimensions	dimensions;
@@ -192,7 +196,6 @@ typedef enum e_error
 	WRONG_ARG_NUM,
 	WRONG_EXTENSION,
 	OPEN_MAP_ERROR,
-	TEXTURE_ERROR,
 	TEXTURE_ORDER,
 	RGB_ERROR,
 	WRONG_CHARS_MAP_ERROR,
@@ -200,11 +203,11 @@ typedef enum e_error
 	EMPTY_MAP,
 	INVALID_WORD,
 	WRONG_FORMAT,
-	WRONG_IMAGE,
 	MAP_HOLE,
 	TEXTURE_OPEN_ERROR
 }						t_error;
 
+void					print_error(char *error_msg);
 void					error_handler(t_error error);
 void					error_handler2(t_data *data, t_error error);
 void					error_handler3(t_data *data, t_error error);
@@ -215,6 +218,7 @@ void					william_wallace(t_data *data);
 void					free_map(t_data *data);
 void					free_array2d(void **pnts);
 void					free_mapi(char **map, int rows);
+void					destroy_images(t_data *data);
 
 // other
 void					init_data(t_data *data);

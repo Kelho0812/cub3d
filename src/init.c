@@ -14,10 +14,10 @@
 
 void	init_map(t_map *map)
 {
-	map->north_texture = NULL;
-	map->south_texture = NULL;
-	map->east_texture = NULL;
-	map->west_texture = NULL;
+	map->north_texture_path = NULL;
+	map->south_texture_path = NULL;
+	map->east_texture_path = NULL;
+	map->west_texture_path = NULL;
 	map->no_count = 0;
 	map->so_count = 0;
 	map->we_count = 0;
