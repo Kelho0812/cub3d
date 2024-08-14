@@ -257,7 +257,6 @@ void					init_data(t_data *data);
 void					init_player(t_player *player);
 void					print_colored_map(char **map);
 
-
 //game
 void					play_game(t_data *data);
 void 					render_game(t_data *data);
