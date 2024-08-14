@@ -88,16 +88,56 @@ void	draw_stripe(t_dda_values dda_values, int x, t_data *data)
 
 void	render_background(t_data *data)
 {
-	int	x;
-	int	y;
+	int 	y;
+	int		x;
+	int		p;
+	int		color;
+	float	rayDirX0;
+	float	rayDirX1;
+	float	rayDirY0;
+	float	rayDirY1;
+	float	posZ;
+	float	rowDistance;
+	float 	floorStepY;
+	float	floorStepX;
+	float 	floorX;
+	float 	floorY;
+	int		cellX;
+	int		cellY;
+	int		tx;
+	int		ty;
 
 	y = 0;
 	while (y < HEIGHT)
 	{
+		rayDirX0 = data->player.dir_x - data->player.plane_x;
+		rayDirY0 = data->player.dir_y - data->player.plane_y;
+		rayDirX1 = data->player.dir_x + data->player.plane_x;
+		rayDirY1 = data->player.dir_y + data->player.plane_y;
+		p = y - HEIGHT / 2;
+		posZ = 0.5 * HEIGHT;
+		rowDistance = posZ / p;
+		floorStepX = rowDistance * (rayDirX1 - rayDirX0) / WIDTH;
+		floorStepY = rowDistance * (rayDirY1 - rayDirY0) / WIDTH;
+		floorX = data->player.px + rowDistance * rayDirX0;
+		floorY = data->player.py + rowDistance * rayDirY0;
 		x = 0;
 		while (x < WIDTH)
 		{
-			my_pixel_put(x, y, data->buffer_background[y * WIDTH + x], data);
+			cellX = (int)(floorX);
+			cellY = (int)(floorY);
+			tx = (int)(data->game.floor_texture.width * (floorX - cellX)) & (data->game.floor_texture.width - 1);
+			ty = (int)(data->game.floor_texture.height * (floorY - cellY)) & (data->game.floor_texture.height - 1);
+			color = *(int *)(data->game.floor_texture.info_texture.data + ty
+				* data->game.floor_texture.info_texture.line_len + tx
+				* (data->game.floor_texture.info_texture.bpp / 8));
+			my_pixel_put(x, y, color, data);
+			color = *(int *)(data->game.celling_texture.info_texture.data + ty
+				* data->game.celling_texture.info_texture.line_len + tx
+				* (data->game.celling_texture.info_texture.bpp / 8));
+			my_pixel_put(x, HEIGHT - y - 1, color, data);
+			floorX += floorStepX;
+			floorY += floorStepY;
 			x++;
 		}
 		y++;

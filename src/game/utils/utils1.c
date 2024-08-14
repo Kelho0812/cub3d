@@ -43,10 +43,18 @@ void	check_textures(t_data *data)
 	data->game.west_texture.texture = mlx_xpm_file_to_image(data->window.mlx,
 			data->map.west_texture_path, &data->game.west_texture.width,
 			&data->game.west_texture.height);
+	data->game.celling_texture.texture = mlx_xpm_file_to_image(data->window.mlx,
+			"./textures/celling.xpm", &data->game.celling_texture.width,
+			&data->game.celling_texture.height);
+	data->game.floor_texture.texture = mlx_xpm_file_to_image(data->window.mlx,
+			"./textures/floor.xpm", &data->game.floor_texture.width,
+			&data->game.floor_texture.height);
 	if (data->game.north_texture.texture == NULL
 		|| data->game.south_texture.texture == NULL
 		|| data->game.east_texture.texture == NULL
-		|| data->game.west_texture.texture == NULL)
+		|| data->game.west_texture.texture == NULL
+		|| data->game.celling_texture.texture == NULL
+		|| data->game.floor_texture.texture == NULL)
 		error_handler4(data, TEXTURE_OPEN_ERROR);
 	if (!check_dimension_texture(data))
 		error_handler4(data, TEXTURE_OPEN_ERROR);
@@ -112,4 +120,14 @@ void	get_data_textures(t_data *data)
 			&data->game.west_texture.info_texture.bpp,
 			&data->game.west_texture.info_texture.line_len,
 			&data->game.west_texture.info_texture.endian);
+	data->game.celling_texture.info_texture.data = mlx_get_data_addr(
+			data->game.celling_texture.texture,
+			&data->game.celling_texture.info_texture.bpp,
+			&data->game.celling_texture.info_texture.line_len,
+			&data->game.celling_texture.info_texture.endian);
+	data->game.floor_texture.info_texture.data = mlx_get_data_addr(
+			data->game.floor_texture.texture,
+			&data->game.floor_texture.info_texture.bpp,
+			&data->game.floor_texture.info_texture.line_len,
+			&data->game.floor_texture.info_texture.endian);
 }

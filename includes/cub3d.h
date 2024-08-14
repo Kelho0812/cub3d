@@ -138,6 +138,8 @@ typedef struct s_map
 	char				*south_texture_path;
 	char				*west_texture_path;
 	char				*east_texture_path;
+	char				*celling_texture_path;
+	char				*floor_texture_path;
 	t_rgb				ceiling_color;
 	t_rgb				floor_color;
 	t_map_dimensions	dimensions;
@@ -153,6 +155,8 @@ typedef struct s_game
 	t_texture			south_texture;
 	t_texture			east_texture;
 	t_texture			west_texture;
+	t_texture			celling_texture;
+	t_texture			floor_texture;
 	t_img				map_img;
 }						t_game;
 
