@@ -47,6 +47,6 @@ int	handle_keypress(int keysym, t_data *data)
         data->player.planeX = data->player.planeX * cos(data->game.rotate_speed) - data->player.planeY * sin(data->game.rotate_speed);
         data->player.planeY = oldPlaneX * sin(data->game.rotate_speed) + data->player.planeY * cos(data->game.rotate_speed);
     }
-    render_game(data);
+    render_map(data);
 	return (0);
 }
