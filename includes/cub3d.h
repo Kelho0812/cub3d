@@ -53,6 +53,17 @@ typedef struct s_dda_values
 	int lineHeight;
 }			t_dda_values;
 
+typedef struct s_texture_values
+{
+	int 	drawStart;
+	int 	drawEnd;
+	double 	texPos;
+	double 	wallX;
+	double 	step;
+	int 	texX;
+	int 	texY;
+}			t_texture_values;
+
 typedef struct s_img
 {
 	void				*mlx_img;

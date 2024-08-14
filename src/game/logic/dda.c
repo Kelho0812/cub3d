@@ -12,6 +12,8 @@
 
 #include "../../../includes/cub3d.h"
 
+static void	define_steps(t_dda_values *dda_values, t_data *data);
+
 void	init_values_dda(int x, t_dda_values *dda_values, t_data *data)
 {
 	dda_values->mapX = (int)data->player.px;
@@ -31,26 +33,7 @@ void	calculate_distances(t_dda_values *dda_values, t_data * data)
 		data->dist.deltaDistY = 1e30;
 	else
 		data->dist.deltaDistY = fabs(1 / data->rays.rayDirY);
-	if (data->rays.rayDirX < 0)
-	{
-		dda_values->stepX = -1;
-		data->dist.sideDistX = (data->player.px - dda_values->mapX) * data->dist.deltaDistX;
-	}
-	else
-	{
-		dda_values->stepX = 1;
-		data->dist.sideDistX = (dda_values->mapX + 1.0 - data->player.px) * data->dist.deltaDistX;
-	}
-	if (data->rays.rayDirY < 0)
-	{
-		dda_values->stepY = -1;
-		data->dist.sideDistY = (data->player.py - dda_values->mapY) * data->dist.deltaDistY;
-	}
-	else
-	{
-		dda_values->stepY = 1;
-		data->dist.sideDistY = (dda_values->mapY + 1.0 - data->player.py) * data->dist.deltaDistY;
-	}
+	define_steps(dda_values, data);
 }
 
 void	execute_dda(t_dda_values *dda_values, t_data *data)
@@ -84,4 +67,28 @@ void	find_distance_to_wall(t_dda_values *dda_values, t_data *data)
 	else
 		data->dist.perpWallDist = data->dist.sideDistY - data->dist.deltaDistY;
 	dda_values->lineHeight = (int)(HEIGHT / data->dist.perpWallDist);
+}
+
+static void	define_steps(t_dda_values *dda_values, t_data *data)
+{
+	if (data->rays.rayDirX < 0)
+	{
+		dda_values->stepX = -1;
+		data->dist.sideDistX = (data->player.px - dda_values->mapX) * data->dist.deltaDistX;
+	}
+	else
+	{
+		dda_values->stepX = 1;
+		data->dist.sideDistX = (dda_values->mapX + 1.0 - data->player.px) * data->dist.deltaDistX;
+	}
+	if (data->rays.rayDirY < 0)
+	{
+		dda_values->stepY = -1;
+		data->dist.sideDistY = (data->player.py - dda_values->mapY) * data->dist.deltaDistY;
+	}
+	else
+	{
+		dda_values->stepY = 1;
+		data->dist.sideDistY = (dda_values->mapY + 1.0 - data->player.py) * data->dist.deltaDistY;
+	}
 }
