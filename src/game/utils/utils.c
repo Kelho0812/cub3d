@@ -12,12 +12,12 @@
 
 #include "../../../includes/cub3d.h"
 
-void create_background_buffer(t_data *data)
+void	create_background_buffer(t_data *data)
 {
-	int x;
-	int y;
-	int celling;
-	int floor;
+	int	x;
+	int	y;
+	int	celling;
+	int	floor;
 
 	celling = data->map.ceiling_color.R << 16 | data->map.ceiling_color.G << 8 | data->map.ceiling_color.B;
 	floor = data->map.floor_color.R << 16 | data->map.floor_color.G << 8 | data->map.floor_color.B;
@@ -33,12 +33,12 @@ void create_background_buffer(t_data *data)
 			else
 				data->buffer_background[y * WIDTH + x] = floor;
 			x++;
-		} 
+		}
 		y++;
 	}
 }
 
-void	init_game_values(t_data * data)
+void	init_game_values(t_data *data)
 {
 	data->player.px += 0.5;
 	data->player.py += 0.5;

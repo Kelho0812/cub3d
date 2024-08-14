@@ -33,9 +33,9 @@ void	open_window(t_data *data)
 			"Cub3d - OsBrabos");
 }
 
-void render_game(t_data *data)
+void	render_game(t_data *data)
 {
-	t_dda_values 	dda_values;
+	t_dda_values	dda_values;
 	int				x;
 
 	x = 0;
@@ -56,11 +56,14 @@ void render_game(t_data *data)
 static void	create_image(t_data *data)
 {
 	data->game.map_img.mlx_img = mlx_new_image(data->window.mlx, WIDTH, HEIGHT);
-	data->game.map_img.data = mlx_get_data_addr(data->game.map_img.mlx_img, &data->game.map_img.bpp, &data->game.map_img.line_len, &data->game.map_img.endian);
+	data->game.map_img.data = mlx_get_data_addr(data->game.map_img.mlx_img,
+			&data->game.map_img.bpp, &data->game.map_img.line_len,
+			&data->game.map_img.endian);
 }
 
 static void	put_image_to_window(t_data *data)
 {
-	mlx_put_image_to_window(data->window.mlx, data->window.mlx_win, data->game.map_img.mlx_img, 0, 0);
-    mlx_destroy_image(data->window.mlx, data->game.map_img.mlx_img);
+	mlx_put_image_to_window(data->window.mlx, data->window.mlx_win,
+		data->game.map_img.mlx_img, 0, 0);
+	mlx_destroy_image(data->window.mlx, data->game.map_img.mlx_img);
 }
