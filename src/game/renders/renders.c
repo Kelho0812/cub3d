@@ -28,13 +28,13 @@ void	my_pixel_put(int x, int y, int color, t_data *data)
 void	define_texture(t_dda_values dda_values, t_data data, t_texture *ptr)
 {
 	if (dda_values.side == 1 && data.rays.rayDirY < 0)
-		*ptr = data.game.north_texture;
-	else if (dda_values.side == 1 && data.rays.rayDirY > 0)
-		*ptr = data.game.east_texture;
-	else if (dda_values.side == 0 && data.rays.rayDirX < 0)
 		*ptr = data.game.south_texture;
-	else if (dda_values.side == 0 && data.rays.rayDirX > 0)
+	else if (dda_values.side == 1 && data.rays.rayDirY > 0)
+		*ptr = data.game.north_texture;
+	else if (dda_values.side == 0 && data.rays.rayDirX < 0)
 		*ptr = data.game.west_texture;
+	else if (dda_values.side == 0 && data.rays.rayDirX > 0)
+		*ptr = data.game.east_texture;
 }
 
 void	define_values_to_draw_texture(t_texture_values *draw_values, t_texture ptr, t_dda_values dda_values, t_data *data)

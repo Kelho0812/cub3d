@@ -28,7 +28,7 @@
 # define RESET "\033[0m"
 
 # define WIDTH 1280
-# define HEIGHT 720
+# define HEIGHT 1024
 
 typedef struct s_dda_values
 {
