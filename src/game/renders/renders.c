@@ -19,8 +19,8 @@ void	my_pixel_put(int x, int y, int color, t_data *data)
 	ptr = NULL;
 	if (x <= WIDTH && x >= 0 && y <= HEIGHT && y >= 0)
 	{
-		ptr = data->map.map_img.data + (x * (data->map.map_img.bpp / 8)) + (y
-				* data->map.map_img.line_len);
+		ptr = data->game.map_img.data + (x * (data->game.map_img.bpp / 8)) + (y
+				* data->game.map_img.line_len);
 		*(unsigned int *)ptr = color;
 	}
 }

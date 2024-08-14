@@ -35,13 +35,6 @@
 
 # define WIDTH 1204
 # define HEIGHT 960
-# define TEXTURE_SIZE 64
-# define MINIMAP_SIZE 12
-# define PLAYER_SIZE 10
-# define PI 3.141592
-# define P2 PI / 2
-# define P3 3 * PI / 2
-# define DEGRESS 0.017453 / 2
 
 typedef struct s_dda_values
 {
@@ -81,12 +74,6 @@ typedef struct s_texture
 	int 	width;
 }				t_texture;
 
-typedef struct s_minimap
-{
-	t_texture	game_wall;
-	t_texture	minimap_wall;
-}				t_minimap;
-
 typedef struct s_ray
 {
 	double rayDirX;
@@ -102,12 +89,6 @@ typedef struct s_dist
     double deltaDistY;
 	double perpWallDist;
 }   t_dist;
-
-typedef struct s_camera
-{
-	int	prev_x;
-	int	prev_y;
-}	t_camera;
 
 typedef enum e_direction
 {
@@ -159,7 +140,6 @@ typedef struct s_map
 	t_rgb				ceiling_color;
 	t_rgb				floor_color;
 	t_map_dimensions	dimensions;
-	t_img				map_img;
 }						t_map;
 
 typedef struct s_game 
@@ -172,6 +152,7 @@ typedef struct s_game
 	t_texture			south_texture;
 	t_texture			east_texture;
 	t_texture			west_texture;
+	t_img				map_img;
 }			t_game;
 
 typedef struct s_window
@@ -186,10 +167,8 @@ typedef struct s_data
 	t_player			player;
 	t_window			window;
 	t_game				game;
-	t_minimap			minimap;
 	t_ray				rays;
 	t_dist				dist;
-	t_camera			camera;
 	unsigned int		*buffer_background;
 }						t_data;
 

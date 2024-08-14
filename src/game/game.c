@@ -55,12 +55,12 @@ void render_game(t_data *data)
 
 static void	create_image(t_data *data)
 {
-	data->map.map_img.mlx_img = mlx_new_image(data->window.mlx, WIDTH, HEIGHT);
-	data->map.map_img.data = mlx_get_data_addr(data->map.map_img.mlx_img, &data->map.map_img.bpp, &data->map.map_img.line_len, &data->map.map_img.endian);
+	data->game.map_img.mlx_img = mlx_new_image(data->window.mlx, WIDTH, HEIGHT);
+	data->game.map_img.data = mlx_get_data_addr(data->game.map_img.mlx_img, &data->game.map_img.bpp, &data->game.map_img.line_len, &data->game.map_img.endian);
 }
 
 static void	put_image_to_window(t_data *data)
 {
-	mlx_put_image_to_window(data->window.mlx, data->window.mlx_win, data->map.map_img.mlx_img, 0, 0);
-    mlx_destroy_image(data->window.mlx, data->map.map_img.mlx_img);
+	mlx_put_image_to_window(data->window.mlx, data->window.mlx_win, data->game.map_img.mlx_img, 0, 0);
+    mlx_destroy_image(data->window.mlx, data->game.map_img.mlx_img);
 }
