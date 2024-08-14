@@ -19,8 +19,8 @@ void	create_background_buffer(t_data *data)
 	int	celling;
 	int	floor;
 
-	celling = data->map.ceiling_color.R << 16 | data->map.ceiling_color.G << 8 | data->map.ceiling_color.B;
-	floor = data->map.floor_color.R << 16 | data->map.floor_color.G << 8 | data->map.floor_color.B;
+	celling = data->map.ceiling_color.r << 16 | data->map.ceiling_color.g << 8 | data->map.ceiling_color.b;
+	floor = data->map.floor_color.r << 16 | data->map.floor_color.g << 8 | data->map.floor_color.b;
 	data->buffer_background = malloc(WIDTH * HEIGHT * sizeof(unsigned int));
 	y = 0;
 	while (y < HEIGHT)
@@ -73,31 +73,31 @@ void	get_direction(t_data *data)
 {
 	if (data->player.direction == N)
 	{
-		data->player.dirX = 0;
-		data->player.dirY = -1;
-		data->player.planeX = 0.66;
-		data->player.planeY = 0;
+		data->player.dir_x = 0;
+		data->player.dir_y = -1;
+		data->player.plane_x = 0.66;
+		data->player.plane_y = 0;
 	}
 	else if (data->player.direction == S)
 	{
-		data->player.dirX = 0;
-		data->player.dirY = 1;
-		data->player.planeX = -0.66;
-		data->player.planeY = 0;
+		data->player.dir_x = 0;
+		data->player.dir_y = 1;
+		data->player.plane_x = -0.66;
+		data->player.plane_y = 0;
 	}
 	else if (data->player.direction == W)
 	{
-		data->player.dirX = 1;
-		data->player.dirY = 0;
-		data->player.planeX = 0;
-		data->player.planeY = 0.66;
+		data->player.dir_x = 1;
+		data->player.dir_y = 0;
+		data->player.plane_x = 0;
+		data->player.plane_y = 0.66;
 	}
 	else if (data->player.direction == E)
 	{
-		data->player.dirX = -1;
-		data->player.dirY = 0;
-		data->player.planeX = 0;
-		data->player.planeY = -0.66;
+		data->player.dir_x = -1;
+		data->player.dir_y = 0;
+		data->player.plane_x = 0;
+		data->player.plane_y = -0.66;
 	}
 }
 

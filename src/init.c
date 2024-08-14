@@ -33,12 +33,12 @@ static void	init_map(t_map *map)
 	map->ea_count = 0;
 	map->c_count = 0;
 	map->f_count = 0;
-	map->ceiling_color.R = -1;
-	map->ceiling_color.B = -1;
-	map->ceiling_color.G = -1;
-	map->floor_color.R = -1;
-	map->floor_color.B = -1;
-	map->floor_color.G = -1;
+	map->ceiling_color.r = -1;
+	map->ceiling_color.b = -1;
+	map->ceiling_color.g = -1;
+	map->floor_color.r = -1;
+	map->floor_color.b = -1;
+	map->floor_color.g = -1;
 }
 
 static void	init_player(t_player *player)

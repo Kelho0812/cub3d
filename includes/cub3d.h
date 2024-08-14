@@ -32,24 +32,24 @@
 
 typedef struct s_dda_values
 {
-	int	mapX;
-	int	mapY;
-	int stepX;
-    int stepY;
-	int side;
-	int lineHeight;
-}			t_dda_values;
+	int					map_x;
+	int					map_y;
+	int					step_x;
+	int					step_y;
+	int					side;
+	int					line_height;
+}						t_dda_values;
 
 typedef struct s_texture_values
 {
-	int 	drawStart;
-	int 	drawEnd;
-	double 	texPos;
-	double 	wallX;
-	double 	step;
-	int 	texX;
-	int 	texY;
-}			t_texture_values;
+	int					draw_start;
+	int					draw_end;
+	double				tex_pos;
+	double				wall_x;
+	double				step;
+	int					tex_x;
+	int					tex_y;
+}						t_texture_values;
 
 typedef struct s_img
 {
@@ -62,27 +62,27 @@ typedef struct s_img
 
 typedef struct s_texture
 {
-	t_img	info_texture;
-	void	*texture;
-	int		height;
-	int 	width;
-}				t_texture;
+	t_img				info_texture;
+	void				*texture;
+	int					height;
+	int					width;
+}						t_texture;
 
 typedef struct s_ray
 {
-	double rayDirX;
-	double rayDirY;
-	double cameraX;
-}				t_ray;
+	double				ray_dir_x;
+	double				ray_dir_y;
+	double				camera_x;
+}						t_ray;
 
 typedef struct s_dist
 {
-    double sideDistX;
-    double sideDistY;
-    double deltaDistX;
-    double deltaDistY;
-	double perpWallDist;
-}   t_dist;
+	double				side_dist_x;
+	double				side_dist_y;
+	double				delta_dist_x;
+	double				delta_dist_y;
+	double				perp_wall_dist;
+}						t_dist;
 
 typedef enum e_direction
 {
@@ -94,15 +94,14 @@ typedef enum e_direction
 
 typedef struct s_player
 {
-	double					px;
-	double					py;
-	double					dirX;
-	double					dirY;
-	double					planeX;
-	double					planeY;
+	double				px;
+	double				py;
+	double				dir_x;
+	double				dir_y;
+	double				plane_x;
+	double				plane_y;
 	t_direction			direction;
 }						t_player;
-
 
 typedef struct s_map_dimensions
 {
@@ -112,9 +111,9 @@ typedef struct s_map_dimensions
 
 typedef struct s_rgb
 {
-	int					R;
-	int					G;
-	int					B;
+	int					r;
+	int					g;
+	int					b;
 }						t_rgb;
 typedef struct s_map
 {
@@ -136,7 +135,7 @@ typedef struct s_map
 	t_map_dimensions	dimensions;
 }						t_map;
 
-typedef struct s_game 
+typedef struct s_game
 {
 	double				rotate_speed;
 	double				move_speed;
@@ -147,7 +146,7 @@ typedef struct s_game
 	t_texture			east_texture;
 	t_texture			west_texture;
 	t_img				map_img;
-}			t_game;
+}						t_game;
 
 typedef struct s_window
 {
@@ -249,30 +248,34 @@ void					destroy_images(t_data *data);
 void					init_data(t_data *data);
 void					print_colored_map(char **map);
 
-//game
+// game
 void					play_game(t_data *data);
-void 					render_game(t_data *data);
+void					render_game(t_data *data);
 void					open_window(t_data *data);
 
-//game-renders
-void 					render_background(t_data *data);
-void					draw_stripe(t_dda_values dda_values, int x, t_data *data);
+// game-renders
+void					render_background(t_data *data);
+void					draw_stripe(t_dda_values dda_values, int x,
+							t_data *data);
 void					my_pixel_put(int x, int y, int color, t_data *data);
 
-//game-logic
-void					init_values_dda(int x, t_dda_values *dda_values, t_data *data);
-void					calculate_distances(t_dda_values *dda_values, t_data * data);
+// game-logic
+void					init_values_dda(int x, t_dda_values *dda_values,
+							t_data *data);
+void					calculate_distances(t_dda_values *dda_values,
+							t_data *data);
 void					execute_dda(t_dda_values *dda_values, t_data *data);
-void					find_distance_to_wall(t_dda_values *dda_values, t_data *data);
+void					find_distance_to_wall(t_dda_values *dda_values,
+							t_data *data);
 
-//game-handlers
-int 					handle_keypress(int keysym, t_data *data);
+// game-handlers
+int						handle_keypress(int keysym, t_data *data);
 int						handle_close(t_data *data);
 void					handle_render(t_data *data);
 
-//game-utils
-void 					create_background_buffer(t_data *data);
-void					init_game_values(t_data * data);
+// game-utils
+void					create_background_buffer(t_data *data);
+void					init_game_values(t_data *data);
 void					get_data_textures(t_data *data);
 void					get_direction(t_data *data);
 

@@ -27,40 +27,40 @@ void	my_pixel_put(int x, int y, int color, t_data *data)
 
 void	define_texture(t_dda_values dda_values, t_data data, t_texture *ptr)
 {
-	if (dda_values.side == 1 && data.rays.rayDirY < 0)
+	if (dda_values.side == 1 && data.rays.ray_dir_y < 0)
 		*ptr = data.game.south_texture;
-	else if (dda_values.side == 1 && data.rays.rayDirY > 0)
+	else if (dda_values.side == 1 && data.rays.ray_dir_y > 0)
 		*ptr = data.game.north_texture;
-	else if (dda_values.side == 0 && data.rays.rayDirX < 0)
+	else if (dda_values.side == 0 && data.rays.ray_dir_x < 0)
 		*ptr = data.game.west_texture;
-	else if (dda_values.side == 0 && data.rays.rayDirX > 0)
+	else if (dda_values.side == 0 && data.rays.ray_dir_x > 0)
 		*ptr = data.game.east_texture;
 }
 
 void	define_values_to_draw_texture(t_texture_values *draw_values,
 		t_texture ptr, t_dda_values dda_values, t_data *data)
 {
-	draw_values->drawStart = HEIGHT / 2 - dda_values.lineHeight / 2;
-	if (draw_values->drawStart < 0)
-		draw_values->drawStart = 0;
-	draw_values->drawEnd = HEIGHT / 2 + dda_values.lineHeight / 2;
-	if (draw_values->drawEnd >= HEIGHT)
-		draw_values->drawEnd = HEIGHT - 1;
+	draw_values->draw_start = HEIGHT / 2 - dda_values.line_height / 2;
+	if (draw_values->draw_start < 0)
+		draw_values->draw_start = 0;
+	draw_values->draw_end = HEIGHT / 2 + dda_values.line_height / 2;
+	if (draw_values->draw_end >= HEIGHT)
+		draw_values->draw_end = HEIGHT - 1;
 	if (dda_values.side == 0)
-		draw_values->wallX = data->player.py + data->dist.perpWallDist
-			* data->rays.rayDirY;
+		draw_values->wall_x = data->player.py + data->dist.perp_wall_dist
+			* data->rays.ray_dir_y;
 	else
-		draw_values->wallX = data->player.px + data->dist.perpWallDist
-			* data->rays.rayDirX;
-	draw_values->wallX -= floor((draw_values->wallX));
-	draw_values->texX = (int)(draw_values->wallX * (double)ptr.width);
-	if (dda_values.side == 0 && data->rays.rayDirX > 0)
-		draw_values->texX = ptr.width - draw_values->texX - 1;
-	if (dda_values.side == 1 && data->rays.rayDirY < 0)
-		draw_values->texX = ptr.width - draw_values->texX - 1;
-	draw_values->step = 1.0 * ptr.height / dda_values.lineHeight;
-	draw_values->texPos = (draw_values->drawStart - HEIGHT / 2
-			+ dda_values.lineHeight / 2) * draw_values->step;
+		draw_values->wall_x = data->player.px + data->dist.perp_wall_dist
+			* data->rays.ray_dir_x;
+	draw_values->wall_x -= floor((draw_values->wall_x));
+	draw_values->tex_x = (int)(draw_values->wall_x * (double)ptr.width);
+	if (dda_values.side == 0 && data->rays.ray_dir_x > 0)
+		draw_values->tex_x = ptr.width - draw_values->tex_x - 1;
+	if (dda_values.side == 1 && data->rays.ray_dir_y < 0)
+		draw_values->tex_x = ptr.width - draw_values->tex_x - 1;
+	draw_values->step = 1.0 * ptr.height / dda_values.line_height;
+	draw_values->tex_pos = (draw_values->draw_start - HEIGHT / 2
+			+ dda_values.line_height / 2) * draw_values->step;
 }
 
 void	draw_stripe(t_dda_values dda_values, int x, t_data *data)
@@ -72,14 +72,14 @@ void	draw_stripe(t_dda_values dda_values, int x, t_data *data)
 
 	define_texture(dda_values, *data, &ptr);
 	define_values_to_draw_texture(&draw_values, ptr, dda_values, data);
-	i = draw_values.drawStart;
-	while (i < draw_values.drawEnd)
+	i = draw_values.draw_start;
+	while (i < draw_values.draw_end)
 	{
-		draw_values.texY = (int)draw_values.texPos
+		draw_values.tex_y = (int)draw_values.tex_pos
 			& (data->game.north_texture.height - 1);
-		draw_values.texPos += draw_values.step;
-		color = *(int *)(ptr.info_texture.data + draw_values.texY
-				* ptr.info_texture.line_len + draw_values.texX
+		draw_values.tex_pos += draw_values.step;
+		color = *(int *)(ptr.info_texture.data + draw_values.tex_y
+				* ptr.info_texture.line_len + draw_values.tex_x
 				* (ptr.info_texture.bpp / 8));
 		my_pixel_put(x, i, color, data);
 		i++;
