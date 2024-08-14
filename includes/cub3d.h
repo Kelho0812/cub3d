@@ -43,6 +43,16 @@
 # define P3 3 * PI / 2
 # define DEGRESS 0.017453 / 2
 
+typedef struct s_dda_values
+{
+	int	mapX;
+	int	mapY;
+	int stepX;
+    int stepY;
+	int side;
+	int lineHeight;
+}			t_dda_values;
+
 typedef struct s_img
 {
 	void				*mlx_img;
@@ -255,25 +265,38 @@ void					destroy_images(t_data *data);
 // other
 void					init_data(t_data *data);
 void					init_player(t_player *player);
-char					*ft_strdup_dif(const char *s, int size);
-void					open_window(t_data *data);
 void					print_colored_map(char **map);
 void					render_minimap(t_data *data);
-void					handle_render(t_data *data);
 void					render_player(t_data *data);
 void					draw_line(float x, float y, float x1, float y1,
 							t_data *data);
+
+
+//game
+void					play_game(t_data *data);
+void 					render_game(t_data *data);
+void					open_window(t_data *data);
+
+//game-renders
+void 					render_background(t_data *data);
+void					draw_stripe(t_dda_values dda_values, int x, t_data *data);
 void					my_pixel_put(int x, int y, int color, t_data *data);
-void 					render_map(t_data *data);
+
+//game-logic
+void					init_values_dda(int x, t_dda_values *dda_values, t_data *data);
+void					calculate_distances(t_dda_values *dda_values, t_data * data);
+void					execute_dda(t_dda_values *dda_values, t_data *data);
+void					find_distance_to_wall(t_dda_values *dda_values, t_data *data);
+
+//game-handlers
+int 					handle_keypress(int keysym, t_data *data);
+int						handle_close(t_data *data);
+void					handle_render(t_data *data);
+
+//game-utils
 void 					create_background_buffer(t_data *data);
 void					init_game_values(t_data * data);
 void					get_data_textures(t_data *data);
 void					get_direction(t_data *data);
-
-// handlers
-
-int 					handle_keypress(int keysym, t_data *data);
-int 					handle_mouse_move(int x, int y, t_data *data);
-int						handle_close(t_data *data);
 
 #endif
