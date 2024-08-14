@@ -57,7 +57,8 @@ void	execute_dda(t_dda_values *dda_values, t_data *data)
 			dda_values->map_y += dda_values->step_y;
 			dda_values->side = 1;
 		}
-		if (data->map.full_map_array[dda_values->map_y][dda_values->map_x] == '1')
+		if (data->map.full_map_array[dda_values->map_y]
+			[dda_values->map_x] == '1')
 			hit = 1;
 	}
 }
@@ -65,9 +66,11 @@ void	execute_dda(t_dda_values *dda_values, t_data *data)
 void	find_distance_to_wall(t_dda_values *dda_values, t_data *data)
 {
 	if (dda_values->side == 0)
-		data->dist.perp_wall_dist = data->dist.side_dist_x - data->dist.delta_dist_x;
+		data->dist.perp_wall_dist = data->dist.side_dist_x
+			- data->dist.delta_dist_x;
 	else
-		data->dist.perp_wall_dist = data->dist.side_dist_y - data->dist.delta_dist_y;
+		data->dist.perp_wall_dist = data->dist.side_dist_y
+			- data->dist.delta_dist_y;
 	dda_values->line_height = (int)(HEIGHT / data->dist.perp_wall_dist);
 }
 
