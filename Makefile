@@ -35,14 +35,13 @@ SOURCES := cub3d.c\
 			parser/mapValidator8.c\
 			parser/mapValidator9.c\
 			parser/mapValidatorUtils.c\
-			init.c\
-			game/renders/minimap.c\
-			game/renders/bresenham.c\
-			game/renders/player.c\
-			game/renders/map.c\
-			game/utils.c\
-			handlers/close_handlers.c\
-			handlers/keypress_handlers.c\
+			game/renders/renders.c\
+			game/logic/dda.c\
+			game/utils/utils.c\
+			game/handlers/close_handlers.c\
+			game/handlers/keypress_handlers.c\
+			game/handlers/game_handlers.c\
+			game/game.c\
 			errorHandler.c\
 			freedom.c\
 			init.c\

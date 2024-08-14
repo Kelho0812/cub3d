@@ -53,6 +53,17 @@ typedef struct s_dda_values
 	int lineHeight;
 }			t_dda_values;
 
+typedef struct s_texture_values
+{
+	int 	drawStart;
+	int 	drawEnd;
+	double 	texPos;
+	double 	wallX;
+	double 	step;
+	int 	texX;
+	int 	texY;
+}			t_texture_values;
+
 typedef struct s_img
 {
 	void				*mlx_img;
@@ -277,14 +288,6 @@ void					open_window(t_data *data);
 void 					render_background(t_data *data);
 void					draw_stripe(t_dda_values dda_values, int x, t_data *data);
 void					my_pixel_put(int x, int y, int color, t_data *data);
-<<<<<<< HEAD
-=======
-void 					render_map(t_data *data);
-void 					create_background_buffer(t_data *data);
-void					init_game_values(t_data * data);
-void					get_data_textures(t_data *data);
-void					get_direction(t_data *data);
->>>>>>> c1799bd (Refactor game rendering functions and fix memory leaks)
 
 //game-logic
 void					init_values_dda(int x, t_dda_values *dda_values, t_data *data);
