@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub3d.h"
+#include "../../../includes/cub3d.h"
 
 void	calculate_distances(int mapX, int mapY, int *stepX, int *stepY, t_data * data)
 {
@@ -111,32 +111,6 @@ void render_background_buffer(t_data *data)
 	}
 }
 
-void create_background_buffer(t_data *data)
-{
-	int x;
-	int y;
-	int celling;
-	int floor;
-
-	celling = data->map.ceiling_color.R << 16 | data->map.ceiling_color.G << 8 | data->map.ceiling_color.B;
-	floor = data->map.floor_color.R << 16 | data->map.floor_color.G << 8 | data->map.floor_color.B;
-	data->buffer_background = malloc(WIDTH * HEIGHT * sizeof(unsigned int));
-	y = 0;
-	while (y < HEIGHT)
-	{
-		x = 0;
-		while (x < WIDTH)
-		{
-			if (y < HEIGHT / 2)
-				data->buffer_background[y * WIDTH + x] = celling;
-			else
-				data->buffer_background[y * WIDTH + x] = floor;
-			x++;
-		} 
-		y++;
-	}
-}
-
 void render_map(t_data *data)
 {
 	int	x = 0;
@@ -185,4 +159,6 @@ void render_map(t_data *data)
 		draw_stripe(lineHeight, x, side, data);
 		x++;
 	}
+	mlx_put_image_to_window(data->window.mlx, data->window.mlx_win, data->map.map_img.mlx_img, 0, 0);
+    mlx_destroy_image(data->window.mlx, data->map.map_img.mlx_img);
 }

@@ -266,6 +266,9 @@ void					draw_line(float x, float y, float x1, float y1,
 void					my_pixel_put(int x, int y, int color, t_data *data);
 void 					render_map(t_data *data);
 void 					create_background_buffer(t_data *data);
+void					init_game_values(t_data * data);
+void					get_data_textures(t_data *data);
+void					get_direction(t_data *data);
 
 // handlers
 

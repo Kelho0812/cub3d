@@ -36,10 +36,11 @@ SOURCES := cub3d.c\
 			parser/mapValidator9.c\
 			parser/mapValidatorUtils.c\
 			init.c\
-			renders/minimap.c\
-			renders/bresenham.c\
-			renders/player.c\
-			renders/map.c\
+			game/renders/minimap.c\
+			game/renders/bresenham.c\
+			game/renders/player.c\
+			game/renders/map.c\
+			game/utils.c\
 			handlers/close_handlers.c\
 			handlers/keypress_handlers.c\
 			errorHandler.c\
