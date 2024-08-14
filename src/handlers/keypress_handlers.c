@@ -15,12 +15,7 @@ int	handle_keypress(int keysym, t_data *data)
 {
 	if (keysym == XK_Escape)
 	{
-	    destroy_images(data);
-		mlx_destroy_window(data->window.mlx, data->window.mlx_win);
-		mlx_destroy_display(data->window.mlx);
-        free(data->buffer_background);
-		free(data->window.mlx);
-		exit(0);
+		handle_close(data);
 	}
     if (keysym == XK_Up)
     {
