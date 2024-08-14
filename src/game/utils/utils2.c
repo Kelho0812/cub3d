@@ -19,10 +19,10 @@ void	create_background_buffer(t_data *data)
 	int	celling;
 	int	floor;
 
-	celling = data->map.ceiling_color.R << 16
-		| data->map.ceiling_color.G << 8 | data->map.ceiling_color.B;
-	floor = data->map.floor_color.R << 16 | data->map.floor_color.G << 8
-		| data->map.floor_color.B;
+	celling = data->map.ceiling_color.r << 16
+		| data->map.ceiling_color.g << 8 | data->map.ceiling_color.b;
+	floor = data->map.floor_color.r << 16 | data->map.floor_color.g << 8
+		| data->map.floor_color.b;
 	data->buffer_background = malloc(WIDTH * HEIGHT * sizeof(unsigned int));
 	y = 0;
 	while (y < HEIGHT)
