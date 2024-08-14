@@ -35,9 +35,6 @@ SOURCES := cub3d.c\
 			parser/mapValidator8.c\
 			parser/mapValidator9.c\
 			parser/mapValidatorUtils.c\
-			game/renders/minimap.c\
-			game/renders/bresenham.c\
-			game/renders/player.c\
 			game/renders/renders.c\
 			game/logic/dda.c\
 			game/utils/utils.c\

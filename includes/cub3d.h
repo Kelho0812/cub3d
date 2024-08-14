@@ -266,10 +266,6 @@ void					destroy_images(t_data *data);
 void					init_data(t_data *data);
 void					init_player(t_player *player);
 void					print_colored_map(char **map);
-void					render_minimap(t_data *data);
-void					render_player(t_data *data);
-void					draw_line(float x, float y, float x1, float y1,
-							t_data *data);
 
 
 //game
