@@ -30,6 +30,14 @@
 # define WIDTH 1280
 # define HEIGHT 1024
 
+typedef struct s_norminetingz
+{
+	int					j;
+	int					wowzers;
+	int					player_count;
+	bool				map_end;
+}						t_norminetingz;
+
 typedef struct s_dda_values
 {
 	int					map_x;
@@ -199,8 +207,8 @@ char					**duplicate_map_with_border(char **map, int rows,
 							int cols);
 bool					is_player_char(char c);
 bool					is_valid_char(char c);
-void					handle_player_char(t_data *data, int *player_count,
-							int i, int j, int wowzers);
+void					handle_player_char(t_data *data, int i,
+							t_norminetingz *n);
 void					get_map_dimensions(char **map, int *rows, int *cols);
 void					print_result_and_exit(bool can_reach_space_or_tab);
 char					**allocate_and_initialize_map(int rows, int cols);
