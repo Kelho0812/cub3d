@@ -18,7 +18,6 @@ static void	move_right(t_data *data);
 
 int	handle_keypress(int keysym, t_data *data)
 {
-
 	if (keysym == XK_Escape)
 		handle_close(data);
 	if (keysym == XK_Up)

@@ -75,8 +75,8 @@ void	draw_stripe(t_dda_values dda_values, int x, t_data *data)
 	i = draw_values.drawStart;
 	while (i < draw_values.drawEnd)
 	{
-		draw_values.texY = (int)draw_values.texPos & (data->game.north_texture.height
-				- 1);
+		draw_values.texY = (int)draw_values.texPos
+			& (data->game.north_texture.height - 1);
 		draw_values.texPos += draw_values.step;
 		color = *(int *)(ptr.info_texture.data + draw_values.texY
 				* ptr.info_texture.line_len + draw_values.texX

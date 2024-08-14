@@ -19,10 +19,10 @@ static int	check_dimension_texture(t_data *data)
 
 	temp_height = data->game.north_texture.height;
 	temp_width = data->game.north_texture.width;
-	if (temp_height != data->game.south_texture.height 
+	if (temp_height != data->game.south_texture.height
 		|| temp_height != data->game.west_texture.height
-		|| temp_height != data->game.east_texture.height 
-		|| temp_width != data->game.south_texture.width 
+		|| temp_height != data->game.east_texture.height
+		|| temp_width != data->game.south_texture.width
 		|| temp_width != data->game.west_texture.width
 		|| temp_width != data->game.east_texture.width)
 		return (0);
@@ -92,19 +92,23 @@ void	get_direction(t_data *data)
 
 void	get_data_textures(t_data *data)
 {
-	data->game.north_texture.info_texture.data = mlx_get_data_addr(data->game.north_texture.texture,
+	data->game.north_texture.info_texture.data = mlx_get_data_addr(
+			data->game.north_texture.texture,
 			&data->game.north_texture.info_texture.bpp,
 			&data->game.north_texture.info_texture.line_len,
 			&data->game.north_texture.info_texture.endian);
-	data->game.south_texture.info_texture.data = mlx_get_data_addr(data->game.south_texture.texture,
+	data->game.south_texture.info_texture.data = mlx_get_data_addr(
+			data->game.south_texture.texture,
 			&data->game.south_texture.info_texture.bpp,
 			&data->game.south_texture.info_texture.line_len,
 			&data->game.south_texture.info_texture.endian);
-	data->game.east_texture.info_texture.data = mlx_get_data_addr(data->game.east_texture.texture,
+	data->game.east_texture.info_texture.data = mlx_get_data_addr(
+			data->game.east_texture.texture,
 			&data->game.east_texture.info_texture.bpp,
 			&data->game.east_texture.info_texture.line_len,
 			&data->game.east_texture.info_texture.endian);
-	data->game.west_texture.info_texture.data = mlx_get_data_addr(data->game.west_texture.texture,
+	data->game.west_texture.info_texture.data = mlx_get_data_addr(
+			data->game.west_texture.texture,
 			&data->game.west_texture.info_texture.bpp,
 			&data->game.west_texture.info_texture.line_len,
 			&data->game.west_texture.info_texture.endian);
