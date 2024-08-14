@@ -19,17 +19,9 @@ char	*ft_strtrim(char const *s1, char const *set)
 	int		i;
 	int		j;
 
-	if (s1 == NULL || set == NULL)
-	{
-		printf("Error: NULL input\n"); // Debug print
-		return (NULL);
-	}
 	if (!set)
 	{
 		str1 = ft_strdup(s1);
-		if (!str1)
-			printf("Error: Memory allocation failed in ft_strdup\n");
-				// Debug print
 		return (str1);
 	}
 	i = 0;
@@ -42,14 +34,10 @@ char	*ft_strtrim(char const *s1, char const *set)
 	if (j <= 0)
 	{
 		str1 = ft_strdup("");
-		if (!str1)
-			printf("Error: Memory allocation failed in ft_strdup\n");
-				// Debug print
 		return (str1);
 	}
 	str1 = ft_substr(s1, i, j);
 	if (!str1)
-		printf("Error: Memory allocation failed in ft_substr\n"); // Debug print
+		printf("Error: Memory allocation failed in ft_substr\n");
 	return (str1);
 }
-

@@ -59,3 +59,4 @@ sup
 .vscode/settings.json
 valgrind_failures.log
 valgrind_log_invalid.txt
+includes/minilibx-linux
