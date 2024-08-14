@@ -30,7 +30,7 @@ void	open_window(t_data *data)
 	get_data_textures(data);
 	get_direction(data);
 	data->window.mlx_win = mlx_new_window(data->window.mlx, WIDTH, HEIGHT,
-			"Cub3d - MegaBosses");
+			"Cub3d - OsBrabos");
 }
 
 void render_game(t_data *data)

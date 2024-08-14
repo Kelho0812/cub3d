@@ -60,10 +60,7 @@ void	check_path(char **map, t_data *data)
 			data->player.px + 1);
 	free_mapi(spaced_map, rows);
 	if (can_reach_space_or_tab)
-	{
-		free_map_array(data->map.full_map_array);
 		error_handler4(data, MAP_HOLE);
-	}
 }
 
 char	**copy_map_from_index(t_data *data, int start_index)
