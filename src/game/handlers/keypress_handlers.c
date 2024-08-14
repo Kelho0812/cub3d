@@ -28,7 +28,6 @@ int	handle_keypress(int keysym, t_data *data)
 		move_left(data);
 	if (keysym == XK_Right)
 		move_right(data);
-	render_game(data);
 	return (0);
 }
 

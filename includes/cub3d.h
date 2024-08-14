@@ -262,7 +262,7 @@ void					print_colored_map(char **map);
 
 // game
 void					play_game(t_data *data);
-void					render_game(t_data *data);
+int						render_game(void *param);
 void					open_window(t_data *data);
 
 // game-renders

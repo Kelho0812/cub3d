@@ -33,12 +33,14 @@ void	open_window(t_data *data)
 			"Cub3d - OsBrabos");
 }
 
-void	render_game(t_data *data)
+int	render_game(void *param)
 {
+	t_data *data;
 	t_dda_values	dda_values;
 	int				x;
 
 	x = 0;
+	data = (t_data*)param;
 	create_image(data);
 	render_background(data);
 	while (x < WIDTH)
@@ -51,6 +53,7 @@ void	render_game(t_data *data)
 		x++;
 	}
 	put_image_to_window(data);
+	return (0);
 }
 
 static void	create_image(t_data *data)
