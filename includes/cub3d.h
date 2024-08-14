@@ -22,13 +22,7 @@
 # include <math.h>
 # include <stdbool.h>
 # include <stdio.h>
-# include "./minilibx-linux/mlx.h"
-# include <X11/keysym.h>
-# include <X11/X.h>
-# include <math.h>
 # include <unistd.h>
-# include <stdint.h>
-# include <time.h>
 
 # define RED "\033[1;31m"
 # define RESET "\033[0m"
