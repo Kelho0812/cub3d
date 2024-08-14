@@ -12,19 +12,6 @@
 
 #include "../../../includes/cub3d.h"
 
-void	my_pixel_put(int x, int y, int color, t_data *data)
-{
-	char	*ptr;
-
-	ptr = NULL;
-	if (x <= WIDTH && x >= 0 && y <= HEIGHT && y >= 0)
-	{
-		ptr = data->map.map_img.data + (x * (data->map.map_img.bpp / 8)) + (y
-				* data->map.map_img.line_len);
-		*(unsigned int *)ptr = color;
-	}
-}
-
 void render_wall(int x, int y, t_data *data)
 {
 	int	y1;

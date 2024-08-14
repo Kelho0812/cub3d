@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub3d.h"
+#include "../../../includes/cub3d.h"
 
 void create_background_buffer(t_data *data)
 {
@@ -69,18 +69,6 @@ void	check_textures(t_data *data)
 	// #TODO check width height
 }
 
-void	destroy_images(t_data *data)
-{
-	if (data->game.north_texture.texture != NULL)
-		mlx_destroy_image(data->window.mlx, data->game.north_texture.texture);
-	if (data->game.south_texture.texture != NULL)
-		mlx_destroy_image(data->window.mlx, data->game.south_texture.texture);
-	if (data->game.east_texture.texture != NULL)
-		mlx_destroy_image(data->window.mlx, data->game.east_texture.texture);
-	if (data->game.west_texture.texture != NULL)
-		mlx_destroy_image(data->window.mlx, data->game.west_texture.texture);
-}
-
 void	get_direction(t_data *data)
 {
 	if (data->player.direction == N)
@@ -131,4 +119,16 @@ void	get_data_textures(t_data *data)
 			&data->game.west_texture.info_texture.bpp,
 			&data->game.west_texture.info_texture.line_len,
 			&data->game.west_texture.info_texture.endian);
+}
+
+void	destroy_images(t_data *data)
+{
+	if (data->game.north_texture.texture != NULL)
+		mlx_destroy_image(data->window.mlx, data->game.north_texture.texture);
+	if (data->game.south_texture.texture != NULL)
+		mlx_destroy_image(data->window.mlx, data->game.south_texture.texture);
+	if (data->game.east_texture.texture != NULL)
+		mlx_destroy_image(data->window.mlx, data->game.east_texture.texture);
+	if (data->game.west_texture.texture != NULL)
+		mlx_destroy_image(data->window.mlx, data->game.west_texture.texture);
 }
