@@ -25,9 +25,3 @@ int	main(int argc, char **argv)
 	free_map_array(data.map.full_map_array);
 	return (0);
 }
-
-void	init_data(t_data *data)
-{
-	init_map(&data->map);
-	init_player(&data->player);
-}
