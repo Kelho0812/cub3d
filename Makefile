@@ -37,7 +37,8 @@ SOURCES := cub3d.c\
 			parser/mapValidatorUtils.c\
 			game/renders/renders.c\
 			game/logic/dda.c\
-			game/utils/utils.c\
+			game/utils/utils1.c\
+			game/utils/utils2.c\
 			game/handlers/close_handlers.c\
 			game/handlers/keypress_handlers.c\
 			game/handlers/game_handlers.c\
