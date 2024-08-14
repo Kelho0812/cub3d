@@ -12,7 +12,16 @@
 
 #include "../includes/cub3d.h"
 
-void	init_map(t_map *map)
+static void	init_map(t_map *map);
+static void	init_player(t_player *player);
+
+void	init_data(t_data *data)
+{
+	init_map(&data->map);
+	init_player(&data->player);
+}
+
+static void	init_map(t_map *map)
 {
 	map->north_texture_path = NULL;
 	map->south_texture_path = NULL;
@@ -32,7 +41,7 @@ void	init_map(t_map *map)
 	map->floor_color.G = -1;
 }
 
-void	init_player(t_player *player)
+static void	init_player(t_player *player)
 {
 	player->px = -1;
 	player->py = -1;

@@ -28,7 +28,7 @@
 # define RESET "\033[0m"
 
 # define WIDTH 1280
-# define HEIGHT 720
+# define HEIGHT 1024
 
 typedef struct s_dda_values
 {
@@ -168,7 +168,6 @@ typedef struct s_data
 
 // PARSER
 void					parse_and_validate_map(char *map, t_data *data);
-void					init_map(t_map *map);
 char					**map_parser(int fd, int i, int count, char *map_path);
 void					validate_elements(t_data *data,
 							char **line_words_array);
@@ -248,7 +247,6 @@ void					destroy_images(t_data *data);
 
 // other
 void					init_data(t_data *data);
-void					init_player(t_player *player);
 void					print_colored_map(char **map);
 
 //game
