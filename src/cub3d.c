@@ -150,14 +150,15 @@ void	check_textures(t_data *data)
 
 void	destroy_images(t_data *data)
 {
-	if (data->game.north_texture.texture != NULL)
-		mlx_destroy_image(data->window.mlx, data->game.north_texture.texture);
-	if (data->game.south_texture.texture != NULL)
-		mlx_destroy_image(data->window.mlx, data->game.south_texture.texture);
-	if (data->game.east_texture.texture != NULL)
-		mlx_destroy_image(data->window.mlx, data->game.east_texture.texture);
-	if (data->game.west_texture.texture != NULL)
-		mlx_destroy_image(data->window.mlx, data->game.west_texture.texture);
-	if (data->minimap.minimap_wall.texture != NULL)
-		mlx_destroy_image(data->window.mlx, data->minimap.minimap_wall.texture);
+	(void)data;
+	// if (data->game.north_texture.texture != NULL)
+	// 	mlx_destroy_image(data->window.mlx, data->game.north_texture.texture);
+	// if (data->game.south_texture.texture != NULL)
+	// 	mlx_destroy_image(data->window.mlx, data->game.south_texture.texture);
+	// if (data->game.east_texture.texture != NULL)
+	// 	mlx_destroy_image(data->window.mlx, data->game.east_texture.texture);
+	// if (data->game.west_texture.texture != NULL)
+	// 	mlx_destroy_image(data->window.mlx, data->game.west_texture.texture);
+	// if (data->minimap.minimap_wall.texture != NULL)
+	// 	mlx_destroy_image(data->window.mlx, data->minimap.minimap_wall.texture);
 }

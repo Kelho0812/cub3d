@@ -61,7 +61,6 @@ void	check_path(char **map, t_data *data)
 	free_mapi(spaced_map, rows);
 	if (can_reach_space_or_tab)
 	{
-		free_map_array(data->map.full_map_array);
 		error_handler4(data, MAP_HOLE);
 	}
 }
