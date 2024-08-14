@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub3d.h"
+#include "../../../includes/cub3d.h"
 
 uint32_t getTick() {
     struct timespec ts;
@@ -42,6 +42,4 @@ void    render_player(t_data *data)
         }
         y1++;
     }
-	mlx_put_image_to_window(data->window.mlx, data->window.mlx_win, data->map.map_img.mlx_img, 0, 0);
-    mlx_destroy_image(data->window.mlx, data->map.map_img.mlx_img);
 }
