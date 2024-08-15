@@ -49,12 +49,16 @@ void	check_textures(t_data *data)
 	data->game.floor_texture.texture = mlx_xpm_file_to_image(data->window.mlx,
 			"./textures/floor.xpm", &data->game.floor_texture.width,
 			&data->game.floor_texture.height);
+	data->game.weapon_texture.texture = mlx_xpm_file_to_image(data->window.mlx,
+			"./textures/weapon.xpm", &data->game.weapon_texture.width,
+			&data->game.weapon_texture.height);
 	if (data->game.north_texture.texture == NULL
 		|| data->game.south_texture.texture == NULL
 		|| data->game.east_texture.texture == NULL
 		|| data->game.west_texture.texture == NULL
 		|| data->game.celling_texture.texture == NULL
-		|| data->game.floor_texture.texture == NULL)
+		|| data->game.floor_texture.texture == NULL
+		|| data->game.weapon_texture.texture == NULL)
 		error_handler4(data, TEXTURE_OPEN_ERROR);
 	if (!check_dimension_texture(data))
 		error_handler4(data, TEXTURE_OPEN_ERROR);
@@ -130,4 +134,9 @@ void	get_data_textures(t_data *data)
 			&data->game.floor_texture.info_texture.bpp,
 			&data->game.floor_texture.info_texture.line_len,
 			&data->game.floor_texture.info_texture.endian);
+	data->game.weapon_texture.info_texture.data = mlx_get_data_addr(
+			data->game.weapon_texture.texture,
+			&data->game.weapon_texture.info_texture.bpp,
+			&data->game.weapon_texture.info_texture.line_len,
+			&data->game.weapon_texture.info_texture.endian);
 }

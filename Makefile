@@ -36,6 +36,8 @@ SOURCES := cub3d.c\
 			parser/mapValidator9.c\
 			parser/mapValidatorUtils.c\
 			game/renders/renders.c\
+			game/renders/minimap.c\
+			game/renders/player.c\
 			game/logic/dda.c\
 			game/utils/utils1.c\
 			game/utils/utils2.c\
@@ -43,6 +45,7 @@ SOURCES := cub3d.c\
 			game/handlers/keypress_handlers.c\
 			game/handlers/game_handlers.c\
 			game/game.c\
+			game/fps.c\
 			errorHandler.c\
 			freedom.c\
 			init.c\

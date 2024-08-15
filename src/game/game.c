@@ -33,6 +33,33 @@ void	open_window(t_data *data)
 			"Cub3d - OsBrabos");
 }
 
+void	render_weapon(t_data *data)
+{
+	int	x;
+	int	y;
+	int	x1;
+	int	y1;
+	int	color;
+
+	x1 = WIDTH / 2 - (data->game.weapon_texture.width / 2);
+	y1 = HEIGHT - data->game.weapon_texture.height;
+	y = 0;
+	while (y < data->game.weapon_texture.height)
+	{
+		x = 0;
+		while (x < data->game.weapon_texture.width)
+		{
+			color = *(int *)(data->game.weapon_texture.info_texture.data + y
+				* data->game.weapon_texture.info_texture.line_len + x
+				* (data->game.weapon_texture.info_texture.bpp / 8));
+			if (color != -16777216)
+				my_pixel_put(x1 + x, y1 + y, color, data);
+			x++;
+		}
+		y++;
+	}
+}
+
 int	render_game(void *param)
 {
 	t_data *data;
@@ -41,6 +68,7 @@ int	render_game(void *param)
 
 	x = 0;
 	data = (t_data*)param;
+	update_time(data);
 	create_image(data);
 	render_background(data);
 	while (x < WIDTH)
@@ -52,6 +80,9 @@ int	render_game(void *param)
 		draw_stripe(dda_values, x, data);
 		x++;
 	}
+	render_minimap(data);
+	render_player(data);
+	render_weapon(data);
 	put_image_to_window(data);
 	return (0);
 }

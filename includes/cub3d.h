@@ -23,12 +23,16 @@
 # include <stdbool.h>
 # include <stdio.h>
 # include <unistd.h>
+# include <sys/time.h>
+# include <stdint.h>
 
 # define RED "\033[1;31m"
 # define RESET "\033[0m"
 
 # define WIDTH 1280
 # define HEIGHT 1024
+# define MINIMAP_SIZE 15
+# define PLAYER_SIZE 7
 
 typedef struct s_norminetingz
 {
@@ -150,13 +154,15 @@ typedef struct s_game
 	double				rotate_speed;
 	double				move_speed;
 	double				time;
-	double				oldtime;
+	double				old_time;
+	double				frame_time;
 	t_texture			north_texture;
 	t_texture			south_texture;
 	t_texture			east_texture;
 	t_texture			west_texture;
 	t_texture			celling_texture;
 	t_texture			floor_texture;
+	t_texture			weapon_texture;
 	t_img				map_img;
 }						t_game;
 
@@ -264,9 +270,12 @@ void					print_colored_map(char **map);
 void					play_game(t_data *data);
 int						render_game(void *param);
 void					open_window(t_data *data);
+void    				update_time(t_data * data);
 
 // game-renders
 void					render_background(t_data *data);
+void					render_minimap(t_data *data);
+void    				render_player(t_data *data);
 void					draw_stripe(t_dda_values dda_values, int x,
 							t_data *data);
 void					my_pixel_put(int x, int y, int color, t_data *data);
