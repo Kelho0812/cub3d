@@ -44,6 +44,7 @@ SOURCES := cub3d.c\
 			game/handlers/close_handlers.c\
 			game/handlers/keypress_handlers.c\
 			game/handlers/game_handlers.c\
+			game/handlers/mouse_handlers.c\
 			game/game.c\
 			game/fps.c\
 			errorHandler.c\

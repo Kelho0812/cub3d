@@ -12,4 +12,13 @@
 
 #include "../../../includes/cub3d.h"
 
-int mouse_move_handler(int x, int y, )
+int handle_mouse(int x, int y, t_data *data)
+{
+    (void)y;
+    if (x > data->game.mouse_position.prev_x)
+        move_right(data);
+    else if (x < data->game.mouse_position.prev_x)
+        move_left(data);
+    data->game.mouse_position.prev_x = x;
+    return (0);
+}

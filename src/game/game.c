@@ -19,6 +19,7 @@ void	play_game(t_data *data)
 {
 	open_window(data);
 	init_game_values(data);
+	data->game.mouse_position.prev_x = 0;
 	render_game(data);
 	handle_render(data);
 }

@@ -127,6 +127,7 @@ typedef struct s_rgb
 	int					g;
 	int					b;
 }						t_rgb;
+
 typedef struct s_map
 {
 	char				**full_file_array;
@@ -149,6 +150,12 @@ typedef struct s_map
 	t_map_dimensions	dimensions;
 }						t_map;
 
+typedef struct s_mouse
+{
+	int	prev_x;
+	int	prev_y;
+}				t_mouse;
+
 typedef struct s_game
 {
 	double				rotate_speed;
@@ -163,6 +170,7 @@ typedef struct s_game
 	t_texture			celling_texture;
 	t_texture			floor_texture;
 	t_texture			weapon_texture;
+	t_mouse				mouse_position;
 	t_img				map_img;
 }						t_game;
 
@@ -292,6 +300,7 @@ void					find_distance_to_wall(t_dda_values *dda_values,
 // game-handlers
 int						handle_keypress(int keysym, t_data *data);
 int						handle_close(t_data *data);
+int 					handle_mouse(int x, int y, t_data *data);
 void					handle_render(t_data *data);
 
 // game-utils
@@ -299,5 +308,11 @@ void					create_background_buffer(t_data *data);
 void					init_game_values(t_data *data);
 void					get_data_textures(t_data *data);
 void					get_direction(t_data *data);
+
+//game-movement
+void					move_up(t_data *data);
+void					move_down(t_data *data);
+void					move_left(t_data *data);
+void					move_right(t_data *data);
 
 #endif
