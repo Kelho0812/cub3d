@@ -160,6 +160,7 @@ typedef struct s_game
 {
 	double				rotate_speed;
 	double				move_speed;
+	double				step_height;
 	double				time;
 	double				old_time;
 	double				frame_time;
@@ -282,6 +283,7 @@ void    				update_time(t_data * data);
 
 // game-renders
 void					render_background(t_data *data);
+void					render_background2(t_data *data);
 void					render_minimap(t_data *data);
 void    				render_player(t_data *data);
 void					draw_stripe(t_dda_values dda_values, int x,
@@ -310,8 +312,10 @@ void					get_data_textures(t_data *data);
 void					get_direction(t_data *data);
 
 //game-movement
-void					move_up(t_data *data);
-void					move_down(t_data *data);
+void					move_front(t_data *data);
+void					move_back(t_data *data);
+void					turn_left(t_data *data);
+void					turn_right(t_data *data);
 void					move_left(t_data *data);
 void					move_right(t_data *data);
 

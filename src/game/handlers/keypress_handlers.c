@@ -17,9 +17,9 @@ int	handle_keypress(int keysym, t_data *data)
 	if (keysym == XK_Escape)
 		handle_close(data);
 	if (keysym == XK_w)
-		move_up(data);
+		move_front(data);
 	if (keysym == XK_s)
-		move_down(data);
+		move_back(data);
 	if (keysym == XK_a)
 		move_left(data);
 	if (keysym == XK_d)
@@ -27,7 +27,7 @@ int	handle_keypress(int keysym, t_data *data)
 	return (0);
 }
 
-void	move_up(t_data *data)
+void	move_front(t_data *data)
 {
 	if (data->map.full_map_array[(int)(data->player.py + data->player.dir_y
 			* data->game.move_speed)][(int)(data->player.px)] != '1')
@@ -37,7 +37,7 @@ void	move_up(t_data *data)
 		data->player.px += data->player.dir_x * data->game.move_speed;
 }
 
-void	move_down(t_data *data)
+void	move_back(t_data *data)
 {
 	if (data->map.full_map_array[(int)(data->player.py - data->player.dir_y
 			* data->game.move_speed)][(int)(data->player.px)] != '1')
@@ -48,6 +48,16 @@ void	move_down(t_data *data)
 }
 
 void	move_left(t_data *data)
+{
+	data->player.px -= data->player.dir_x * data->game.move_speed;
+}
+
+void	move_right(t_data *data)
+{
+	data->player.px += data->player.dir_x * data->game.move_speed;
+}
+
+void	turn_left(t_data *data)
 {
 	double	old_dir_x;
 	double	old_plane_x;
@@ -64,7 +74,7 @@ void	move_left(t_data *data)
 		+ data->player.plane_y * cos(-data->game.rotate_speed);
 }
 
-void	move_right(t_data *data)
+void	turn_right(t_data *data)
 {
 	double	old_dir_x;
 	double	old_plane_x;

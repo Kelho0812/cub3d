@@ -14,11 +14,15 @@
 
 int handle_mouse(int x, int y, t_data *data)
 {
-    (void)y;
+    if (y > data->game.mouse_position.prev_y)
+        data->game.step_height -= 2;
+    else if (y < data->game.mouse_position.prev_y)
+        data->game.step_height += 2;
     if (x > data->game.mouse_position.prev_x)
-        move_right(data);
+        turn_right(data);
     else if (x < data->game.mouse_position.prev_x)
-        move_left(data);
+        turn_left(data);
     data->game.mouse_position.prev_x = x;
+    data->game.mouse_position.prev_y = y;
     return (0);
 }

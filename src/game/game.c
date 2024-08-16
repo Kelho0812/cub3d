@@ -20,6 +20,8 @@ void	play_game(t_data *data)
 	open_window(data);
 	init_game_values(data);
 	data->game.mouse_position.prev_x = 0;
+	data->game.mouse_position.prev_y = 0;
+	data->game.step_height = 0;
 	render_game(data);
 	handle_render(data);
 }
@@ -72,6 +74,7 @@ int	render_game(void *param)
 	update_time(data);
 	create_image(data);
 	render_background(data);
+	render_background2(data);
 	while (x < WIDTH)
 	{
 		init_values_dda(x, &dda_values, data);

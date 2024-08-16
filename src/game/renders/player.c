@@ -34,10 +34,16 @@ void    render_player(t_data *data)
         x1 = 0 - PLAYER_SIZE / 2;
         while (x1 < PLAYER_SIZE / 2)
         {
+            data->rays.camera_x = 2 * x1 / (double)WIDTH - 1;
+            data->rays.ray_dir_x = data->player.dir_x + data->player.plane_x
+                * data->rays.camera_x;
+            data->rays.ray_dir_y = data->player.dir_y + data->player.plane_y
+                * data->rays.camera_x;
             if (x + x1 < WIDTH && y + y1 < HEIGHT)
 			{
                 my_pixel_put(x + x1, y + y1, 0xFF0000, data);
 			}
+            draw_line
             x1++;
         }
         y1++;
