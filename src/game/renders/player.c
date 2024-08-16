@@ -27,6 +27,7 @@ void    render_player(t_data *data)
     int y1;
     int x = data->player.px * MINIMAP_SIZE;
     int y = data->player.py * MINIMAP_SIZE;
+    float x_step;
 
     y1 = 0 - PLAYER_SIZE / 2;
     while (y1 < PLAYER_SIZE / 2)
@@ -34,18 +35,24 @@ void    render_player(t_data *data)
         x1 = 0 - PLAYER_SIZE / 2;
         while (x1 < PLAYER_SIZE / 2)
         {
-            data->rays.camera_x = 2 * x1 / (double)WIDTH - 1;
-            data->rays.ray_dir_x = data->player.dir_x + data->player.plane_x
-                * data->rays.camera_x;
-            data->rays.ray_dir_y = data->player.dir_y + data->player.plane_y
-                * data->rays.camera_x;
             if (x + x1 < WIDTH && y + y1 < HEIGHT)
 			{
                 my_pixel_put(x + x1, y + y1, 0xFF0000, data);
 			}
-            draw_line
+            draw_line(x, y, x + (10 * data->rays.ray_dir_x), y + (10 * data->rays.ray_dir_y), data);
             x1++;
         }
         y1++;
+    }
+    x_step = 0;
+    while (x_step < 2)
+    {
+        data->rays.camera_x = x_step / (double)WIDTH;
+        data->rays.ray_dir_x = data->player.dir_x + data->player.plane_x
+            * data->rays.camera_x;
+        data->rays.ray_dir_y = data->player.dir_y + data->player.plane_y
+            * data->rays.camera_x;
+        draw_line(x, y, x + (10 * data->rays.ray_dir_x), y + (10 * data->rays.ray_dir_y), data);
+        x_step += 0.5;
     }
 }

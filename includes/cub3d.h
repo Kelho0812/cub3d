@@ -289,6 +289,7 @@ void    				render_player(t_data *data);
 void					draw_stripe(t_dda_values dda_values, int x,
 							t_data *data);
 void					my_pixel_put(int x, int y, int color, t_data *data);
+void					draw_line(float x, float y, float x1, float y1, t_data *data);
 
 // game-logic
 void					init_values_dda(int x, t_dda_values *dda_values,
