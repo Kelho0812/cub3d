@@ -14,7 +14,7 @@
 
 bool	is_valid_char(char c)
 {
-	return (c == '0' || c == '1' || is_player_char(c) || c == ' ' || c == '\t');
+	return (c == '0' || c == '1' || c == '2' || is_player_char(c) || c == ' ' || c == '\t');
 }
 
 void	check_wrong_chars(t_data *data, char **map_lines, int i)

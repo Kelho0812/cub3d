@@ -30,4 +30,5 @@ void    update_time(t_data * data)
     mlx_string_put(data->window.mlx, data->window.mlx_win, WIDTH - 50, 10, 0xFFFFFF, frame_time);
     data->game.move_speed = data->game.frame_time * 1.5;
     data->game.rotate_speed = data->game.frame_time * 0.3;
+	free(frame_time);
 }

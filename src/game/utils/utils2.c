@@ -19,10 +19,8 @@ void	create_background_buffer(t_data *data)
 	int	celling;
 	int	floor;
 
-	celling = data->map.ceiling_color.r << 16
-		| data->map.ceiling_color.g << 8 | data->map.ceiling_color.b;
-	floor = data->map.floor_color.r << 16 | data->map.floor_color.g << 8
-		| data->map.floor_color.b;
+	celling = data->map.ceiling_color.r << 16 | data->map.ceiling_color.g << 8 | data->map.ceiling_color.b;
+	floor = data->map.floor_color.r << 16 | data->map.floor_color.g << 8 | data->map.floor_color.b;
 	data->buffer_background = malloc(WIDTH * HEIGHT * sizeof(unsigned int));
 	y = 0;
 	while (y < HEIGHT)
@@ -59,4 +57,10 @@ void	destroy_images(t_data *data)
 		mlx_destroy_image(data->window.mlx, data->game.east_texture.texture);
 	if (data->game.west_texture.texture != NULL)
 		mlx_destroy_image(data->window.mlx, data->game.west_texture.texture);
+	if (data->game.celling_texture.texture != NULL)
+		mlx_destroy_image(data->window.mlx, data->game.celling_texture.texture);
+	if (data->game.floor_texture.texture != NULL)
+		mlx_destroy_image(data->window.mlx, data->game.floor_texture.texture);
+	if (data->game.weapon_texture.texture != NULL)
+		mlx_destroy_image(data->window.mlx, data->game.weapon_texture.texture);
 }
