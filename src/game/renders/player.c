@@ -35,12 +35,12 @@ void    render_player(t_data *data)
         }
         y1++;
     }
-    x_step = -1;
-    while (x_step < 1)
+    x_step = -0.7;
+    while (x_step < 0.7)
     {
         data->rays.ray_dir_x = data->player.dir_x + data->player.plane_x * x_step;
         data->rays.ray_dir_y = data->player.dir_y + data->player.plane_y * x_step;
-        draw_line(x, y, x + (12 * data->rays.ray_dir_x), y + (12 * data->rays.ray_dir_y), data);
-        x_step += 0.1;
+        draw_line(x, y, x + (13 * data->rays.ray_dir_x), y + (13 * data->rays.ray_dir_y), data);
+        x_step += 0.2;
     }
 }
