@@ -33,4 +33,12 @@ void	destroy_images(t_data *data)
 		mlx_destroy_image(data->window.mlx, data->game.wall3.texture);
 	if (data->game.wall4.texture != NULL)
 		mlx_destroy_image(data->window.mlx, data->game.wall4.texture);
+	if (data->game.wall5.texture != NULL)
+		mlx_destroy_image(data->window.mlx, data->game.wall5.texture);
+	if (data->game.celling_texture.texture != NULL)
+		mlx_destroy_image(data->window.mlx, data->game.celling_texture.texture);
+	if (data->game.floor_texture.texture != NULL)
+		mlx_destroy_image(data->window.mlx, data->game.floor_texture.texture);
+	if (data->game.weapon_texture.texture != NULL)
+		mlx_destroy_image(data->window.mlx, data->game.weapon_texture.texture);
 }
