@@ -25,57 +25,57 @@ void	my_pixel_put(int x, int y, int color, t_img img)
 	}
 }
 
-void	define_texture(t_dda_values dda_values, t_data data, t_texture *ptr)
+void	define_texture(t_rec_val temp, t_data data, t_texture *ptr)
 {
-	if (data.map.full_map_array[dda_values.map_y][dda_values.map_x] == '1')
+	if (data.map.full_map_array[temp.map_y][temp.map_x] == '1')
 		*ptr = data.game.wall1;
-	else if (data.map.full_map_array[dda_values.map_y][dda_values.map_x] == '2')
+	else if (data.map.full_map_array[temp.map_y][temp.map_x] == '2')
 		*ptr = data.game.wall2;
-	else if (data.map.full_map_array[dda_values.map_y][dda_values.map_x] == '3')
+	else if (data.map.full_map_array[temp.map_y][temp.map_x] == '3')
 		*ptr = data.game.wall3;
-	else if (data.map.full_map_array[dda_values.map_y][dda_values.map_x] == '4')
+	else if (data.map.full_map_array[temp.map_y][temp.map_x] == '4')
 		*ptr = data.game.wall4;
-	else if (data.map.full_map_array[dda_values.map_y][dda_values.map_x] == '5')
+	else if (data.map.full_map_array[temp.map_y][temp.map_x] == '5')
 		*ptr = data.game.wall5;
-	else if (data.map.full_map_array[dda_values.map_y][dda_values.map_x] == '6')
+	else if (data.map.full_map_array[temp.map_y][temp.map_x] == '6')
 		*ptr = data.game.animation.frames->texture;
 }
 
 void	define_values_to_draw_texture(t_texture_values *draw_values,
-		t_texture ptr, t_dda_values dda_values, t_data *data)
+		t_texture ptr, t_rec_val temp, t_data *data)
 {
-	draw_values->draw_start = HEIGHT / 2 - (dda_values.line_height / 2) + data->game.step_height;
+	draw_values->draw_start = HEIGHT / 2 - (temp.line_height / 2) + data->game.step_height;
 	if (draw_values->draw_start < 0)
 		draw_values->draw_start = 0;
-	draw_values->draw_end = HEIGHT / 2 + (dda_values.line_height / 2) + data->game.step_height;
+	draw_values->draw_end = HEIGHT / 2 + (temp.line_height / 2) + data->game.step_height;
 	if (draw_values->draw_end >= HEIGHT)
 		draw_values->draw_end = HEIGHT - 1;
-	if (dda_values.side == 0)
-		draw_values->wall_x = data->player.py + data->dist.perp_wall_dist
+	if (temp.side == 0)
+		draw_values->wall_x = data->player.py + temp.wallDist
 			* data->rays.ray_dir_y;
 	else
-		draw_values->wall_x = data->player.px + data->dist.perp_wall_dist
+		draw_values->wall_x = data->player.px + temp.wallDist
 			* data->rays.ray_dir_x;
 	draw_values->wall_x -= floor((draw_values->wall_x));
 	draw_values->tex_x = (int)(draw_values->wall_x * (double)ptr.width);
-	if (dda_values.side == 0 && data->rays.ray_dir_x > 0)
+	if (temp.side == 0 && data->rays.ray_dir_x > 0)
 		draw_values->tex_x = ptr.width - draw_values->tex_x - 1;
-	if (dda_values.side == 1 && data->rays.ray_dir_y < 0)
+	if (temp.side == 1 && data->rays.ray_dir_y < 0)
 		draw_values->tex_x = ptr.width - draw_values->tex_x - 1;
-	draw_values->step = 1.0 * ptr.height / dda_values.line_height;
+	draw_values->step = 1.0 * ptr.height / temp.line_height;
 	draw_values->tex_pos = ((draw_values->draw_start - data->game.step_height) - HEIGHT / 2
-			+ dda_values.line_height / 2) * draw_values->step;
+			+ temp.line_height / 2) * draw_values->step;
 }
 
-void	draw_stripe(t_dda_values dda_values, int x, t_data *data)
+void	draw_stripe(int x, t_data *data, t_rec_val *temp)
 {
 	int					i;
 	int					color;
 	t_texture			ptr;
 	t_texture_values	draw_values;
 
-	define_texture(dda_values, *data, &ptr);
-	define_values_to_draw_texture(&draw_values, ptr, dda_values, data);
+	define_texture(*temp, *data, &ptr);
+	define_values_to_draw_texture(&draw_values, ptr, *temp, data);
 	i = draw_values.draw_start;
 	while (i < draw_values.draw_end)
 	{

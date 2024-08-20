@@ -41,6 +41,7 @@ void	calculate_distances(t_dda_values *dda_values, t_data *data)
 void	execute_dda(t_dda_values *dda_values, t_data *data, int x)
 {
 	int	hit;
+	t_rec_val	temp;
 
 	hit = 0;
 	while (hit == 0)
@@ -49,37 +50,44 @@ void	execute_dda(t_dda_values *dda_values, t_data *data, int x)
 		{
 			data->dist.side_dist_x += data->dist.delta_dist_x;
 			dda_values->map_x += dda_values->step_x;
-			dda_values->side = 0;
+			temp.side = 0;
 		}
 		else
 		{
 			data->dist.side_dist_y += data->dist.delta_dist_y;
 			dda_values->map_y += dda_values->step_y;
-			dda_values->side = 1;
+			temp.side = 1;
 		}
 		if (!ft_strchr("0NWES6", data->map.full_map_array[dda_values->map_y]
 			[dda_values->map_x]))
+		{
+			temp.map_x = dda_values->map_x;
+			temp.map_y = dda_values->map_y;
+			find_distance_to_wall(data, &temp);
 			hit = 1;
+		}
 		else if (ft_strchr("6", data->map.full_map_array[dda_values->map_y]
 			[dda_values->map_x]))
 		{
+			temp.map_x = dda_values->map_x;
+			temp.map_y = dda_values->map_y;
+			find_distance_to_wall(data, &temp);
 			execute_dda(dda_values, data, x);
 			hit = 1;
 		}
 	}
-	find_distance_to_wall(dda_values, data);
-	draw_stripe(*dda_values, x, data);
+	draw_stripe(x, data, &temp);
 }
 
-void	find_distance_to_wall(t_dda_values *dda_values, t_data *data)
+void	find_distance_to_wall(t_data *data, t_rec_val *temp)
 {
-	if (dda_values->side == 0)
-		data->dist.perp_wall_dist = data->dist.side_dist_x
+	if (temp->side == 0)
+		temp->wallDist = data->dist.side_dist_x
 			- data->dist.delta_dist_x;
 	else
-		data->dist.perp_wall_dist = data->dist.side_dist_y
+		temp->wallDist = data->dist.side_dist_y
 			- data->dist.delta_dist_y;
-	dda_values->line_height = (int)(HEIGHT / data->dist.perp_wall_dist);
+	temp->line_height = (int)(HEIGHT / temp->wallDist);
 }
 
 static void	define_steps(t_dda_values *dda_values, t_data *data)

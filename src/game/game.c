@@ -99,7 +99,7 @@ void	render_mira(t_data *data)
 
 int	render_game(void *param)
 {
-	t_data *data;
+	t_data 			*data;
 	t_dda_values	dda_values;
 	int				x;
 

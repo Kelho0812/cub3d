@@ -49,10 +49,16 @@ typedef struct s_dda_values
 	int					map_y;
 	int					step_x;
 	int					step_y;
-	int					side;
-	int					line_height;
 }						t_dda_values;
 
+typedef struct s_rec_val
+{
+	int					side;
+	int					map_x;
+	int					map_y;
+	int					line_height;
+	double				wallDist;
+}				t_rec_val;
 typedef struct s_texture_values
 {
 	int					draw_start;
@@ -94,7 +100,6 @@ typedef struct s_dist
 	double				side_dist_y;
 	double				delta_dist_x;
 	double				delta_dist_y;
-	double				perp_wall_dist;
 }						t_dist;
 
 typedef enum e_direction
@@ -312,8 +317,8 @@ void					render_floor(t_data *data);
 void					render_celling(t_data *data);
 void					render_minimap(t_data *data);
 void					render_player(t_data *data);
-void					draw_stripe(t_dda_values dda_values, int x,
-							t_data *data);
+void					draw_stripe(int x,
+							t_data *data, t_rec_val *temp);
 void					my_pixel_put(int x, int y, int color, t_img img);
 void					draw_line(float x, float y, float x1, float y1,
 							t_data *data);
@@ -324,8 +329,7 @@ void					init_values_dda(int x, t_dda_values *dda_values,
 void					calculate_distances(t_dda_values *dda_values,
 							t_data *data);
 void					execute_dda(t_dda_values *dda_values, t_data *data, int x);
-void					find_distance_to_wall(t_dda_values *dda_values,
-							t_data *data);
+void					find_distance_to_wall(t_data *data, t_rec_val *temp);
 
 // game-handlers
 int						handle_keypress(int keysym, t_data *data);
