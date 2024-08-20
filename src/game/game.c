@@ -70,8 +70,8 @@ int	render_game(void *param)
 	data = (t_data*)param;
 	update_time(data);
 	create_image(data);
-	// render_floor(data);
-	// render_celling(data);
+	render_floor(data);
+	render_celling(data);
 	while (x < WIDTH)
 	{
 		init_values_dda(x, &dda_values, data);
