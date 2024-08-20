@@ -107,7 +107,8 @@ void	close_door(t_data *data)
 {
 	if (data->game.animation.frames->prev != NULL)
 		data->game.animation.frames = data->game.animation.frames->prev;
-	data->game.door_status = 0;
+	else
+		data->game.door_status = 0;
 }
 
 int	render_game(void *param)
