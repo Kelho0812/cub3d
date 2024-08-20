@@ -39,6 +39,7 @@ SOURCES := cub3d.c\
 			game/renders/minimap.c\
 			game/renders/player.c\
 			game/renders/bresenham.c\
+			game/renders/sprite.c\
 			game/logic/dda.c\
 			game/utils/utils1.c\
 			game/utils/utils2.c\

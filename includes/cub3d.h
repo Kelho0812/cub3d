@@ -173,8 +173,9 @@ typedef struct s_frame
 
 typedef struct s_animation
 {
-	t_slice				slice;
-	t_frame				*frames;
+	t_texture	texture;
+	t_slice		slice;
+	t_frame		*frames;
 }						t_animation;
 
 typedef struct s_window
@@ -346,5 +347,7 @@ void					turn_left(t_data *data);
 void					turn_right(t_data *data);
 void					move_left(t_data *data);
 void					move_right(t_data *data);
+
+void    				create_frames(t_data *data);
 
 #endif

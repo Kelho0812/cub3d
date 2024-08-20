@@ -19,6 +19,7 @@ void	play_game(t_data *data)
 {
 	open_window(data);
 	init_game_values(data);
+	create_frames(data);
 	render_game(data);
 	handle_render(data);
 }
@@ -122,6 +123,7 @@ int	render_game(void *param)
 	render_weapon(data);
 	render_mira(data);
 	put_image_to_window(data);
+	// data->game.animation.frames = data->game.animation.frames->next;
 	return (0);
 }
 
