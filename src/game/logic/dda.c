@@ -38,7 +38,7 @@ void	calculate_distances(t_dda_values *dda_values, t_data *data)
 	define_steps(dda_values, data);
 }
 
-void	execute_dda(t_dda_values *dda_values, t_data *data)
+void	execute_dda(t_dda_values *dda_values, t_data *data, int x)
 {
 	int	hit;
 
@@ -57,10 +57,18 @@ void	execute_dda(t_dda_values *dda_values, t_data *data)
 			dda_values->map_y += dda_values->step_y;
 			dda_values->side = 1;
 		}
-		if (!ft_strchr("0NWES", data->map.full_map_array[dda_values->map_y]
+		if (!ft_strchr("0NWES6", data->map.full_map_array[dda_values->map_y]
 			[dda_values->map_x]))
 			hit = 1;
+		else if (ft_strchr("6", data->map.full_map_array[dda_values->map_y]
+			[dda_values->map_x]))
+		{
+			execute_dda(dda_values, data, x);
+			hit = 1;
+		}
 	}
+	find_distance_to_wall(dda_values, data);
+	draw_stripe(*dda_values, x, data);
 }
 
 void	find_distance_to_wall(t_dda_values *dda_values, t_data *data)

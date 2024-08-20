@@ -113,9 +113,7 @@ int	render_game(void *param)
 	{
 		init_values_dda(x, &dda_values, data);
 		calculate_distances(&dda_values, data);
-		execute_dda(&dda_values, data);
-		find_distance_to_wall(&dda_values, data);
-		draw_stripe(dda_values, x, data);
+		execute_dda(&dda_values, data, x);
 		x++;
 	}
 	render_minimap(data);
@@ -123,7 +121,7 @@ int	render_game(void *param)
 	render_weapon(data);
 	render_mira(data);
 	put_image_to_window(data);
-	// data->game.animation.frames = data->game.animation.frames->next;
+	data->game.animation.frames = data->game.animation.frames->next;
 	return (0);
 }
 

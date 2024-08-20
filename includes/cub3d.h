@@ -168,14 +168,12 @@ typedef	struct s_slice
 
 typedef struct s_frame
 {
-	t_img				frame;
+	t_texture			texture;
 	struct s_frame		*next;
 }						t_frame;
 
 typedef struct s_animation
 {
-	t_texture	texture;
-	t_slice		slice;
 	t_frame		*frames;
 }						t_animation;
 
@@ -324,7 +322,7 @@ void					init_values_dda(int x, t_dda_values *dda_values,
 							t_data *data);
 void					calculate_distances(t_dda_values *dda_values,
 							t_data *data);
-void					execute_dda(t_dda_values *dda_values, t_data *data);
+void					execute_dda(t_dda_values *dda_values, t_data *data, int x);
 void					find_distance_to_wall(t_dda_values *dda_values,
 							t_data *data);
 
