@@ -44,16 +44,14 @@ static void render_wall(int x, int y, t_data *data)
 	int	color;
 
     y1 = 0;
-    while (y1 < MINIMAP_SIZE)
+    while (y1 < MINIMAP_SIZE - 1)
     {
         x1 = 0;
-        while (x1 < MINIMAP_SIZE)
+        while (x1 < MINIMAP_SIZE - 1)
         {
             if (x + x1 < WIDTH && y + y1 < HEIGHT)
             {
-                color =  *(int *)(data->game.celling_texture.info_texture.data + y1
-                    * data->game.celling_texture.info_texture.line_len + x1
-                    * (data->game.celling_texture.info_texture.bpp / 8));
+                color = 0xA7CCED;
                 my_pixel_put(x + x1, y + y1, color, data->game.map_img);
             }
             x1++;
@@ -69,14 +67,12 @@ static void render_minimap_floor(int x, int y, t_data *data)
     int color;
 
     y1 = 0;
-    while (y1 < MINIMAP_SIZE)
+    while (y1 < MINIMAP_SIZE - 1)
     {
         x1 = 0;
-        while (x1 < MINIMAP_SIZE)
+        while (x1 < MINIMAP_SIZE - 1)
         {
-            color = *(int *)(data->game.floor_texture.info_texture.data + y1
-                * data->game.floor_texture.info_texture.line_len + x1
-                * (data->game.floor_texture.info_texture.bpp / 8));
+            color = 0x304D6D;
             if (x + x1 < WIDTH && y + y1 < HEIGHT)
             {
                 my_pixel_put(x + x1, y + y1, color, data->game.map_img);

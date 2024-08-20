@@ -60,6 +60,42 @@ void	render_weapon(t_data *data)
 	}
 }
 
+void	render_mira(t_data *data)
+{
+	int	x;
+	int	y;
+	int	x1;
+	int	y1;
+	int	color;
+
+	x1 = WIDTH / 2 - 10;
+	y1 = HEIGHT / 2 - 10;
+	y = 0;
+	while (y < 3)
+	{
+		x = 1;
+		while (x < 20)
+		{
+			color = 0xFFFFFF;
+			my_pixel_put(x1 + x, HEIGHT / 2 - 1 + y, color, data->game.map_img);
+			x++;
+		}
+		y++;
+	}
+	y = 1;
+	while (y < 20)
+	{
+		x = 0;
+		while (x < 3)
+		{
+			color = 0xFFFFFF;
+			my_pixel_put(WIDTH / 2 - 1 + x, y1 + y, color, data->game.map_img);
+			x++;
+		}
+		y++;
+	}
+}
+
 int	render_game(void *param)
 {
 	t_data *data;
@@ -84,6 +120,7 @@ int	render_game(void *param)
 	render_minimap(data);
 	render_player(data);
 	render_weapon(data);
+	render_mira(data);
 	put_image_to_window(data);
 	return (0);
 }
