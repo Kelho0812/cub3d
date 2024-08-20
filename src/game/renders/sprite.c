@@ -47,7 +47,7 @@ void    create_frames(t_data *data)
     data->game.animation.frames = calloc(1, sizeof(t_frame));
     temp = data->game.animation.frames;
     frames = 1;
-    while (frames < 4)
+    while (frames < 41)
     {
         num = ft_itoa(frames);
         str = ft_strjoin("./textures/animation", num);
@@ -58,7 +58,7 @@ void    create_frames(t_data *data)
         temp->texture.info_texture.data = mlx_get_data_addr(temp->texture.texture,
         &temp->texture.info_texture.bpp, &temp->texture.info_texture.line_len, 
         &temp->texture.info_texture.endian);
-        if (frames + 1 != 4)
+        if (frames + 1 != 41)
         {
             temp->next = calloc(1, sizeof(t_frame));
             temp = temp->next;
