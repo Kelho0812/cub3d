@@ -38,43 +38,32 @@
 
 void    create_frames(t_data *data)
 {
-    int frames = 3;
+    int     frames;
     t_frame *temp;
-    t_texture tex1;
-    t_texture tex2;
-    t_texture tex3;
+    char    *str;
+    char    *str2;
+    char    *num;
 
     data->game.animation.frames = calloc(1, sizeof(t_frame));
     temp = data->game.animation.frames;
-    tex1.texture = mlx_xpm_file_to_image(data->window.mlx, 
-        "./textures/fire1.xpm", &tex1.width, &tex1.height);
-    tex1.info_texture.data = mlx_get_data_addr(tex1.texture,
-        &tex1.info_texture.bpp, &tex1.info_texture.line_len, 
-        &tex1.info_texture.endian);
-    tex2.texture = mlx_xpm_file_to_image(data->window.mlx, 
-        "./textures/fire2.xpm", &tex2.width, &tex2.height);
-    tex2.info_texture.data = mlx_get_data_addr(tex2.texture,
-        &tex2.info_texture.bpp, &tex2.info_texture.line_len, 
-        &tex2.info_texture.endian);
-    tex3.texture = mlx_xpm_file_to_image(data->window.mlx, 
-        "./textures/fire3.xpm", &tex3.width, &tex3.height);
-    tex3.info_texture.data = mlx_get_data_addr(tex3.texture,
-        &tex3.info_texture.bpp, &tex3.info_texture.line_len, 
-        &tex3.info_texture.endian);
-    while (frames)
+    frames = 1;
+    while (frames < 4)
     {
-        if (frames == 3)
-            temp->texture = tex1;
-        else if (frames == 2)
-            temp->texture = tex2;
-        else if (frames == 1)
-            temp->texture = tex3;
-        if (frames != 1)
+        num = ft_itoa(frames);
+        str = ft_strjoin("./textures/animation", num);
+        str2 = ft_strjoin(str, ".xpm");
+        free(str);
+        temp->texture.texture = mlx_xpm_file_to_image(data->window.mlx, 
+        str2, &temp->texture.width, &temp->texture.height);
+        temp->texture.info_texture.data = mlx_get_data_addr(temp->texture.texture,
+        &temp->texture.info_texture.bpp, &temp->texture.info_texture.line_len, 
+        &temp->texture.info_texture.endian);
+        if (frames + 1 != 4)
         {
             temp->next = calloc(1, sizeof(t_frame));
             temp = temp->next;
         }
-        frames--;
+        frames++;
     }
     temp->next = data->game.animation.frames;
 }
