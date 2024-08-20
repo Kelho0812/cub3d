@@ -109,24 +109,28 @@ gdb: re
 
 define SUP_BODY
 {
-   name
+   mlx_mouse_hide
    Memcheck:Leak
-   fun:*alloc
    ...
-   obj:*/libreadline.so.*
-   ...
+   fun:mlx_mouse_hide
 }
 {
-	leak readline
+	leak XrmGetStringDatabase
 	Memcheck:Leak
 	...
-	fun:readline
+	fun:XrmGetStringDatabase
 }
 {
-	leak add_history
+	leak _dl_open
 	Memcheck:Leak
 	...
-	fun:add_history
+	fun:_dl_open
+}
+{
+	leak _XrmInitParseInfo
+	Memcheck:Leak
+	...
+	fun:_XrmInitParseInfo
 }
 endef
 
