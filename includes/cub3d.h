@@ -174,6 +174,7 @@ typedef struct s_frame
 {
 	t_texture			texture;
 	struct s_frame		*next;
+	struct s_frame		*prev;
 }						t_frame;
 
 typedef struct s_animation
@@ -195,6 +196,7 @@ typedef struct s_game
 	double				time;
 	double				old_time;
 	double				frame_time;
+	int					door_status;
 	t_texture			wall1;
 	t_texture			wall2;
 	t_texture			wall3;

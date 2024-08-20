@@ -24,16 +24,30 @@ int	handle_keypress(int keysym, t_data *data)
 		move_left(data);
 	if (keysym == XK_d)
 		move_right(data);
+	if ((keysym == XK_e && ft_strchr("6", 
+		data->map.full_map_array[(int)(data->player.py + data->player.dir_y
+			* data->game.move_speed)][(int)(data->player.px)])))
+		data->game.door_status = 1;
+	if (keysym == XK_e && ft_strchr("6", 
+		data->map.full_map_array[(int)(data->player.py + data->player.dir_y
+			* data->game.move_speed)][(int)(data->player.px)]) && data->game.door_status == 1)
+		data->game.door_status = 2;
 	return (0);
 }
 
 void	move_front(t_data *data)
 {
 	if (ft_strchr("0NWES", data->map.full_map_array[(int)(data->player.py + data->player.dir_y
-			* data->game.move_speed)][(int)(data->player.px)]))
+			* data->game.move_speed)][(int)(data->player.px)])
+			|| (ft_strchr("6", data->map.full_map_array[(int)(data->player.py + data->player.dir_y
+			* data->game.move_speed)][(int)(data->player.px)])
+			&& data->game.door_status == 1))
 		data->player.py += data->player.dir_y * data->game.move_speed;
 	if (ft_strchr("0NWES", data->map.full_map_array[(int)(data->player.py)][(int)(data->player.px
-			+ data->player.dir_x * data->game.move_speed)]))
+			+ data->player.dir_x * data->game.move_speed)])
+			|| (ft_strchr("0NWES", data->map.full_map_array[(int)(data->player.py)][(int)(data->player.px
+			+ data->player.dir_x * data->game.move_speed)])
+			&& data->game.door_status == 1))
 		data->player.px += data->player.dir_x * data->game.move_speed;
 }
 

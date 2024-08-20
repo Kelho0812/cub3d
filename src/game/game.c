@@ -97,6 +97,19 @@ void	render_mira(t_data *data)
 	}
 }
 
+void	open_door(t_data *data)
+{
+	if (data->game.animation.frames->next != NULL)
+		data->game.animation.frames = data->game.animation.frames->next;
+}
+
+void	close_door(t_data *data)
+{
+	if (data->game.animation.frames->prev != NULL)
+		data->game.animation.frames = data->game.animation.frames->prev;
+	data->game.door_status = 0;
+}
+
 int	render_game(void *param)
 {
 	t_data 			*data;
@@ -121,7 +134,10 @@ int	render_game(void *param)
 	render_weapon(data);
 	render_mira(data);
 	put_image_to_window(data);
-	data->game.animation.frames = data->game.animation.frames->next;
+	if (data->game.door_status == 1)
+		open_door(data);
+	else if (data->game.door_status == 2)
+		close_door(data);
 	return (0);
 }
 

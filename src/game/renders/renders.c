@@ -85,7 +85,7 @@ void	draw_stripe(int x, t_data *data, t_rec_val *temp)
 		color = *(int *)(ptr.info_texture.data + draw_values.tex_y
 				* ptr.info_texture.line_len + draw_values.tex_x
 				* (ptr.info_texture.bpp / 8));
-		if (color != 0x000000)
+		if (color > 0x000000)
 			my_pixel_put(x, i, color, data->game.map_img);
 		i++;
 	}
