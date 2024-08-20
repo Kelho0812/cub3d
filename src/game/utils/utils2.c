@@ -21,6 +21,7 @@ void	init_game_values(t_data *data)
 	data->game.mouse_position.prev_x = 0;
 	data->game.mouse_position.prev_y = 0;
 	data->game.step_height = 0;
+	data->game.time = gettimeofday_ms();
 }
 
 void	destroy_images(t_data *data)

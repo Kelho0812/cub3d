@@ -12,7 +12,7 @@
 
 #include "../../includes/cub3d.h"
 
-static uint64_t	gettimeofday_ms(void) {
+uint64_t	gettimeofday_ms(void) {
 	static struct timeval	tv;
 
 	gettimeofday(&tv, NULL);
