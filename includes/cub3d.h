@@ -31,9 +31,10 @@
 
 # define WIDTH 1920
 # define HEIGHT 1080
-# define MINIMAP_SIZE 20
+# define MINIMAP_SIZE 15
 # define PLAYER_SIZE 7
-
+# define MINIMAP_WALL_COLOR 0xa39ba8
+# define MINIMAP_FLOOR_COLOR 0x333745
 typedef struct s_norminetingz
 {
 	int					j;
