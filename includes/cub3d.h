@@ -29,8 +29,8 @@
 # define RED "\033[1;31m"
 # define RESET "\033[0m"
 
-# define WIDTH 1280
-# define HEIGHT 1024
+# define WIDTH 1920
+# define HEIGHT 1080
 # define MINIMAP_SIZE 15
 # define PLAYER_SIZE 7
 
@@ -167,8 +167,8 @@ typedef	struct s_slice
 
 typedef struct s_frame
 {
-	t_img		frame;
-	t_frame		*next;
+	t_img				frame;
+	struct s_frame		*next;
 }						t_frame;
 
 typedef struct s_animation

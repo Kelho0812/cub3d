@@ -53,7 +53,7 @@ void	render_weapon(t_data *data)
 				* data->game.weapon_texture.info_texture.line_len + x
 				* (data->game.weapon_texture.info_texture.bpp / 8));
 			if (color != -16777216)
-				my_pixel_put(x1 + x, y1 + y, color, data);
+				my_pixel_put(x1 + x, y1 + y, color, data->game.map_img);
 			x++;
 		}
 		y++;
