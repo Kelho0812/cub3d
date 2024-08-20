@@ -21,10 +21,10 @@
 # include <fcntl.h>
 # include <math.h>
 # include <stdbool.h>
-# include <stdio.h>
-# include <unistd.h>
-# include <sys/time.h>
 # include <stdint.h>
+# include <stdio.h>
+# include <sys/time.h>
+# include <unistd.h>
 
 # define RED "\033[1;31m"
 # define RESET "\033[0m"
@@ -153,18 +153,17 @@ typedef struct s_map
 
 typedef struct s_mouse
 {
-	int	prev_x;
-	int	prev_y;
-}				t_mouse;
+	int					prev_x;
+	int					prev_y;
+}						t_mouse;
 
-typedef	struct s_slice
+typedef struct s_slice
 {
-	int	x;
-	int	y;
-	int	width;
-	int	height;
-}				t_slice;
-
+	int					x;
+	int					y;
+	int					width;
+	int					height;
+}						t_slice;
 
 typedef struct s_frame
 {
@@ -239,6 +238,7 @@ void					validate_and_copy_elements(t_data *data);
 void					validate_and_copy_map(t_data *data);
 void					copy_elements(t_data *data, char **line);
 void					set_rgb(t_data *data, t_rgb *rgb, char **line);
+uint64_t				gettimeofday_ms(void);
 bool					is_north(char *map);
 bool					is_south(char *map);
 bool					is_west(char *map);
@@ -305,17 +305,18 @@ void					print_colored_map(char **map);
 void					play_game(t_data *data);
 int						render_game(void *param);
 void					open_window(t_data *data);
-void    				update_time(t_data * data);
+void					update_time(t_data *data);
 
 // game-renders
 void					render_floor(t_data *data);
 void					render_celling(t_data *data);
 void					render_minimap(t_data *data);
-void    				render_player(t_data *data);
+void					render_player(t_data *data);
 void					draw_stripe(t_dda_values dda_values, int x,
 							t_data *data);
 void					my_pixel_put(int x, int y, int color, t_img img);
-void					draw_line(float x, float y, float x1, float y1, t_data *data);
+void					draw_line(float x, float y, float x1, float y1,
+							t_data *data);
 
 // game-logic
 void					init_values_dda(int x, t_dda_values *dda_values,
@@ -329,7 +330,7 @@ void					find_distance_to_wall(t_dda_values *dda_values,
 // game-handlers
 int						handle_keypress(int keysym, t_data *data);
 int						handle_close(t_data *data);
-int 					handle_mouse(int x, int y, t_data *data);
+int						handle_mouse(int x, int y, t_data *data);
 void					handle_render(t_data *data);
 
 // game-utils
@@ -337,7 +338,7 @@ void					init_game_values(t_data *data);
 void					get_data_textures(t_data *data);
 void					get_direction(t_data *data);
 
-//game-movement
+// game-movement
 void					move_front(t_data *data);
 void					move_back(t_data *data);
 void					turn_left(t_data *data);
