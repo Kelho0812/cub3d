@@ -38,7 +38,7 @@ void	define_texture(t_dda_values dda_values, t_data data, t_texture *ptr)
 	else if (data.map.full_map_array[dda_values.map_y][dda_values.map_x] == '5')
 		*ptr = data.game.wall5;
 	else if (data.map.full_map_array[dda_values.map_y][dda_values.map_x] == '6')
-		*ptr = data.game.wall6;
+		*ptr = data.game.animation.texture;
 }
 
 void	define_values_to_draw_texture(t_texture_values *draw_values,
@@ -85,7 +85,8 @@ void	draw_stripe(t_dda_values dda_values, int x, t_data *data)
 		color = *(int *)(ptr.info_texture.data + draw_values.tex_y
 				* ptr.info_texture.line_len + draw_values.tex_x
 				* (ptr.info_texture.bpp / 8));
-		my_pixel_put(x, i, color, data->game.map_img);
+		if (color != -16777216)
+			my_pixel_put(x, i, color, data->game.map_img);
 		i++;
 	}
 }
