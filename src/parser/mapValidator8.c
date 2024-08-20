@@ -12,9 +12,14 @@
 
 #include "../../includes/cub3d.h"
 
+bool is_valid_map_char(char c)
+{
+	return(ft_strchr("0123456", c));
+}
+
 bool	is_valid_char(char c)
 {
-	return (c == '0' || c == '1' || c == '2' || is_player_char(c) || c == ' ' || c == '\t');
+	return (is_valid_map_char(c) || is_player_char(c) || c == ' ' || c == '\t');
 }
 
 void	check_wrong_chars(t_data *data, char **map_lines, int i)
@@ -36,8 +41,7 @@ void	check_wrong_chars(t_data *data, char **map_lines, int i)
 			if (is_player_char(map_lines[i][n.j]))
 				handle_player_char(data, i, &n);
 			else if (!is_valid_char(map_lines[i][n.j]))
-				continue;
-				// error_handler2(data, WRONG_CHARS_MAP_ERROR);
+				error_handler2(data, WRONG_CHARS_MAP_ERROR);
 		}
 		if (n.j == 0 && map_lines[i][n.j] == '\0')
 			n.map_end = true;
