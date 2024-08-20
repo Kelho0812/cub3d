@@ -12,51 +12,25 @@
 
 #include "../../../includes/cub3d.h"
 
-void	create_background_buffer(t_data *data)
-{
-	int	x;
-	int	y;
-	int	celling;
-	int	floor;
-
-	celling = data->map.ceiling_color.r << 16
-		| data->map.ceiling_color.g << 8 | data->map.ceiling_color.b;
-	floor = data->map.floor_color.r << 16 | data->map.floor_color.g << 8
-		| data->map.floor_color.b;
-	data->buffer_background = malloc(WIDTH * HEIGHT * sizeof(unsigned int));
-	y = 0;
-	while (y < HEIGHT)
-	{
-		x = 0;
-		while (x < WIDTH)
-		{
-			if (y < HEIGHT / 2)
-				data->buffer_background[y * WIDTH + x] = celling;
-			else
-				data->buffer_background[y * WIDTH + x] = floor;
-			x++;
-		}
-		y++;
-	}
-}
-
 void	init_game_values(t_data *data)
 {
 	data->player.px += 0.5;
 	data->player.py += 0.5;
 	data->game.move_speed = 0.08;
 	data->game.rotate_speed = 0.05;
-	create_background_buffer(data);
+	data->game.mouse_position.prev_x = 0;
+	data->game.mouse_position.prev_y = 0;
+	data->game.step_height = 0;
 }
 
 void	destroy_images(t_data *data)
 {
-	if (data->game.north_texture.texture != NULL)
-		mlx_destroy_image(data->window.mlx, data->game.north_texture.texture);
-	if (data->game.south_texture.texture != NULL)
-		mlx_destroy_image(data->window.mlx, data->game.south_texture.texture);
-	if (data->game.east_texture.texture != NULL)
-		mlx_destroy_image(data->window.mlx, data->game.east_texture.texture);
-	if (data->game.west_texture.texture != NULL)
-		mlx_destroy_image(data->window.mlx, data->game.west_texture.texture);
+	if (data->game.wall1.texture != NULL)
+		mlx_destroy_image(data->window.mlx, data->game.wall1.texture);
+	if (data->game.wall2.texture != NULL)
+		mlx_destroy_image(data->window.mlx, data->game.wall2.texture);
+	if (data->game.wall3.texture != NULL)
+		mlx_destroy_image(data->window.mlx, data->game.wall3.texture);
+	if (data->game.wall4.texture != NULL)
+		mlx_destroy_image(data->window.mlx, data->game.wall4.texture);
 }

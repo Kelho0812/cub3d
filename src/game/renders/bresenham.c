@@ -52,7 +52,7 @@ void	draw_line(float x, float y, float x1, float y1, t_data *data)
 	y_step /= max;
 	while ((int)(x - x1) || (int)(y - y1))
 	{
-		my_pixel_put(x, y, 0x00FF00, data);
+		my_pixel_put(x, y, 0x00FF00, data->game.map_img);
 		x += x_step;
 		y += y_step;
 	}

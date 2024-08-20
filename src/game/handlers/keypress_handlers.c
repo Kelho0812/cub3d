@@ -29,21 +29,21 @@ int	handle_keypress(int keysym, t_data *data)
 
 void	move_front(t_data *data)
 {
-	if (data->map.full_map_array[(int)(data->player.py + data->player.dir_y
-			* data->game.move_speed)][(int)(data->player.px)] != '1')
+	if (ft_strchr("0NWES", data->map.full_map_array[(int)(data->player.py + data->player.dir_y
+			* data->game.move_speed)][(int)(data->player.px)]))
 		data->player.py += data->player.dir_y * data->game.move_speed;
-	if (data->map.full_map_array[(int)(data->player.py)][(int)(data->player.px
-			+ data->player.dir_x * data->game.move_speed)] != '1')
+	if (ft_strchr("0NWES", data->map.full_map_array[(int)(data->player.py)][(int)(data->player.px
+			+ data->player.dir_x * data->game.move_speed)]))
 		data->player.px += data->player.dir_x * data->game.move_speed;
 }
 
 void	move_back(t_data *data)
 {
-	if (data->map.full_map_array[(int)(data->player.py - data->player.dir_y
-			* data->game.move_speed)][(int)(data->player.px)] != '1')
+	if (ft_strchr("0NWES", data->map.full_map_array[(int)(data->player.py - data->player.dir_y
+			* data->game.move_speed)][(int)(data->player.px)]))
 		data->player.py -= data->player.dir_y * data->game.move_speed;
-	if (data->map.full_map_array[(int)(data->player.py)][(int)(data->player.px
-			- data->player.dir_x * data->game.move_speed)] != '1')
+	if (ft_strchr("0NWES", data->map.full_map_array[(int)(data->player.py)][(int)(data->player.px
+			- data->player.dir_x * data->game.move_speed)]))
 		data->player.px -= data->player.dir_x * data->game.move_speed;
 }
 

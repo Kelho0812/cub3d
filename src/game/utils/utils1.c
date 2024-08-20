@@ -17,32 +17,35 @@ static int	check_dimension_texture(t_data *data)
 	int	temp_height;
 	int	temp_width;
 
-	temp_height = data->game.north_texture.height;
-	temp_width = data->game.north_texture.width;
-	if (temp_height != data->game.south_texture.height
-		|| temp_height != data->game.west_texture.height
-		|| temp_height != data->game.east_texture.height
-		|| temp_width != data->game.south_texture.width
-		|| temp_width != data->game.west_texture.width
-		|| temp_width != data->game.east_texture.width)
+	temp_height = data->game.wall1.height;
+	temp_width = data->game.wall1.width;
+	if (temp_height != data->game.wall2.height
+		|| temp_height != data->game.wall4.height
+		|| temp_height != data->game.wall3.height
+		|| temp_width != data->game.wall2.width
+		|| temp_width != data->game.wall4.width
+		|| temp_width != data->game.wall3.width)
 		return (0);
 	return (1);
 }
 
 void	check_textures(t_data *data)
 {
-	data->game.north_texture.texture = mlx_xpm_file_to_image(data->window.mlx,
-			data->map.north_texture_path, &data->game.north_texture.width,
-			&data->game.north_texture.height);
-	data->game.south_texture.texture = mlx_xpm_file_to_image(data->window.mlx,
-			data->map.south_texture_path, &data->game.south_texture.width,
-			&data->game.south_texture.height);
-	data->game.east_texture.texture = mlx_xpm_file_to_image(data->window.mlx,
-			data->map.east_texture_path, &data->game.east_texture.width,
-			&data->game.east_texture.height);
-	data->game.west_texture.texture = mlx_xpm_file_to_image(data->window.mlx,
-			data->map.west_texture_path, &data->game.west_texture.width,
-			&data->game.west_texture.height);
+	data->game.wall1.texture = mlx_xpm_file_to_image(data->window.mlx,
+			"./textures/wall1.xpm", &data->game.wall1.width,
+			&data->game.wall1.height);
+	data->game.wall2.texture = mlx_xpm_file_to_image(data->window.mlx,
+			"./textures/wall2.xpm", &data->game.wall2.width,
+			&data->game.wall2.height);
+	data->game.wall3.texture = mlx_xpm_file_to_image(data->window.mlx,
+			"./textures/wall3.xpm", &data->game.wall3.width,
+			&data->game.wall3.height);
+	data->game.wall4.texture = mlx_xpm_file_to_image(data->window.mlx,
+			"./textures/wall4.xpm", &data->game.wall4.width,
+			&data->game.wall4.height);
+	data->game.wall5.texture = mlx_xpm_file_to_image(data->window.mlx,
+			"./textures/wall5.xpm", &data->game.wall5.width,
+			&data->game.wall5.height);
 	data->game.celling_texture.texture = mlx_xpm_file_to_image(data->window.mlx,
 			"./textures/celling.xpm", &data->game.celling_texture.width,
 			&data->game.celling_texture.height);
@@ -52,10 +55,10 @@ void	check_textures(t_data *data)
 	data->game.weapon_texture.texture = mlx_xpm_file_to_image(data->window.mlx,
 			"./textures/weapon.xpm", &data->game.weapon_texture.width,
 			&data->game.weapon_texture.height);
-	if (data->game.north_texture.texture == NULL
-		|| data->game.south_texture.texture == NULL
-		|| data->game.east_texture.texture == NULL
-		|| data->game.west_texture.texture == NULL
+	if (data->game.wall1.texture == NULL
+		|| data->game.wall2.texture == NULL
+		|| data->game.wall3.texture == NULL
+		|| data->game.wall4.texture == NULL
 		|| data->game.celling_texture.texture == NULL
 		|| data->game.floor_texture.texture == NULL
 		|| data->game.weapon_texture.texture == NULL)
@@ -104,26 +107,31 @@ void	get_direction(t_data *data)
 
 void	get_data_textures(t_data *data)
 {
-	data->game.north_texture.info_texture.data = mlx_get_data_addr(
-			data->game.north_texture.texture,
-			&data->game.north_texture.info_texture.bpp,
-			&data->game.north_texture.info_texture.line_len,
-			&data->game.north_texture.info_texture.endian);
-	data->game.south_texture.info_texture.data = mlx_get_data_addr(
-			data->game.south_texture.texture,
-			&data->game.south_texture.info_texture.bpp,
-			&data->game.south_texture.info_texture.line_len,
-			&data->game.south_texture.info_texture.endian);
-	data->game.east_texture.info_texture.data = mlx_get_data_addr(
-			data->game.east_texture.texture,
-			&data->game.east_texture.info_texture.bpp,
-			&data->game.east_texture.info_texture.line_len,
-			&data->game.east_texture.info_texture.endian);
-	data->game.west_texture.info_texture.data = mlx_get_data_addr(
-			data->game.west_texture.texture,
-			&data->game.west_texture.info_texture.bpp,
-			&data->game.west_texture.info_texture.line_len,
-			&data->game.west_texture.info_texture.endian);
+	data->game.wall1.info_texture.data = mlx_get_data_addr(
+			data->game.wall1.texture,
+			&data->game.wall1.info_texture.bpp,
+			&data->game.wall1.info_texture.line_len,
+			&data->game.wall1.info_texture.endian);
+	data->game.wall2.info_texture.data = mlx_get_data_addr(
+			data->game.wall2.texture,
+			&data->game.wall2.info_texture.bpp,
+			&data->game.wall2.info_texture.line_len,
+			&data->game.wall2.info_texture.endian);
+	data->game.wall3.info_texture.data = mlx_get_data_addr(
+			data->game.wall3.texture,
+			&data->game.wall3.info_texture.bpp,
+			&data->game.wall3.info_texture.line_len,
+			&data->game.wall3.info_texture.endian);
+	data->game.wall4.info_texture.data = mlx_get_data_addr(
+			data->game.wall4.texture,
+			&data->game.wall4.info_texture.bpp,
+			&data->game.wall4.info_texture.line_len,
+			&data->game.wall4.info_texture.endian);
+	data->game.wall5.info_texture.data = mlx_get_data_addr(
+			data->game.wall5.texture,
+			&data->game.wall5.info_texture.bpp,
+			&data->game.wall5.info_texture.line_len,
+			&data->game.wall5.info_texture.endian);
 	data->game.celling_texture.info_texture.data = mlx_get_data_addr(
 			data->game.celling_texture.texture,
 			&data->game.celling_texture.info_texture.bpp,

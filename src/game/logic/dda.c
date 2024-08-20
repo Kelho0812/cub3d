@@ -57,8 +57,8 @@ void	execute_dda(t_dda_values *dda_values, t_data *data)
 			dda_values->map_y += dda_values->step_y;
 			dda_values->side = 1;
 		}
-		if (data->map.full_map_array[dda_values->map_y]
-			[dda_values->map_x] == '1')
+		if (!ft_strchr("0NWES", data->map.full_map_array[dda_values->map_y]
+			[dda_values->map_x]))
 			hit = 1;
 	}
 }

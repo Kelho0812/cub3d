@@ -156,6 +156,33 @@ typedef struct s_mouse
 	int	prev_y;
 }				t_mouse;
 
+typedef	struct s_slice
+{
+	int	x;
+	int	y;
+	int	width;
+	int	height;
+}				t_slice;
+
+
+typedef struct s_frame
+{
+	t_img		frame;
+	t_frame		*next;
+}						t_frame;
+
+typedef struct s_animation
+{
+	t_slice		slice;
+	t_frame		*frames;
+}						t_animation;
+
+typedef struct s_window
+{
+	void				*mlx;
+	void				*mlx_win;
+}						t_window;
+
 typedef struct s_game
 {
 	double				rotate_speed;
@@ -164,22 +191,21 @@ typedef struct s_game
 	double				time;
 	double				old_time;
 	double				frame_time;
-	t_texture			north_texture;
-	t_texture			south_texture;
-	t_texture			east_texture;
-	t_texture			west_texture;
+	t_texture			wall1;
+	t_texture			wall2;
+	t_texture			wall3;
+	t_texture			wall4;
+	t_texture			wall5;
+	t_texture			wall6;
+	t_texture			wall7;
+	t_texture			wall8;
+	t_animation			animation;
 	t_texture			celling_texture;
 	t_texture			floor_texture;
 	t_texture			weapon_texture;
 	t_mouse				mouse_position;
 	t_img				map_img;
 }						t_game;
-
-typedef struct s_window
-{
-	void				*mlx;
-	void				*mlx_win;
-}						t_window;
 
 typedef struct s_data
 {
@@ -282,13 +308,13 @@ void					open_window(t_data *data);
 void    				update_time(t_data * data);
 
 // game-renders
-void					render_background(t_data *data);
-void					render_background2(t_data *data);
+void					render_floor(t_data *data);
+void					render_celling(t_data *data);
 void					render_minimap(t_data *data);
 void    				render_player(t_data *data);
 void					draw_stripe(t_dda_values dda_values, int x,
 							t_data *data);
-void					my_pixel_put(int x, int y, int color, t_data *data);
+void					my_pixel_put(int x, int y, int color, t_img img);
 void					draw_line(float x, float y, float x1, float y1, t_data *data);
 
 // game-logic
@@ -307,7 +333,6 @@ int 					handle_mouse(int x, int y, t_data *data);
 void					handle_render(t_data *data);
 
 // game-utils
-void					create_background_buffer(t_data *data);
 void					init_game_values(t_data *data);
 void					get_data_textures(t_data *data);
 void					get_direction(t_data *data);

@@ -20,6 +20,5 @@ int	handle_close(t_data *data)
 	free(data->window.mlx);
 	free_map_array(data->map.full_map_array);
 	william_wallace(data);
-	free(data->buffer_background);
 	exit(0);
 }

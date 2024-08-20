@@ -12,15 +12,6 @@
 
 #include "../../../includes/cub3d.h"
 
-// uint32_t getTick() {
-//     struct timespec ts;
-//     unsigned theTick = 0U;
-//     clock_gettime( CLOCK_MONOTONIC, &ts );
-//     theTick  = ts.tv_nsec / 1000000;
-//     theTick += ts.tv_sec * 1000;
-//     return theTick;
-// }
-
 void    render_player(t_data *data)
 {
     int x1;
@@ -37,22 +28,19 @@ void    render_player(t_data *data)
         {
             if (x + x1 < WIDTH && y + y1 < HEIGHT)
 			{
-                my_pixel_put(x + x1, y + y1, 0xFF0000, data);
+                my_pixel_put(x + x1, y + y1, 0xFF0000, data->game.map_img);
 			}
             draw_line(x, y, x + (10 * data->rays.ray_dir_x), y + (10 * data->rays.ray_dir_y), data);
             x1++;
         }
         y1++;
     }
-    x_step = 0;
-    while (x_step < 2)
+    x_step = -1;
+    while (x_step < 1)
     {
-        data->rays.camera_x = x_step / (double)WIDTH;
-        data->rays.ray_dir_x = data->player.dir_x + data->player.plane_x
-            * data->rays.camera_x;
-        data->rays.ray_dir_y = data->player.dir_y + data->player.plane_y
-            * data->rays.camera_x;
-        draw_line(x, y, x + (10 * data->rays.ray_dir_x), y + (10 * data->rays.ray_dir_y), data);
-        x_step += 0.5;
+        data->rays.ray_dir_x = data->player.dir_x + data->player.plane_x * x_step;
+        data->rays.ray_dir_y = data->player.dir_y + data->player.plane_y * x_step;
+        draw_line(x, y, x + (12 * data->rays.ray_dir_x), y + (12 * data->rays.ray_dir_y), data);
+        x_step += 0.1;
     }
 }

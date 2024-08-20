@@ -36,7 +36,8 @@ void	check_wrong_chars(t_data *data, char **map_lines, int i)
 			if (is_player_char(map_lines[i][n.j]))
 				handle_player_char(data, i, &n);
 			else if (!is_valid_char(map_lines[i][n.j]))
-				error_handler2(data, WRONG_CHARS_MAP_ERROR);
+				continue;
+				// error_handler2(data, WRONG_CHARS_MAP_ERROR);
 		}
 		if (n.j == 0 && map_lines[i][n.j] == '\0')
 			n.map_end = true;
