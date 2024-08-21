@@ -12,31 +12,31 @@
 
 #include "../../../includes/cub3d.h"
 
-int handle_mouse(int x, int y, t_data *data)
+int	handle_mouse(int x, int y, t_data *data)
 {
-    if (y < 20)
-        mlx_mouse_move(data->window.mlx, data->window.mlx_win, x, HEIGHT - 100);
-    if (y > HEIGHT - 99)
-        mlx_mouse_move(data->window.mlx, data->window.mlx_win, x, 21);
-    if (x < 30)
-        mlx_mouse_move(data->window.mlx, data->window.mlx_win, WIDTH - 33, y);
-    if (x > WIDTH - 30)
-        mlx_mouse_move(data->window.mlx, data->window.mlx_win, 33, y);
-    if (y > data->game.mouse_position.prev_y)
-    {
-        if (data->game.step_height > -100)
-            data->game.step_height -= 3;
-    }
-    else if (y < data->game.mouse_position.prev_y)
-    {
-        if (data->game.step_height < 100)
-            data->game.step_height += 3;
-    }
-    if (x > data->game.mouse_position.prev_x)
-        turn_right(data);
-    else if (x < data->game.mouse_position.prev_x)
-        turn_left(data);
-    data->game.mouse_position.prev_x = x;
-    data->game.mouse_position.prev_y = y;
-    return (0);
+	if (y < 20)
+		mlx_mouse_move(data->window.mlx, data->window.mlx_win, x, HEIGHT - 100);
+	if (y > HEIGHT - 99)
+		mlx_mouse_move(data->window.mlx, data->window.mlx_win, x, 21);
+	if (x < 30)
+		mlx_mouse_move(data->window.mlx, data->window.mlx_win, WIDTH - 33, y);
+	if (x > WIDTH - 30)
+		mlx_mouse_move(data->window.mlx, data->window.mlx_win, 33, y);
+	if (y > data->game.mouse_position.prev_y)
+	{
+		if (data->game.step_height > -100)
+			data->game.step_height -= 3;
+	}
+	else if (y < data->game.mouse_position.prev_y)
+	{
+		if (data->game.step_height < 100)
+			data->game.step_height += 3;
+	}
+	if (x > data->game.mouse_position.prev_x)
+		turn_right(data);
+	else if (x < data->game.mouse_position.prev_x)
+		turn_left(data);
+	data->game.mouse_position.prev_x = x;
+	data->game.mouse_position.prev_y = y;
+	return (0);
 }

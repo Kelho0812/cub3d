@@ -19,8 +19,7 @@ void	my_pixel_put(int x, int y, int color, t_img img)
 	ptr = NULL;
 	if (x <= WIDTH && x >= 0 && y <= HEIGHT && y >= 0)
 	{
-		ptr = img.data + (x * (img.bpp / 8)) + (y
-				* img.line_len);
+		ptr = img.data + (x * (img.bpp / 8)) + (y * img.line_len);
 		*(unsigned int *)ptr = color;
 	}
 }
@@ -44,10 +43,12 @@ void	define_texture(t_rec_val temp, t_data data, t_texture *ptr)
 void	define_values_to_draw_texture(t_texture_values *draw_values,
 		t_texture ptr, t_rec_val temp, t_data *data)
 {
-	draw_values->draw_start = HEIGHT / 2 - (temp.line_height / 2) + data->game.step_height;
+	draw_values->draw_start = HEIGHT / 2 - (temp.line_height / 2)
+		+ data->game.step_height;
 	if (draw_values->draw_start < 0)
 		draw_values->draw_start = 0;
-	draw_values->draw_end = HEIGHT / 2 + (temp.line_height / 2) + data->game.step_height;
+	draw_values->draw_end = HEIGHT / 2 + (temp.line_height / 2)
+		+ data->game.step_height;
 	if (draw_values->draw_end >= HEIGHT)
 		draw_values->draw_end = HEIGHT - 1;
 	if (temp.side == 0)
@@ -63,8 +64,8 @@ void	define_values_to_draw_texture(t_texture_values *draw_values,
 	if (temp.side == 1 && data->rays.ray_dir_y < 0)
 		draw_values->tex_x = ptr.width - draw_values->tex_x - 1;
 	draw_values->step = 1.0 * ptr.height / temp.line_height;
-	draw_values->tex_pos = ((draw_values->draw_start - data->game.step_height) - HEIGHT / 2
-			+ temp.line_height / 2) * draw_values->step;
+	draw_values->tex_pos = ((draw_values->draw_start - data->game.step_height)
+			- HEIGHT / 2 + temp.line_height / 2) * draw_values->step;
 }
 
 void	draw_stripe(int x, t_data *data, t_rec_val *temp)
@@ -79,8 +80,8 @@ void	draw_stripe(int x, t_data *data, t_rec_val *temp)
 	i = draw_values.draw_start;
 	while (i < draw_values.draw_end)
 	{
-		draw_values.tex_y = (int)draw_values.tex_pos
-			& (data->game.wall1.height - 1);
+		draw_values.tex_y = (int)draw_values.tex_pos & (data->game.wall1.height
+				- 1);
 		draw_values.tex_pos += draw_values.step;
 		color = *(int *)(ptr.info_texture.data + draw_values.tex_y
 				* ptr.info_texture.line_len + draw_values.tex_x
@@ -93,7 +94,7 @@ void	draw_stripe(int x, t_data *data, t_rec_val *temp)
 
 void	render_floor(t_data *data)
 {
-	int 	y;
+	int		y;
 	int		x;
 	int		p;
 	int		color;
@@ -103,10 +104,10 @@ void	render_floor(t_data *data)
 	float	rayDirY1;
 	float	posZ;
 	float	rowDistance;
-	float 	floorStepY;
+	float	floorStepY;
 	float	floorStepX;
-	float 	floorX;
-	float 	floorY;
+	float	floorX;
+	float	floorY;
 	int		cellX;
 	int		cellY;
 	int		tx;
@@ -131,11 +132,13 @@ void	render_floor(t_data *data)
 		{
 			cellX = (int)(floorX);
 			cellY = (int)(floorY);
-			tx = (int)(data->game.floor_texture.width * (floorX - cellX)) & (data->game.floor_texture.width - 1);
-			ty = (int)(data->game.floor_texture.height * (floorY - cellY)) & (data->game.floor_texture.height - 1);
+			tx = (int)(data->game.floor_texture.width * (floorX
+						- cellX)) & (data->game.floor_texture.width - 1);
+			ty = (int)(data->game.floor_texture.height * (floorY
+						- cellY)) & (data->game.floor_texture.height - 1);
 			color = *(int *)(data->game.celling_texture.info_texture.data + ty
-				* data->game.celling_texture.info_texture.line_len + tx
-				* (data->game.celling_texture.info_texture.bpp / 8));
+					* data->game.celling_texture.info_texture.line_len + tx
+					* (data->game.celling_texture.info_texture.bpp / 8));
 			color = (color >> 1) & 8355711;
 			if (rowDistance > 0)
 				my_pixel_put(x, HEIGHT - y - 1, color, data->game.map_img);
@@ -149,7 +152,7 @@ void	render_floor(t_data *data)
 
 void	render_celling(t_data *data)
 {
-	int 	y;
+	int		y;
 	int		x;
 	int		p;
 	int		color;
@@ -159,10 +162,10 @@ void	render_celling(t_data *data)
 	float	rayDirY1;
 	float	posZ;
 	float	rowDistance;
-	float 	floorStepY;
+	float	floorStepY;
 	float	floorStepX;
-	float 	floorX;
-	float 	floorY;
+	float	floorX;
+	float	floorY;
 	int		cellX;
 	int		cellY;
 	int		tx;
@@ -187,11 +190,13 @@ void	render_celling(t_data *data)
 		{
 			cellX = (int)(floorX);
 			cellY = (int)(floorY);
-			tx = (int)(data->game.floor_texture.width * (floorX - cellX)) & (data->game.floor_texture.width - 1);
-			ty = (int)(data->game.floor_texture.height * (floorY - cellY)) & (data->game.floor_texture.height - 1);
+			tx = (int)(data->game.floor_texture.width * (floorX
+						- cellX)) & (data->game.floor_texture.width - 1);
+			ty = (int)(data->game.floor_texture.height * (floorY
+						- cellY)) & (data->game.floor_texture.height - 1);
 			color = *(int *)(data->game.floor_texture.info_texture.data + ty
-				* data->game.floor_texture.info_texture.line_len + tx
-				* (data->game.floor_texture.info_texture.bpp / 8));
+					* data->game.floor_texture.info_texture.line_len + tx
+					* (data->game.floor_texture.info_texture.bpp / 8));
 			if (rowDistance > 0)
 				my_pixel_put(x, y, color, data->game.map_img);
 			floorX += floorStepX;
