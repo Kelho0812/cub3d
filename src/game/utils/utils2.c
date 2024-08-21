@@ -60,3 +60,28 @@ void	check_door(t_data *data)
 			data->game.door_status = 0;
 	}
 }
+
+void	render_background(t_data *data)
+{
+	int	x;
+	int	y;
+	int	celling;
+	int	floor;
+
+	celling = 0xFF00FF;
+	floor = 0x00FF00;
+	y = 0;
+	while (y < HEIGHT)
+	{
+		x = 0;
+		while (x < WIDTH)
+		{
+			if (y < HEIGHT / 2)
+				my_pixel_put(x, y, celling, data->game.map_img);
+			else
+				my_pixel_put(x, y, floor, data->game.map_img);
+			x++;
+		}
+		y++;
+	}
+}
