@@ -38,6 +38,11 @@ void	calculate_distances(t_dda_values *dda_values, t_data *data)
 	define_steps(dda_values, data);
 }
 
+// void	door_case(t_data *data, t_dda_values dda_values, t_rec_val *temp, int *hit)
+// {
+	
+// }
+
 void	execute_dda(t_dda_values *dda_values, t_data *data, int x)
 {
 	int	hit;

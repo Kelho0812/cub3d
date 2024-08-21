@@ -319,6 +319,7 @@ void					render_floor(t_data *data);
 void					render_celling(t_data *data);
 void					render_minimap(t_data *data);
 void					render_player(t_data *data);
+void					render_weapon(t_data *data);
 void					draw_stripe(int x,
 							t_data *data, t_rec_val *temp);
 void					my_pixel_put(int x, int y, int color, t_img img);

@@ -34,81 +34,20 @@ void	open_window(t_data *data)
 			"Cub3d - OsBrabos");
 }
 
-void	render_weapon(t_data *data)
+void	check_door(t_data *data)
 {
-	int	x;
-	int	y;
-	int	x1;
-	int	y1;
-	int	color;
-
-	x1 = WIDTH / 2 - (data->game.weapon_texture.width / 2);
-	y1 = HEIGHT - data->game.weapon_texture.height;
-	y = 0;
-	while (y < data->game.weapon_texture.height)
+	if (data->game.door_status == 1)
 	{
-		x = 0;
-		while (x < data->game.weapon_texture.width)
-		{
-			color = *(int *)(data->game.weapon_texture.info_texture.data + y
-				* data->game.weapon_texture.info_texture.line_len + x
-				* (data->game.weapon_texture.info_texture.bpp / 8));
-			if (color != -16777216)
-				my_pixel_put(x1 + x, y1 + y, color, data->game.map_img);
-			x++;
-		}
-		y++;
+		if (data->game.animation.frames->next != NULL)
+			data->game.animation.frames = data->game.animation.frames->next;
 	}
-}
-
-void	render_mira(t_data *data)
-{
-	int	x;
-	int	y;
-	int	x1;
-	int	y1;
-	int	color;
-
-	x1 = WIDTH / 2 - 10;
-	y1 = HEIGHT / 2 - 10;
-	y = 0;
-	while (y < 3)
+	else if (data->game.door_status == 2)
 	{
-		x = 1;
-		while (x < 20)
-		{
-			color = 0xFFFFFF;
-			my_pixel_put(x1 + x, HEIGHT / 2 - 1 + y, color, data->game.map_img);
-			x++;
-		}
-		y++;
+		if (data->game.animation.frames->prev != NULL)
+			data->game.animation.frames = data->game.animation.frames->prev;
+		else
+			data->game.door_status = 0;
 	}
-	y = 1;
-	while (y < 20)
-	{
-		x = 0;
-		while (x < 3)
-		{
-			color = 0xFFFFFF;
-			my_pixel_put(WIDTH / 2 - 1 + x, y1 + y, color, data->game.map_img);
-			x++;
-		}
-		y++;
-	}
-}
-
-void	open_door(t_data *data)
-{
-	if (data->game.animation.frames->next != NULL)
-		data->game.animation.frames = data->game.animation.frames->next;
-}
-
-void	close_door(t_data *data)
-{
-	if (data->game.animation.frames->prev != NULL)
-		data->game.animation.frames = data->game.animation.frames->prev;
-	else
-		data->game.door_status = 0;
 }
 
 int	render_game(void *param)
@@ -133,12 +72,8 @@ int	render_game(void *param)
 	render_minimap(data);
 	render_player(data);
 	render_weapon(data);
-	render_mira(data);
 	put_image_to_window(data);
-	if (data->game.door_status == 1)
-		open_door(data);
-	else if (data->game.door_status == 2)
-		close_door(data);
+	check_door(data);
 	return (0);
 }
 

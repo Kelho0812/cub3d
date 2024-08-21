@@ -12,30 +12,6 @@
 
 #include "../../../includes/cub3d.h"
 
-// void    add_frame(t_frame *head, t_data *data, t_texture *ptr)
-// {
-//     int x;
-//     int y;
-//     int color;
-
-//     y = 0;
-//     head->frame.mlx_img = mlx_new_image(data->window.mlx, ptr->width, ptr->height);
-//     head->frame.data = mlx_get_data_addr(head->frame.mlx_img, &head->frame.bpp, &head->frame.line_len, &head->frame.endian);
-//     while (y < ptr->height)
-//     {
-//         x = 0;
-//         while (x < ptr->width)
-//         {
-//             color = *(int *)(ptr->info_texture.data + y
-// 				* ptr->info_texture.line_len + x
-// 				* (ptr->info_texture.bpp / 8));
-//             my_pixel_put(x, y, color, head->frame);
-//             x++;
-//         }
-//         y++;
-//     }
-// }
-
 void    create_frames(t_data *data)
 {
     int     frames;
