@@ -44,3 +44,19 @@ void	destroy_images(t_data *data)
 	if (data->game.weapon_texture.texture != NULL)
 		mlx_destroy_image(data->window.mlx, data->game.weapon_texture.texture);
 }
+
+void	check_door(t_data *data)
+{
+	if (data->game.door_status == 1)
+	{
+		if (data->game.animation.frames->next != NULL)
+			data->game.animation.frames = data->game.animation.frames->next;
+	}
+	else if (data->game.door_status == 2)
+	{
+		if (data->game.animation.frames->prev != NULL)
+			data->game.animation.frames = data->game.animation.frames->prev;
+		else
+			data->game.door_status = 0;
+	}
+}

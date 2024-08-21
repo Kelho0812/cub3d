@@ -34,22 +34,6 @@ void	open_window(t_data *data)
 			"Cub3d - OsBrabos");
 }
 
-void	check_door(t_data *data)
-{
-	if (data->game.door_status == 1)
-	{
-		if (data->game.animation.frames->next != NULL)
-			data->game.animation.frames = data->game.animation.frames->next;
-	}
-	else if (data->game.door_status == 2)
-	{
-		if (data->game.animation.frames->prev != NULL)
-			data->game.animation.frames = data->game.animation.frames->prev;
-		else
-			data->game.door_status = 0;
-	}
-}
-
 int	render_game(void *param)
 {
 	t_data			*data;
