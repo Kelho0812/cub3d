@@ -52,12 +52,12 @@ void	check_door(t_data *data)
 
 int	render_game(void *param)
 {
-	t_data 			*data;
+	t_data			*data;
 	t_dda_values	dda_values;
 	int				x;
 
 	x = 0;
-	data = (t_data*)param;
+	data = (t_data *)param;
 	update_time(data);
 	create_image(data);
 	render_floor(data);

@@ -41,9 +41,9 @@ float	positive(float n)
 
 void	draw_line(float x, float y, float x1, float y1, t_data *data)
 {
-	float x_step;
-	float y_step;
-	float max;
+	float	x_step;
+	float	y_step;
+	float	max;
 
 	x_step = x1 - x;
 	y_step = y1 - y;
