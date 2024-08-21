@@ -35,6 +35,7 @@
 # define PLAYER_SIZE 7
 # define MINIMAP_WALL_COLOR 0xa39ba8
 # define MINIMAP_FLOOR_COLOR 0x333745
+
 typedef struct s_norminetingz
 {
 	int					j;
@@ -57,8 +58,8 @@ typedef struct s_rec_val
 	int					map_x;
 	int					map_y;
 	int					line_height;
-	double				wallDist;
-}				t_rec_val;
+	double				wall_dist;
+}						t_rec_val;
 typedef struct s_texture_values
 {
 	int					draw_start;
@@ -179,7 +180,7 @@ typedef struct s_frame
 
 typedef struct s_animation
 {
-	t_frame		*frames;
+	t_frame				*frames;
 }						t_animation;
 
 typedef struct s_window
@@ -320,8 +321,7 @@ void					render_celling(t_data *data);
 void					render_minimap(t_data *data);
 void					render_player(t_data *data);
 void					render_weapon(t_data *data);
-void					draw_stripe(int x,
-							t_data *data, t_rec_val *temp);
+void					draw_stripe(int x, t_data *data, t_rec_val *temp);
 void					my_pixel_put(int x, int y, int color, t_img img);
 void					draw_line(float x, float y, float x1, float y1,
 							t_data *data);
@@ -331,7 +331,8 @@ void					init_values_dda(int x, t_dda_values *dda_values,
 							t_data *data);
 void					calculate_distances(t_dda_values *dda_values,
 							t_data *data);
-void					execute_dda(t_dda_values *dda_values, t_data *data, int x);
+void					execute_dda(t_dda_values *dda_values, t_data *data,
+							int x);
 void					find_distance_to_wall(t_data *data, t_rec_val *temp);
 void					make_steps(t_data *data, t_dda_values *dda_values, t_rec_val *temp);
 void					door_case(t_data *data, t_dda_values *dda_values, t_rec_val *temp, int x);
@@ -355,6 +356,6 @@ void					turn_right(t_data *data);
 void					move_left(t_data *data);
 void					move_right(t_data *data);
 
-void    				create_frames(t_data *data);
+void					create_frames(t_data *data);
 
 #endif
