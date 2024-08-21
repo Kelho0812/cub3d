@@ -15,6 +15,7 @@
 int	handle_close(t_data *data)
 {
 	destroy_images(data);
+	clean_frames(data);
 	mlx_destroy_window(data->window.mlx, data->window.mlx_win);
 	mlx_destroy_display(data->window.mlx);
 	free(data->window.mlx);

@@ -119,6 +119,10 @@ typedef struct s_player
 	double				py;
 	double				dir_x;
 	double				dir_y;
+	double				left_x;
+	double				left_y;
+	double				right_x;
+	double				right_y;
 	double				plane_x;
 	double				plane_y;
 	t_direction			direction;
@@ -183,6 +187,8 @@ typedef struct s_frame
 typedef struct s_animation
 {
 	t_frame				*frames;
+	t_frame				*start;
+	t_frame				*end;
 }						t_animation;
 
 typedef struct s_window
@@ -358,5 +364,10 @@ void					move_right(t_data *data);
 //game-sprites
 int						clean_frames(t_data *data);
 int						create_frames(t_data *data);
+
+//game-shadow
+int						shadow_floor(int color, int y);
+int						shadow_celling(int color, int y);
+int						shadow_dist(int color, double dist);
 
 #endif

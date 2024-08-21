@@ -52,6 +52,7 @@ SOURCES := cub3d.c\
 			game/handlers/movement.c\
 			game/game.c\
 			game/fps.c\
+			game/shadow.c\
 			errorHandler.c\
 			freedom.c\
 			init.c\

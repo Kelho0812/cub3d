@@ -23,6 +23,7 @@ int	create_frames(t_data *data)
 
 	data->game.animation.frames = calloc(1, sizeof(t_frame));
 	temp = data->game.animation.frames;
+	data->game.animation.start = temp;
 	temp->prev = NULL;
 	frames = 1;
 	while (frames < 39)
@@ -39,6 +40,7 @@ int	create_frames(t_data *data)
 			temp->prev = tail;
 		frames++;
 	}
+	data->game.animation.end = temp;
 	temp->next = NULL;
 	return (1);
 }
@@ -46,14 +48,21 @@ int	create_frames(t_data *data)
 int	clean_frames(t_data *data)
 {
 	t_frame	*tail;
+	t_frame	*temp;
 
-	tail = data->game.animation.frames->next;
-	while (data->game.animation.frames)
+	if (data->game.door_status == 2)
+		tail = data->game.animation.end;
+	else
+		tail = data->game.animation.start;
+	while (tail)
 	{
-		mlx_destroy_image(data->window.mlx,
-			data->game.animation.frames->texture.info_texture.mlx_img);
-		free(data->game.animation.frames);
-		data->game.animation.frames = tail;
+		if (data->game.door_status == 2)
+			temp = tail->prev;
+		else
+			temp = tail->next;
+		mlx_destroy_image(data->window.mlx, tail->texture.texture);
+		free(tail);
+		tail = temp;
 	}
 	return (0);
 }
@@ -61,21 +70,24 @@ int	clean_frames(t_data *data)
 static int	load_texture(t_data *data, t_frame *temp, int frames)
 {
 	char	*path;
+	t_frame *prev;
 
 	path = create_path(frames);
 	temp->texture.texture = mlx_xpm_file_to_image(data->window.mlx, path,
 			&temp->texture.width, &temp->texture.height);
+	free(path);
 	if (temp->texture.texture == NULL)
 	{
+		prev = temp->prev;
 		free(temp);
-		temp = NULL;
+		if (prev)
+			prev->next = NULL;
 		return (0);
 	}
 	temp->texture.info_texture.data = mlx_get_data_addr(temp->texture.texture,
 			&temp->texture.info_texture.bpp,
 			&temp->texture.info_texture.line_len,
 			&temp->texture.info_texture.endian);
-	free(path);
 	return (1);
 }
 

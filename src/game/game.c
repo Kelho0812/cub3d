@@ -17,8 +17,8 @@ static void	put_image_to_window(t_data *data);
 
 void	play_game(t_data *data)
 {
-	open_window(data);
 	init_game_values(data);
+	open_window(data);
 	render_game(data);
 	handle_render(data);
 }

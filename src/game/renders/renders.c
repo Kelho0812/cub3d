@@ -86,6 +86,8 @@ void	draw_stripe(int x, t_data *data, t_rec_val *temp)
 		color = *(int *)(ptr.info_texture.data + draw_values.tex_y
 				* ptr.info_texture.line_len + draw_values.tex_x
 				* (ptr.info_texture.bpp / 8));
+		if (temp->wall_dist > 2)
+			color = shadow_dist(color, temp->wall_dist);
 		if (color > 0x000000)
 			my_pixel_put(x, i, color, data->game.map_img);
 		i++;
@@ -98,6 +100,7 @@ void	render_background(t_data *data)
 	int	y;
 	int	celling;
 	int	floor;
+	int	color;
 
 	celling = CEILING_COLOR;
 	floor = FLOOR_COLOR;
@@ -108,9 +111,10 @@ void	render_background(t_data *data)
 		while (x < WIDTH)
 		{
 			if (y < HEIGHT / 2 + data->game.step_height)
-				my_pixel_put(x, y, celling, data->game.map_img);
+				color = shadow_celling(celling, y);
 			else
-				my_pixel_put(x, y, floor, data->game.map_img);
+				color = shadow_floor(floor, y);
+			my_pixel_put(x, y, color, data->game.map_img);
 			x++;
 		}
 		y++;

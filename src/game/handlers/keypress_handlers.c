@@ -64,11 +64,20 @@ void	move_back(t_data *data)
 {
 	if (ft_strchr("0NWES", data->map.full_map_array[(int)(data->player.py
 				- data->player.dir_y
-				* data->game.move_speed)][(int)(data->player.px)]))
+				* data->game.move_speed)][(int)(data->player.px)])
+		|| (ft_strchr("6", data->map.full_map_array[(int)(data->player.py
+					- data->player.dir_y
+					* data->game.move_speed)][(int)(data->player.px)])
+			&& data->game.door_status == 1))
 		data->player.py -= data->player.dir_y * data->game.move_speed;
 	if (ft_strchr("0NWES",
 			data->map.full_map_array[(int)(data->player.py)]
 		[(int)(data->player.px
-			- data->player.dir_x * data->game.move_speed)]))
+			- data->player.dir_x * data->game.move_speed)])
+		|| (ft_strchr("0NWES",
+				data->map.full_map_array[(int)(data->player.py)]
+				[(int)(data->player.px
+					- data->player.dir_x * data->game.move_speed)])
+			&& data->game.door_status == 1))
 		data->player.px -= data->player.dir_x * data->game.move_speed;
 }

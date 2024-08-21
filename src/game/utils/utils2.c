@@ -63,6 +63,10 @@ void	get_direction2(t_data *data)
 	{
 		data->player.dir_x = 1;
 		data->player.dir_y = 0;
+		data->player.right_x = 0;
+		data->player.right_y = 1;
+		data->player.left_x = 0;
+		data->player.left_y = -1;
 		data->player.plane_x = 0;
 		data->player.plane_y = 1;
 	}
@@ -70,6 +74,10 @@ void	get_direction2(t_data *data)
 	{
 		data->player.dir_x = -1;
 		data->player.dir_y = 0;
+		data->player.right_x = 0;
+		data->player.right_y = -1;
+		data->player.left_x = 0;
+		data->player.left_y = 1;
 		data->player.plane_x = 0;
 		data->player.plane_y = -1;
 	}
@@ -81,6 +89,10 @@ void	get_direction(t_data *data)
 	{
 		data->player.dir_x = 0;
 		data->player.dir_y = -1;
+		data->player.right_x = 1;
+		data->player.right_y = 0;
+		data->player.left_x = -1;
+		data->player.left_y = 0;
 		data->player.plane_x = 1;
 		data->player.plane_y = 0;
 	}
@@ -88,6 +100,10 @@ void	get_direction(t_data *data)
 	{
 		data->player.dir_x = 0;
 		data->player.dir_y = 1;
+		data->player.right_x = -1;
+		data->player.right_y = 0;
+		data->player.left_x = 1;
+		data->player.left_y = 0;
 		data->player.plane_x = -1;
 		data->player.plane_y = 0;
 	}
