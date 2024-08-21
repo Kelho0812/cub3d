@@ -25,7 +25,7 @@ void	render_weapon(t_data *data)
 	int	color;
 
 	x1 = WIDTH / 2;
-	y1 = HEIGHT - data->game.animation_torch.frames->texture.height;
+	y1 = HEIGHT - 70 - data->game.animation_torch.frames->texture.height;
 	y = 0;
 	while (y < data->game.animation_torch.frames->texture.height)
 	{
