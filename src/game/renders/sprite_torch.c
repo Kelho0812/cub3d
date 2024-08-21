@@ -29,7 +29,7 @@ int	create_frames_torch(t_data *data)
 	while (++frames < 31)
 	{
 		if (!load_texture(data, temp, frames))
-			return (clean_frames(data));
+			return (clean_frames_torch(data));
 		if (frames + 1 != 31)
 		{
 			temp->next = calloc(1, sizeof(t_frame));
@@ -47,14 +47,17 @@ int	clean_frames_torch(t_data *data)
 {
 	t_frame	*tail;
 	t_frame	*temp;
+	int		num_frames;
 
 	tail = data->game.animation_torch.start;
-	while (tail)
+	num_frames = 31;
+	while (num_frames)
 	{
 		temp = tail->next;
 		mlx_destroy_image(data->window.mlx, tail->texture.texture);
 		free(tail);
 		tail = temp;
+		num_frames--;
 	}
 	return (0);
 }
