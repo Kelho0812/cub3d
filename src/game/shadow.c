@@ -30,9 +30,9 @@ int	shadow_celling(int color, int y)
 	int	g;
 	int	b;
 
-	r = ((color >> 16) & 0xFF) - (y * 0.3);
-	g = ((color >> 8) & 0xFF) - (y * 0.3);
-	b = (color & 0xFF) - (y * 0.3);
+	r = ((color >> 16) & 0xFF) - (y * 0.2);
+	g = ((color >> 8) & 0xFF) - (y * 0.2);
+	b = (color & 0xFF) - (y * 0.2);
 	return ((r << 16) | (g << 8) | b);
 }
 

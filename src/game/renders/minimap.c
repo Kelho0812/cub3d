@@ -27,9 +27,9 @@ void	render_minimap(t_data *data)
 		x = 0;
 		while (data->map.full_map_array[y][x])
 		{
-			if (!ft_strchr("0NWES", data->map.full_map_array[y][x]))
+			if (ft_strchr("12345", data->map.full_map_array[y][x]))
 				render_wall(x * MINIMAP_SIZE, y * MINIMAP_SIZE, data);
-			else
+			else if (ft_strchr("06NESW", data->map.full_map_array[y][x]))
 				render_minimap_floor(x * MINIMAP_SIZE,
 					y * MINIMAP_SIZE, data);
 			x++;
