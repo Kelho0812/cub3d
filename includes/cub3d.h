@@ -333,6 +333,8 @@ void					calculate_distances(t_dda_values *dda_values,
 							t_data *data);
 void					execute_dda(t_dda_values *dda_values, t_data *data, int x);
 void					find_distance_to_wall(t_data *data, t_rec_val *temp);
+void					make_steps(t_data *data, t_dda_values *dda_values, t_rec_val *temp);
+void					door_case(t_data *data, t_dda_values *dda_values, t_rec_val *temp, int x);
 
 // game-handlers
 int						handle_keypress(int keysym, t_data *data);

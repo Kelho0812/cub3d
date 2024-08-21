@@ -38,11 +38,6 @@ void	calculate_distances(t_dda_values *dda_values, t_data *data)
 	define_steps(dda_values, data);
 }
 
-// void	door_case(t_data *data, t_dda_values dda_values, t_rec_val *temp, int *hit)
-// {
-	
-// }
-
 void	execute_dda(t_dda_values *dda_values, t_data *data, int x)
 {
 	int	hit;
@@ -51,18 +46,7 @@ void	execute_dda(t_dda_values *dda_values, t_data *data, int x)
 	hit = 0;
 	while (hit == 0)
 	{
-		if (data->dist.side_dist_x < data->dist.side_dist_y)
-		{
-			data->dist.side_dist_x += data->dist.delta_dist_x;
-			dda_values->map_x += dda_values->step_x;
-			temp.side = 0;
-		}
-		else
-		{
-			data->dist.side_dist_y += data->dist.delta_dist_y;
-			dda_values->map_y += dda_values->step_y;
-			temp.side = 1;
-		}
+		make_steps(data, dda_values, &temp);
 		if (!ft_strchr("0NWES6", data->map.full_map_array[dda_values->map_y]
 			[dda_values->map_x]))
 		{
@@ -74,10 +58,7 @@ void	execute_dda(t_dda_values *dda_values, t_data *data, int x)
 		else if (ft_strchr("6", data->map.full_map_array[dda_values->map_y]
 			[dda_values->map_x]))
 		{
-			temp.map_x = dda_values->map_x;
-			temp.map_y = dda_values->map_y;
-			find_distance_to_wall(data, &temp);
-			execute_dda(dda_values, data, x);
+			door_case(data, dda_values, &temp, x);
 			hit = 1;
 		}
 	}

@@ -42,6 +42,7 @@ SOURCES := cub3d.c\
 			game/renders/sprite.c\
 			game/renders/weapon.c\
 			game/logic/dda.c\
+			game/logic/dda_utils.c\
 			game/utils/utils1.c\
 			game/utils/utils2.c\
 			game/handlers/close_handlers.c\
