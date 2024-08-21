@@ -91,3 +91,28 @@ void	draw_stripe(int x, t_data *data, t_rec_val *temp)
 		i++;
 	}
 }
+
+void	render_background(t_data *data)
+{
+	int	x;
+	int	y;
+	int	celling;
+	int	floor;
+
+	celling = CEILING_COLOR;
+	floor = FLOOR_COLOR;
+	y = 0;
+	while (y < HEIGHT)
+	{
+		x = 0;
+		while (x < WIDTH)
+		{
+			if (y < HEIGHT / 2 + data->game.step_height)
+				my_pixel_put(x, y, celling, data->game.map_img);
+			else
+				my_pixel_put(x, y, floor, data->game.map_img);
+			x++;
+		}
+		y++;
+	}
+}
