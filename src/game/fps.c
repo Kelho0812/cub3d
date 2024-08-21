@@ -30,7 +30,7 @@ void	update_time(t_data *data)
 	frame_time = ft_itoa((int)(1.0 / data->game.frame_time));
 	mlx_string_put(data->window.mlx, data->window.mlx_win, WIDTH - 50, 10,
 		0xFFFFFF, frame_time);
-	data->game.move_speed = data->game.frame_time * 1.2;
-	data->game.rotate_speed = data->game.frame_time * 0.3;
+	data->game.move_speed = data->game.frame_time * 2;
+	data->game.rotate_speed = data->game.frame_time * 0.4;
 	free(frame_time);
 }

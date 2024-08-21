@@ -361,6 +361,6 @@ void					turn_left(t_data *data);
 void					turn_right(t_data *data);
 void					move_left(t_data *data);
 void					move_right(t_data *data);
-void					create_frames(t_data *data);
+int						create_frames(t_data *data);
 
 #endif
