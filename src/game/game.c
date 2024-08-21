@@ -19,7 +19,6 @@ void	play_game(t_data *data)
 {
 	open_window(data);
 	init_game_values(data);
-	create_frames(data);
 	render_game(data);
 	handle_render(data);
 }
@@ -28,6 +27,7 @@ void	open_window(t_data *data)
 {
 	data->window.mlx = mlx_init();
 	check_textures(data);
+	create_frames(data);
 	get_data_textures(data);
 	get_direction(data);
 	data->window.mlx_win = mlx_new_window(data->window.mlx, WIDTH, HEIGHT,

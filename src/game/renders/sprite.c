@@ -14,7 +14,6 @@
 
 static char	*create_path(int frames);
 static int	load_texture(t_data *data, t_frame *temp, int frames);
-static int	clean_frames(t_data *data);
 
 int	create_frames(t_data *data)
 {
@@ -44,7 +43,7 @@ int	create_frames(t_data *data)
 	return (1);
 }
 
-static int	clean_frames(t_data *data)
+int	clean_frames(t_data *data)
 {
 	t_frame	*tail;
 
