@@ -24,23 +24,24 @@ void	render_weapon(t_data *data)
 	int	y1;
 	int	color;
 
-	x1 = WIDTH / 2 - (data->game.weapon_texture.width / 2);
-	y1 = HEIGHT - data->game.weapon_texture.height;
+	x1 = WIDTH / 2 - (data->game.animation_torch.frames->texture.width / 2);
+	y1 = HEIGHT - data->game.animation_torch.frames->texture.height;
 	y = 0;
-	while (y < data->game.weapon_texture.height)
+	while (y < data->game.animation_torch.frames->texture.height)
 	{
 		x = 0;
-		while (x < data->game.weapon_texture.width)
+		while (x < data->game.animation_torch.frames->texture.width)
 		{
-			color = *(int *)(data->game.weapon_texture.info_texture.data + y
-					* data->game.weapon_texture.info_texture.line_len + x
-					* (data->game.weapon_texture.info_texture.bpp / 8));
+			color = *(int *)(data->game.animation_torch.frames->texture.info_texture.data + y
+					* data->game.animation_torch.frames->texture.info_texture.line_len + x
+					* (data->game.animation_torch.frames->texture.info_texture.bpp / 8));
 			if (color != -16777216)
 				my_pixel_put(x1 + x, y1 + y, color, data->game.map_img);
 			x++;
 		}
 		y++;
 	}
+	data->game.animation_torch.frames = data->game.animation_torch.frames->next;
 	render_scope(data);
 }
 

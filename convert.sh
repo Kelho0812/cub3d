@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Directory containing the files
-DIRECTORY="./frames"
+DIRECTORY="./torch"
 
 # Counter for the new filenames
 counter=1
@@ -14,7 +14,7 @@ for file in "$DIRECTORY"/*; do
     new_filename=$(printf "animation%d.xpm" "$counter")
     # Rename the file
     # Apply the convert command to resize the image
-    convert "$file" -resize 64x64 "./textures/$new_filename"
+    convert "$file" -resize 256x256 "./textures/torch/$new_filename"
     
     # Increment the counter
     counter=$((counter + 1))

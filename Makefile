@@ -40,6 +40,7 @@ SOURCES := cub3d.c\
 			game/renders/player.c\
 			game/renders/bresenham.c\
 			game/renders/sprite.c\
+			game/renders/sprite_torch.c\
 			game/renders/weapon.c\
 			game/logic/dda.c\
 			game/logic/dda_utils.c\

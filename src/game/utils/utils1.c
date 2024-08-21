@@ -103,7 +103,8 @@ static void	check_errors_textures(t_data *data)
 		|| data->game.wall4.texture == NULL
 		|| data->game.wall5.texture == NULL
 		|| data->game.weapon_texture.texture == NULL
-		|| !create_frames(data))
+		|| !create_frames(data)
+		|| !create_frames_torch(data))
 		error_handler4(data, TEXTURE_OPEN_ERROR);
 	if (!check_dimension_texture(data))
 		error_handler4(data, TEXTURE_OPEN_ERROR);

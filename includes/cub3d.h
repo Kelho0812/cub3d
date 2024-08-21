@@ -212,6 +212,7 @@ typedef struct s_game
 	t_texture			wall4;
 	t_texture			wall5;
 	t_animation			animation;
+	t_animation			animation_torch;
 	t_texture			weapon_texture;
 	t_mouse				mouse_position;
 	t_img				map_img;
@@ -363,7 +364,9 @@ void					move_right(t_data *data);
 
 //game-sprites
 int						clean_frames(t_data *data);
+int						clean_frames_torch(t_data *data);
 int						create_frames(t_data *data);
+int						create_frames_torch(t_data *data);
 
 //game-shadow
 int						shadow_floor(int color, int y);
