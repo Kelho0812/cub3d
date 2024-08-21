@@ -205,12 +205,7 @@ typedef struct s_game
 	t_texture			wall3;
 	t_texture			wall4;
 	t_texture			wall5;
-	t_texture			wall6;
-	t_texture			wall7;
-	t_texture			wall8;
 	t_animation			animation;
-	t_texture			celling_texture;
-	t_texture			floor_texture;
 	t_texture			weapon_texture;
 	t_mouse				mouse_position;
 	t_img				map_img;
@@ -275,7 +270,7 @@ void					validate_number(t_data *data, char **colors_array,
 							char **line);
 void					doublecheckelements(t_data *data);
 void					assign_rgb(t_rgb *rgb, char **colors_array);
-void					check_textures(t_data *data);
+void					get_textures(t_data *data);
 
 // ERROR_HANDLERS
 typedef enum e_error
@@ -318,8 +313,6 @@ void					open_window(t_data *data);
 void					update_time(t_data *data);
 
 // game-renders
-void					render_floor(t_data *data);
-void					render_celling(t_data *data);
 void					render_minimap(t_data *data);
 void					render_player(t_data *data);
 void					render_weapon(t_data *data);
@@ -349,7 +342,8 @@ void					handle_render(t_data *data);
 
 // game-utils
 void					init_game_values(t_data *data);
-void					get_data_textures(t_data *data);
+void					get_data_textures_wall(t_data *data);
+void					get_data_texture_weapon(t_data *data);
 void					get_direction(t_data *data);
 void					check_door(t_data *data);
 void					render_background(t_data *data);

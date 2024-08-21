@@ -26,9 +26,9 @@ void	play_game(t_data *data)
 void	open_window(t_data *data)
 {
 	data->window.mlx = mlx_init();
-	check_textures(data);
-	create_frames(data);
-	get_data_textures(data);
+	get_textures(data);
+	get_data_textures_wall(data);
+	get_data_texture_weapon(data);
 	get_direction(data);
 	data->window.mlx_win = mlx_new_window(data->window.mlx, WIDTH, HEIGHT,
 			"Cub3d - OsBrabos");

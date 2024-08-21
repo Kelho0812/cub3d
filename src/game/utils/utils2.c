@@ -37,10 +37,6 @@ void	destroy_images(t_data *data)
 		mlx_destroy_image(data->window.mlx, data->game.wall4.texture);
 	if (data->game.wall5.texture != NULL)
 		mlx_destroy_image(data->window.mlx, data->game.wall5.texture);
-	if (data->game.celling_texture.texture != NULL)
-		mlx_destroy_image(data->window.mlx, data->game.celling_texture.texture);
-	if (data->game.floor_texture.texture != NULL)
-		mlx_destroy_image(data->window.mlx, data->game.floor_texture.texture);
 	if (data->game.weapon_texture.texture != NULL)
 		mlx_destroy_image(data->window.mlx, data->game.weapon_texture.texture);
 }
@@ -84,4 +80,42 @@ void	render_background(t_data *data)
 		}
 		y++;
 	}
+}
+
+void	get_direction2(t_data *data)
+{
+	if (data->player.direction == W)
+	{
+		data->player.dir_x = 1;
+		data->player.dir_y = 0;
+		data->player.plane_x = 0;
+		data->player.plane_y = 1;
+	}
+	else if (data->player.direction == E)
+	{
+		data->player.dir_x = -1;
+		data->player.dir_y = 0;
+		data->player.plane_x = 0;
+		data->player.plane_y = -1;
+	}
+}
+
+void	get_direction(t_data *data)
+{
+	if (data->player.direction == N)
+	{
+		data->player.dir_x = 0;
+		data->player.dir_y = -1;
+		data->player.plane_x = 1;
+		data->player.plane_y = 0;
+	}
+	else if (data->player.direction == S)
+	{
+		data->player.dir_x = 0;
+		data->player.dir_y = 1;
+		data->player.plane_x = -1;
+		data->player.plane_y = 0;
+	}
+	else
+		get_direction2(data);
 }
