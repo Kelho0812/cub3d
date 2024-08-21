@@ -318,8 +318,7 @@ void					render_player(t_data *data);
 void					render_weapon(t_data *data);
 void					draw_stripe(int x, t_data *data, t_rec_val *temp);
 void					my_pixel_put(int x, int y, int color, t_img img);
-void					draw_line(float x, float y, float x1, float y1,
-							t_data *data);
+void					draw_line(float x, float y, t_data *data);
 
 // game-logic
 void					init_values_dda(int x, t_dda_values *dda_values,

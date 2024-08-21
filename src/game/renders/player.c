@@ -51,8 +51,7 @@ static void	draw_fov(t_data *data, int x, int y)
 			* x_step;
 		data->rays.ray_dir_y = data->player.dir_y + data->player.plane_y
 			* x_step;
-		draw_line(x, y, x + (15 * data->rays.ray_dir_x), y + (15
-				* data->rays.ray_dir_y), data);
+		draw_line(x, y, data);
 		x_step += 0.08;
 	}
 }

@@ -27,12 +27,16 @@ float	positive(float n)
 	return (n);
 }
 
-void	draw_line(float x, float y, float x1, float y1, t_data *data)
+void	draw_line(float x, float y, t_data *data)
 {
 	float	x_step;
 	float	y_step;
+	float	x1;
+	float	y1;
 	float	max;
 
+	x1 = x + (15 * data->rays.ray_dir_x);
+	y1 = y + (15 * data->rays.ray_dir_y);
 	x_step = x1 - x;
 	y_step = y1 - y;
 	max = max_step(positive(x_step), positive(y_step));
