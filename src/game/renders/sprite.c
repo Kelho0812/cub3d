@@ -69,7 +69,7 @@ int	clean_frames(t_data *data)
 static int	load_texture(t_data *data, t_frame *temp, int frames)
 {
 	char	*path;
-	t_frame *prev;
+	t_frame	*prev;
 
 	path = create_path(frames);
 	temp->texture.texture = mlx_xpm_file_to_image(data->window.mlx, path,
