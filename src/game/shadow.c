@@ -36,11 +36,11 @@ int	shadow_celling(int color, int y)
 	return ((r << 16) | (g << 8) | b);
 }
 
-int shadow_dist(int color, double dist)
+int	shadow_dist(int color, double dist)
 {
-	int r;
-	int g;
-	int b;
+	int	r;
+	int	g;
+	int	b;
 
 	r = ((color >> 16) & 0xFF) / (dist * 0.5);
 	g = ((color >> 8) & 0xFF) / (dist * 0.5);

@@ -71,20 +71,16 @@ void	turn_left(t_data *data)
 		- data->player.plane_y * sin(-data->game.rotate_speed);
 	data->player.plane_y = old_plane_x * sin(-data->game.rotate_speed)
 		+ data->player.plane_y * cos(-data->game.rotate_speed);
-
-	//
 	temp = data->player.left_x;
 	data->player.left_x = data->player.left_x * cos(-data->game.rotate_speed)
 		- data->player.left_y * sin(-data->game.rotate_speed);
 	data->player.left_y = temp * sin(-data->game.rotate_speed)
 		+ data->player.left_y * cos(-data->game.rotate_speed);
-
 	temp = data->player.right_x;
 	data->player.right_x = data->player.right_x * cos(-data->game.rotate_speed)
 		- data->player.right_y * sin(-data->game.rotate_speed);
 	data->player.right_y = temp * sin(-data->game.rotate_speed)
 		+ data->player.right_y * cos(-data->game.rotate_speed);
-	//
 }
 
 void	turn_right(t_data *data)
@@ -102,18 +98,14 @@ void	turn_right(t_data *data)
 		- data->player.plane_y * sin(data->game.rotate_speed);
 	data->player.plane_y = old_plane_x * sin(data->game.rotate_speed)
 		+ data->player.plane_y * cos(data->game.rotate_speed);
-
-	//
 	temp = data->player.left_x;
 	data->player.left_x = data->player.left_x * cos(data->game.rotate_speed)
 		- data->player.left_y * sin(data->game.rotate_speed);
 	data->player.left_y = temp * sin(data->game.rotate_speed)
 		+ data->player.left_y * cos(data->game.rotate_speed);
-
 	temp = data->player.right_x;
 	data->player.right_x = data->player.right_x * cos(data->game.rotate_speed)
 		- data->player.right_y * sin(data->game.rotate_speed);
 	data->player.right_y = temp * sin(data->game.rotate_speed)
 		+ data->player.right_y * cos(data->game.rotate_speed);
-	//
 }
