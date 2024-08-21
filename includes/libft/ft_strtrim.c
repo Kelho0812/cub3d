@@ -19,6 +19,8 @@ char	*ft_strtrim(char const *s1, char const *set)
 	int		i;
 	int		j;
 
+	if (s1 == NULL || set == NULL)
+		return (NULL);
 	if (!set)
 	{
 		str1 = ft_strdup(s1);
@@ -37,7 +39,5 @@ char	*ft_strtrim(char const *s1, char const *set)
 		return (str1);
 	}
 	str1 = ft_substr(s1, i, j);
-	if (!str1)
-		printf("Error: Memory allocation failed in ft_substr\n");
 	return (str1);
 }
