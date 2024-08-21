@@ -21,9 +21,9 @@ int	create_frames_torch(t_data *data)
 	t_frame	*temp;
 	t_frame	*tail;
 
-	data->game.animation_torch.frames = calloc(1, sizeof(t_frame));
-	temp = data->game.animation_torch.frames;
-	data->game.animation_torch.start = temp;
+	data->game.anim_t.frames = calloc(1, sizeof(t_frame));
+	temp = data->game.anim_t.frames;
+	data->game.anim_t.start = temp;
 	temp->prev = NULL;
 	frames = 0;
 	while (++frames < 31)
@@ -39,7 +39,7 @@ int	create_frames_torch(t_data *data)
 		if (frames != 1)
 			temp->prev = tail;
 	}
-	temp->next = data->game.animation_torch.start;
+	temp->next = data->game.anim_t.start;
 	return (1);
 }
 
@@ -49,7 +49,7 @@ int	clean_frames_torch(t_data *data)
 	t_frame	*temp;
 	int		num_frames;
 
-	tail = data->game.animation_torch.start;
+	tail = data->game.anim_t.start;
 	num_frames = 30;
 	while (num_frames)
 	{
@@ -79,10 +79,10 @@ static int	load_texture(t_data *data, t_frame *temp, int frames)
 			prev->next = NULL;
 		return (0);
 	}
-	temp->texture.info_texture.data = mlx_get_data_addr(temp->texture.texture,
-			&temp->texture.info_texture.bpp,
-			&temp->texture.info_texture.line_len,
-			&temp->texture.info_texture.endian);
+	temp->texture.info.data = mlx_get_data_addr(temp->texture.texture,
+			&temp->texture.info.bpp,
+			&temp->texture.info.line_len,
+			&temp->texture.info.endian);
 	return (1);
 }
 

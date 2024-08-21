@@ -84,7 +84,7 @@ typedef struct s_img
 
 typedef struct s_texture
 {
-	t_img				info_texture;
+	t_img				info;
 	void				*texture;
 	int					height;
 	int					width;
@@ -212,7 +212,7 @@ typedef struct s_game
 	t_texture			wall4;
 	t_texture			wall5;
 	t_animation			animation;
-	t_animation			animation_torch;
+	t_animation			anim_t;
 	t_texture			weapon_texture;
 	t_mouse				mouse_position;
 	t_img				map_img;

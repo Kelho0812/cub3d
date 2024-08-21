@@ -83,9 +83,9 @@ void	draw_stripe(int x, t_data *data, t_rec_val *temp)
 		draw_values.tex_y = (int)draw_values.tex_pos & (data->game.wall1.height
 				- 1);
 		draw_values.tex_pos += draw_values.step;
-		color = *(int *)(ptr.info_texture.data + draw_values.tex_y
-				* ptr.info_texture.line_len + draw_values.tex_x
-				* (ptr.info_texture.bpp / 8));
+		color = *(int *)(ptr.info.data + draw_values.tex_y
+				* ptr.info.line_len + draw_values.tex_x
+				* (ptr.info.bpp / 8));
 		if (temp->wall_dist > 2)
 			color = shadow_dist(color, temp->wall_dist);
 		if (color > 0x000000)
