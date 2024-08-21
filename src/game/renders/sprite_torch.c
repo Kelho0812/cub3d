@@ -50,7 +50,7 @@ int	clean_frames_torch(t_data *data)
 	int		num_frames;
 
 	tail = data->game.animation_torch.start;
-	num_frames = 31;
+	num_frames = 30;
 	while (num_frames)
 	{
 		temp = tail->next;
