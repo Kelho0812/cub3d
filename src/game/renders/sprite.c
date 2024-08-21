@@ -50,7 +50,8 @@ int	clean_frames(t_data *data)
 	tail = data->game.animation.frames->next;
 	while (data->game.animation.frames)
 	{
-		mlx_destroy_image(data->window.mlx, data->game.animation.frames->texture.info_texture.mlx_img);
+		mlx_destroy_image(data->window.mlx,
+			data->game.animation.frames->texture.info_texture.mlx_img);
 		free(data->game.animation.frames);
 		data->game.animation.frames = tail;
 	}
@@ -59,7 +60,7 @@ int	clean_frames(t_data *data)
 
 static int	load_texture(t_data *data, t_frame *temp, int frames)
 {
-	char *path;
+	char	*path;
 
 	path = create_path(frames);
 	temp->texture.texture = mlx_xpm_file_to_image(data->window.mlx, path,
