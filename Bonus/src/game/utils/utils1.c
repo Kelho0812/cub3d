@@ -40,40 +40,40 @@ void	get_textures(t_data *data)
 
 void	get_data_textures_wall(t_data *data)
 {
-	data->game.wall1.info_texture.data = mlx_get_data_addr(
+	data->game.wall1.info.data = mlx_get_data_addr(
 			data->game.wall1.texture,
-			&data->game.wall1.info_texture.bpp,
-			&data->game.wall1.info_texture.line_len,
-			&data->game.wall1.info_texture.endian);
-	data->game.wall2.info_texture.data = mlx_get_data_addr(
+			&data->game.wall1.info.bpp,
+			&data->game.wall1.info.line_len,
+			&data->game.wall1.info.endian);
+	data->game.wall2.info.data = mlx_get_data_addr(
 			data->game.wall2.texture,
-			&data->game.wall2.info_texture.bpp,
-			&data->game.wall2.info_texture.line_len,
-			&data->game.wall2.info_texture.endian);
-	data->game.wall3.info_texture.data = mlx_get_data_addr(
+			&data->game.wall2.info.bpp,
+			&data->game.wall2.info.line_len,
+			&data->game.wall2.info.endian);
+	data->game.wall3.info.data = mlx_get_data_addr(
 			data->game.wall3.texture,
-			&data->game.wall3.info_texture.bpp,
-			&data->game.wall3.info_texture.line_len,
-			&data->game.wall3.info_texture.endian);
-	data->game.wall4.info_texture.data = mlx_get_data_addr(
+			&data->game.wall3.info.bpp,
+			&data->game.wall3.info.line_len,
+			&data->game.wall3.info.endian);
+	data->game.wall4.info.data = mlx_get_data_addr(
 			data->game.wall4.texture,
-			&data->game.wall4.info_texture.bpp,
-			&data->game.wall4.info_texture.line_len,
-			&data->game.wall4.info_texture.endian);
-	data->game.wall5.info_texture.data = mlx_get_data_addr(
+			&data->game.wall4.info.bpp,
+			&data->game.wall4.info.line_len,
+			&data->game.wall4.info.endian);
+	data->game.wall5.info.data = mlx_get_data_addr(
 			data->game.wall5.texture,
-			&data->game.wall5.info_texture.bpp,
-			&data->game.wall5.info_texture.line_len,
-			&data->game.wall5.info_texture.endian);
+			&data->game.wall5.info.bpp,
+			&data->game.wall5.info.line_len,
+			&data->game.wall5.info.endian);
 }
 
 void	get_data_texture_weapon(t_data *data)
 {
-	data->game.weapon_texture.info_texture.data = mlx_get_data_addr(
+	data->game.weapon_texture.info.data = mlx_get_data_addr(
 			data->game.weapon_texture.texture,
-			&data->game.weapon_texture.info_texture.bpp,
-			&data->game.weapon_texture.info_texture.line_len,
-			&data->game.weapon_texture.info_texture.endian);
+			&data->game.weapon_texture.info.bpp,
+			&data->game.weapon_texture.info.line_len,
+			&data->game.weapon_texture.info.endian);
 }
 
 static int	check_dimension_texture(t_data *data)
