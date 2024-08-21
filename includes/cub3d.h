@@ -347,6 +347,7 @@ void					handle_render(t_data *data);
 void					init_game_values(t_data *data);
 void					get_data_textures(t_data *data);
 void					get_direction(t_data *data);
+void					check_door(t_data *data);
 
 // game-movement
 void					move_front(t_data *data);
