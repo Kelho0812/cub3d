@@ -25,8 +25,8 @@ int	create_frames(t_data *data)
 	temp = data->game.animation.frames;
 	data->game.animation.start = temp;
 	temp->prev = NULL;
-	frames = 1;
-	while (frames < 39)
+	frames = 0;
+	while (++frames < 39)
 	{
 		if (!load_texture(data, temp, frames))
 			return (clean_frames(data));
@@ -38,7 +38,6 @@ int	create_frames(t_data *data)
 		}
 		if (frames != 1)
 			temp->prev = tail;
-		frames++;
 	}
 	data->game.animation.end = temp;
 	temp->next = NULL;
