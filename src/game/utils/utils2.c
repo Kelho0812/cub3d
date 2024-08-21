@@ -76,7 +76,7 @@ void	render_background(t_data *data)
 		x = 0;
 		while (x < WIDTH)
 		{
-			if (y < HEIGHT / 2)
+			if (y < HEIGHT / 2 + data->game.step_height)
 				my_pixel_put(x, y, celling, data->game.map_img);
 			else
 				my_pixel_put(x, y, floor, data->game.map_img);
