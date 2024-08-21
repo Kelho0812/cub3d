@@ -68,8 +68,8 @@ void	render_background(t_data *data)
 	int	celling;
 	int	floor;
 
-	celling = 0xFF00FF;
-	floor = 0x00FF00;
+	celling = CEILING_COLOR;
+	floor = FLOOR_COLOR;
 	y = 0;
 	while (y < HEIGHT)
 	{

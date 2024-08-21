@@ -35,6 +35,8 @@
 # define PLAYER_SIZE 7
 # define MINIMAP_WALL_COLOR 0xa39ba8
 # define MINIMAP_FLOOR_COLOR 0x333745
+# define CEILING_COLOR  0xB7D5D4
+# define FLOOR_COLOR 0x707070
 
 typedef struct s_norminetingz
 {
