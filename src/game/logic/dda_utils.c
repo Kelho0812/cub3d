@@ -28,10 +28,10 @@ void	make_steps(t_data *data, t_dda_values *dda_values, t_rec_val *temp)
 	}
 }
 
-void	door_case(t_data *data, t_dda_values *dda_values, t_rec_val *temp, int x)
+void	door_case(t_data *data, t_dda_values *dda_v, t_rec_val *temp, int x)
 {
-	temp->map_x = dda_values->map_x;
-	temp->map_y = dda_values->map_y;
+	temp->map_x = dda_v->map_x;
+	temp->map_y = dda_v->map_y;
 	find_distance_to_wall(data, temp);
-	execute_dda(dda_values, data, x);
+	execute_dda(dda_v, data, x);
 }

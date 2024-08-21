@@ -30,7 +30,8 @@ void	render_minimap(t_data *data)
 			if (!ft_strchr("0NWES", data->map.full_map_array[y][x]))
 				render_wall(x * MINIMAP_SIZE, y * MINIMAP_SIZE, data);
 			else
-				render_minimap_floor(x * MINIMAP_SIZE, y * MINIMAP_SIZE, data);
+				render_minimap_floor(x * MINIMAP_SIZE, y *
+				 MINIMAP_SIZE, data);
 			x++;
 		}
 		y++;

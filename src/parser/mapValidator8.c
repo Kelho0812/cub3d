@@ -12,9 +12,9 @@
 
 #include "../../includes/cub3d.h"
 
-bool is_valid_map_char(char c)
+bool	is_valid_map_char(char c)
 {
-	return(ft_strchr("0123456", c));
+	return (ft_strchr("0123456", c));
 }
 
 bool	is_valid_char(char c)
