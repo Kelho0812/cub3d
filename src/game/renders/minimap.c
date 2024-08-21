@@ -30,8 +30,8 @@ void	render_minimap(t_data *data)
 			if (!ft_strchr("0NWES", data->map.full_map_array[y][x]))
 				render_wall(x * MINIMAP_SIZE, y * MINIMAP_SIZE, data);
 			else
-				render_minimap_floor(x * MINIMAP_SIZE, y *
-				 MINIMAP_SIZE, data);
+				render_minimap_floor(x * MINIMAP_SIZE,
+					y * MINIMAP_SIZE, data);
 			x++;
 		}
 		y++;
@@ -51,7 +51,8 @@ static void	render_wall(int x, int y, t_data *data)
 		{
 			if (x + x1 < WIDTH && y + y1 < HEIGHT)
 			{
-				my_pixel_put(x + x1, y + y1, MINIMAP_WALL_COLOR, data->game.map_img);
+				my_pixel_put(x + x1, y + y1,
+					MINIMAP_WALL_COLOR, data->game.map_img);
 			}
 			x1++;
 		}
@@ -72,7 +73,8 @@ static void	render_minimap_floor(int x, int y, t_data *data)
 		{
 			if (x + x1 < WIDTH && y + y1 < HEIGHT)
 			{
-				my_pixel_put(x + x1, y + y1, MINIMAP_FLOOR_COLOR, data->game.map_img);
+				my_pixel_put(x + x1, y + y1,
+					MINIMAP_FLOOR_COLOR, data->game.map_img);
 			}
 			x1++;
 		}
