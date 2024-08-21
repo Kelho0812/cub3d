@@ -52,10 +52,10 @@ void	define_values_to_draw_texture(t_texture_values *draw_values,
 	if (draw_values->draw_end >= HEIGHT)
 		draw_values->draw_end = HEIGHT - 1;
 	if (temp.side == 0)
-		draw_values->wall_x = data->player.py + temp.wallDist
+		draw_values->wall_x = data->player.py + temp.wall_dist
 			* data->rays.ray_dir_y;
 	else
-		draw_values->wall_x = data->player.px + temp.wallDist
+		draw_values->wall_x = data->player.px + temp.wall_dist
 			* data->rays.ray_dir_x;
 	draw_values->wall_x -= floor((draw_values->wall_x));
 	draw_values->tex_x = (int)(draw_values->wall_x * (double)ptr.width);

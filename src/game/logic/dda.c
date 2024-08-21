@@ -87,12 +87,12 @@ void	execute_dda(t_dda_values *dda_values, t_data *data, int x)
 void	find_distance_to_wall(t_data *data, t_rec_val *temp)
 {
 	if (temp->side == 0)
-		temp->wallDist = data->dist.side_dist_x
+		temp->wall_dist = data->dist.side_dist_x
 			- data->dist.delta_dist_x;
 	else
-		temp->wallDist = data->dist.side_dist_y
+		temp->wall_dist = data->dist.side_dist_y
 			- data->dist.delta_dist_y;
-	temp->line_height = (int)(HEIGHT / temp->wallDist);
+	temp->line_height = (int)(HEIGHT / temp->wall_dist);
 }
 
 static void	define_steps(t_dda_values *dda_values, t_data *data)
