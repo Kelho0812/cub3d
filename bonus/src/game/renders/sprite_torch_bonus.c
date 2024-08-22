@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/cub3d.h"
+#include "../../../includes/cub3d_bonus.h"
 
 static char	*create_path(int frames);
 static int	load_texture(t_data *data, t_frame *temp, int frames);

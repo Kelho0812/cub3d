@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/cub3d.h"
+#include "../../../includes/cub3d_bonus.h"
 
 static void	check_errors_textures(t_data *data);
 static int	check_dimension_texture(t_data *data);

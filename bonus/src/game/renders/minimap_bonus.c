@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/cub3d.h"
+#include "../../../includes/cub3d_bonus.h"
 
 static void	render_wall(int x, int y, t_data *data);
 static void	render_minimap_floor(int x, int y, t_data *data);
