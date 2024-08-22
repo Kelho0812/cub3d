@@ -1,0 +1,9 @@
+*.o
+*.a
+cub3D
+leaks-old.log
+sup
+valgrind_log_invalid.txt
+leaks.log
+valgrind_failures.log
+Makefile.gen
