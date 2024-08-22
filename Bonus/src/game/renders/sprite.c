@@ -36,8 +36,7 @@ int	create_frames(t_data *data)
 			tail = temp;
 			temp = temp->next;
 		}
-		if (frames != 1)
-			temp->prev = tail;
+		temp->prev = tail;
 	}
 	data->game.animation.end = temp;
 	temp->next = NULL;
@@ -75,6 +74,12 @@ static int	load_texture(t_data *data, t_frame *temp, int frames)
 	temp->texture.texture = mlx_xpm_file_to_image(data->window.mlx, path,
 			&temp->texture.width, &temp->texture.height);
 	free(path);
+	if (temp->texture.texture == NULL && frames == 1)
+	{
+		free(temp);
+		data->game.animation.start = NULL;
+		return (0);
+	}
 	if (temp->texture.texture == NULL)
 	{
 		prev = temp->prev;

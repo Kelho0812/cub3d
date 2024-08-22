@@ -36,8 +36,7 @@ int	create_frames_torch(t_data *data)
 			tail = temp;
 			temp = temp->next;
 		}
-		if (frames != 1)
-			temp->prev = tail;
+		temp->prev = tail;
 	}
 	temp->next = data->game.anim_t.start;
 	return (1);
@@ -51,7 +50,7 @@ int	clean_frames_torch(t_data *data)
 
 	tail = data->game.anim_t.start;
 	num_frames = 30;
-	while (num_frames)
+	while (num_frames && tail)
 	{
 		temp = tail->next;
 		mlx_destroy_image(data->window.mlx, tail->texture.texture);
@@ -71,6 +70,12 @@ static int	load_texture(t_data *data, t_frame *temp, int frames)
 	temp->texture.texture = mlx_xpm_file_to_image(data->window.mlx, path,
 			&temp->texture.width, &temp->texture.height);
 	free(path);
+	if (temp->texture.texture == NULL && frames == 1)
+	{
+		free(temp);
+		data->game.anim_t.start = NULL;
+		return (0);
+	}
 	if (temp->texture.texture == NULL)
 	{
 		prev = temp->prev;
