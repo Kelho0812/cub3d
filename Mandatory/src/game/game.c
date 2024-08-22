@@ -26,11 +26,26 @@ void	play_game(t_data *data)
 void	open_window(t_data *data)
 {
 	data->window.mlx = mlx_init();
+	if (!data->window.mlx)
+	{
+		william_wallace(data);
+		free_map_array(data->map.full_map_array);
+		print_error("ERROR ON MLX");
+		exit(0);
+	}
 	check_textures(data);
 	get_data_textures(data);
 	get_direction(data);
 	data->window.mlx_win = mlx_new_window(data->window.mlx, WIDTH, HEIGHT,
 			"Cub3d - OsBrabos");
+	if (!data->window.mlx_win)
+	{
+		free(data->window.mlx);
+		william_wallace(data);
+		free_map_array(data->map.full_map_array);
+		print_error("ERROR ON MLX");
+		exit(0);
+	}
 }
 
 int	render_game(void *param)
