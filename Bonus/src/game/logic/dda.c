@@ -47,7 +47,7 @@ void	execute_dda(t_dda_values *dda_values, t_data *data, int x)
 	while (hit == 0)
 	{
 		make_steps(data, dda_values, &temp);
-		if (!ft_strchr("0NWES6",
+		if (!ft_strchr("0NWES65",
 				data->map.full_map_array[dda_values->map_y][dda_values->map_x]))
 		{
 			temp.map_x = dda_values->map_x;
@@ -55,7 +55,7 @@ void	execute_dda(t_dda_values *dda_values, t_data *data, int x)
 			find_distance_to_wall(data, &temp);
 			hit = 1;
 		}
-		else if (ft_strchr("6",
+		else if (ft_strchr("65",
 				data->map.full_map_array[dda_values->map_y][dda_values->map_x]))
 		{
 			door_case(data, dda_values, &temp, x);
