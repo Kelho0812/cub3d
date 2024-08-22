@@ -89,8 +89,7 @@ static int	load_texture(t_data *data, t_frame *temp, int frames)
 		return (0);
 	}
 	temp->texture.info.data = mlx_get_data_addr(temp->texture.texture,
-			&temp->texture.info.bpp,
-			&temp->texture.info.line_len,
+			&temp->texture.info.bpp, &temp->texture.info.line_len,
 			&temp->texture.info.endian);
 	return (1);
 }
