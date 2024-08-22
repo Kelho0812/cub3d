@@ -20,7 +20,7 @@ run_valgrind() {
     local log_file=$2
     
     echo "Executando valgrind no arquivo: $map_file"
-    valgrind --leak-check=full --show-leak-kinds=all ./cub3D "$map_file" &> "$log_file"
+    valgrind --leak-check=full --show-leak-kinds=all ./cub3D_bonus "$map_file" &> "$log_file"
     
     if grep -q -E "Invalid read" "$log_file"; then
         echo "Falha encontrada no arquivo: $map_file"

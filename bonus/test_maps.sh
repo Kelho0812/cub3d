@@ -26,7 +26,7 @@ run_valgrind() {
     local expected_status=$3
     
     # echo "Executando valgrind no arquivo: $map_file"
-    ./cub3D "$map_file" &> "$log_file"
+    ./cub3D_bonus "$map_file" &> "$log_file"
     local actual_status=$?
     
     if [ $actual_status -ne $expected_status ]; then
