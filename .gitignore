@@ -1,6 +1,7 @@
 *.o
 *.a
 cub3D
+cub3D_bonus
 leaks-old.log
 sup
 valgrind_log_invalid.txt
