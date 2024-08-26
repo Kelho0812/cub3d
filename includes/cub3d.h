@@ -27,8 +27,8 @@
 # define RED "\033[1;31m"
 # define RESET "\033[0m"
 
-# define WIDTH 1280
-# define HEIGHT 1024
+# define WIDTH 1920
+# define HEIGHT 1080
 
 typedef struct s_norminetingz
 {
@@ -106,6 +106,10 @@ typedef struct s_player
 	double				py;
 	double				dir_x;
 	double				dir_y;
+	double				left_x;
+	double				left_y;
+	double				right_x;
+	double				right_y;
 	double				plane_x;
 	double				plane_y;
 	t_direction			direction;
@@ -286,5 +290,7 @@ void					create_background_buffer(t_data *data);
 void					init_game_values(t_data *data);
 void					get_data_textures(t_data *data);
 void					get_direction(t_data *data);
+void					move_right(t_data *data);
+void					move_left(t_data *data);
 
 #endif

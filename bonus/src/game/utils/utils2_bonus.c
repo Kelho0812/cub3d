@@ -61,17 +61,6 @@ void	get_direction2(t_data *data)
 {
 	if (data->player.direction == W)
 	{
-		data->player.dir_x = 1;
-		data->player.dir_y = 0;
-		data->player.right_x = 0;
-		data->player.right_y = 1;
-		data->player.left_x = 0;
-		data->player.left_y = -1;
-		data->player.plane_x = 0;
-		data->player.plane_y = 1;
-	}
-	else if (data->player.direction == E)
-	{
 		data->player.dir_x = -1;
 		data->player.dir_y = 0;
 		data->player.right_x = 0;
@@ -80,6 +69,17 @@ void	get_direction2(t_data *data)
 		data->player.left_y = 1;
 		data->player.plane_x = 0;
 		data->player.plane_y = -1;
+	}
+	else if (data->player.direction == E)
+	{
+		data->player.dir_x = 1;
+		data->player.dir_y = 0;
+		data->player.right_x = 0;
+		data->player.right_y = 1;
+		data->player.left_x = 0;
+		data->player.left_y = -1;
+		data->player.plane_x = 0;
+		data->player.plane_y = 1;
 	}
 }
 

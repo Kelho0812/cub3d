@@ -17,6 +17,7 @@ VG = valgrind --leak-check=full --show-leak-kinds=all --suppressions=sup --track
 
 # File-related variables
 NAME = cub3D
+NAME_BONUS = ./bonus/cub3D_bonus
 LIBFT = ./includes/libft/libft.a
 MINILIBX = $(LIBMLX_DIR)/libmlx.a
 RM = rm -rf
@@ -42,6 +43,7 @@ SOURCES := cub3d.c\
 			game/handlers/close_handlers.c\
 			game/handlers/keypress_handlers.c\
 			game/handlers/game_handlers.c\
+			game/handlers/movement.c\
 			game/game.c\
 			errorHandler.c\
 			freedom.c\
@@ -71,6 +73,9 @@ $(ODIR)/%.o: $(SDIR)/%.c | $(ODIR)
 $(ODIR):
 	@mkdir -p $@
 
+$(NAME_BONUS):
+	@cd ./bonus && make -s
+
 $(LIBFT) :
 	@cd ./includes/libft/ && make bonus -s
 	@echo "libft.a created"
@@ -89,8 +94,7 @@ fclean : clean
 
 re : fclean all 
 
-bonus:
-	@cd ./bonus && make -s
+bonus: $(NAME_BONUS)
 
 bonus_re:
 	@cd ./bonus && make re -s

@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
+#ifndef CUB3D_BONUS_H
+# define CUB3D_BONUS_H
 
 # include "./getNextLine/getNextLine.h"
 # include "./libft/libft.h"
@@ -33,7 +33,7 @@
 # define HEIGHT 1080
 # define MINIMAP_SIZE 15
 # define PLAYER_SIZE 7
-# define MINIMAP_WALL_COLOR 0xa39ba8
+# define MINIMAP_WALL_COLOR 0xE55812
 # define MINIMAP_FLOOR_COLOR 0x333745
 # define CEILING_COLOR  0xB7D5D4
 # define FLOOR_COLOR 0x707070
